@@ -9,8 +9,13 @@
 #include "Service.h"
 
 class InfoService : Service {
-    virtual void helperMessage();
+
+private:
+    int help;
     void printInfo();
+public:
+    virtual void helperMessage();
+    void run();
 };
 
 
