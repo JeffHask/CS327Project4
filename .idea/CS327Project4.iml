@@ -3,22 +3,16 @@
   <component name="NewModuleRootManager">
     <content url="file://$MODULE_DIR$">
       <sourceFolder url="file://$MODULE_DIR$/CMakeLists.txt" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/ISound.cpp" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/SndInfo.cpp" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Sndcat.cpp" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Sndcvt.cpp" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Sndfx.cpp" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Sndplay.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/ConcatService.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/headers/ConcatService.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/IService.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/InfoService.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/headers/InfoService.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Service.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/SoundFile.cpp" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/headers/ISound.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/headers/SndInfo.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/headers/Sndcat.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/headers/IService.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/headers/Service.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/headers/SoundFile.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/headers/sndcvt.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/headers/sndfx.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/headers/sndgen.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/headers/sndmix.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/headers/sndplay.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/mains/sndcatMain.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/mains/sndcvtMain.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/mains/sndfxMain.cpp" isTestSource="false" />

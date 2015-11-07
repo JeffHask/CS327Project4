@@ -6,21 +6,24 @@
 #define CS327PROJECT4_SOUNDFILE_H
 
 
-#include "ISound.h"
+#include <stdio.h>
 
-class soundFile : iSound {
-protected:
+class soundFile {
+private:
     char *fileName;
     char *fileType;
     int sampleRate;
     int bitDepth;
     int numberOfChannels;
-    int* numberOfSamples;
+    int* Samples;
     int lengthOfSound;
+
+public:
     soundFile();
     soundFile(char* fileName);
-    void readCS299File();
-    void readWAVFile();
+    void readCS299File(char* fileName);
+    void readWAVFile(char* fileName);
+    void writeFile(FILE* outputFile);
 
 };
 
