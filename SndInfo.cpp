@@ -2,8 +2,8 @@
 // Created by jeffrey on 11/7/15.
 //
 
-#include "headers/SndInfo.h"
+#include "sndInfo.h"
 
-void SndInfo :: helperMessage() {
+void sndInfo:: helperMessage() {
     char* p = fileName;
 }

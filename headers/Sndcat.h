@@ -5,10 +5,4 @@
 #ifndef CS327PROJECT4_SNDCAT_H
 #define CS327PROJECT4_SNDCAT_H
 
-
-class sndcat {
-
-};
-
-
 #endif //CS327PROJECT4_SNDCAT_H

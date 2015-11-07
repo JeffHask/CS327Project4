@@ -8,7 +8,7 @@
 
 #include "ISound.h"
 
-class SoundFile : ISound {
+class soundFile : iSound {
 protected:
     char *fileName;
     char *fileType;
@@ -17,8 +17,8 @@ protected:
     int numberOfChannels;
     int* numberOfSamples;
     int lengthOfSound;
-    SoundFile();
-    SoundFile(char* fileName);
+    soundFile();
+    soundFile(char* fileName);
     void readCS299File();
     void readWAVFile();
 

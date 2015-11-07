@@ -8,7 +8,7 @@
 
 #include "SoundFile.h"
 
-class SndInfo : SoundFile {
+class sndInfo : soundFile {
 public:
     virtual void helperMessage();
     void printInfo();

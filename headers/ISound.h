@@ -6,7 +6,7 @@
 #define CS327PROJECT4_ISOUND_H
 
 
-class ISound {
+class iSound {
     virtual void helperMessage() = 0;
 };
 

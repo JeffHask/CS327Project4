@@ -5,16 +5,27 @@
       <sourceFolder url="file://$MODULE_DIR$/CMakeLists.txt" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/ISound.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/SndInfo.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Sndcat.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Sndcvt.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Sndfx.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Sndplay.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/SoundFile.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/headers/ISound.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/headers/SndInfo.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/headers/Sndcat.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/headers/SoundFile.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/headers/sndcvt.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/headers/sndfx.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/headers/sndgen.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/headers/sndmix.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/headers/sndplay.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/mains/sndcatMain.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/mains/sndcvtMain.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/mains/sndfxMain.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/mains/sndgenMain.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/mains/sndinfoMain.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/mains/sndmixMain.cpp" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/sndcat.cpp" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/sndcat.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/mains/sndplayMain.cpp" isTestSource="false" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
