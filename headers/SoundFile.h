@@ -7,7 +7,7 @@
 
 
 #include <stdio.h>
-#include "../SampleLine.h"
+#include "SampleLine.h"
 
 class SoundFile {
 private:

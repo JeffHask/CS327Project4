@@ -8,7 +8,7 @@
 #include "Service.h"
 #include "SoundFile.h"
 
-class ConcatService : Service {
+class ConcatService : public Service {
     private:
         int helpMessage;
         int toWav;
@@ -20,7 +20,7 @@ class ConcatService : Service {
         ConcatService();
         ConcatService(int helpSwitch, int toWAV, char* soundFiles[], char* outptFileName);
         virtual void helperMessage();
-        void run(int hasHSwitch);
+        virtual void run(int hasHSwitch);
     };
 
 

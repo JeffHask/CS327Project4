@@ -1,10 +1,14 @@
 #include <iostream>
+#include "headers/Service.h"
+#include "headers/InfoService.h"
+#include "headers/ConcatService.h"
 
 #define SNDINFO 1
 #define SNDCAT 2
 #define SNDMIX 3
 #define SNDCVT 4
 using namespace std;
+
 void handleCommandArgs(int& pp);
 int main(int argc, char*argv[]) {
     int helpSwitch = 0;
@@ -14,6 +18,8 @@ int main(int argc, char*argv[]) {
     string inputFiles[argc - 1];
     int inputFileIndex = 0;
     int writeToWav = 0;
+    Service *service;
+
 
     string executable = string(argv[0]);
     executable = executable.substr(executable.length()- 6, executable.length()-1);
@@ -25,7 +31,6 @@ int main(int argc, char*argv[]) {
     }  else if (!executable.compare("sndcvt")) {
         executableNumber = SNDCVT;
     } else {
-        cout << executable << endl;
         executableNumber = SNDINFO;
     }
     int i;
@@ -59,5 +64,16 @@ int main(int argc, char*argv[]) {
             }
         }
     }
+    if(executableNumber == SNDINFO) {
+        service = new InfoService(helpSwitch);
+        service->run();
+    } else if (executableNumber == SNDCAT) {
+        service = new ConcatService();
+    } else if (executableNumber == SNDMIX) {
+
+    } else {
+
+    }
+
     return 0;
 }

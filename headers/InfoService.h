@@ -8,14 +8,16 @@
 
 #include "Service.h"
 
-class InfoService : Service {
+class InfoService : public Service {
 
 private:
     int help;
     void printInfo();
 public:
+    InfoService();
+    InfoService(int help);
     virtual void helperMessage();
-    void run();
+    virtual void run();
 };
 
 

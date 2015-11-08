@@ -8,7 +8,7 @@
       <sourceFolder url="file://$MODULE_DIR$/InfoService.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/MixService.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/SampleLine.cpp" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/SampleLine.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/headers/SampleLine.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Service.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/SoundFile.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/headers/ConcatService.h" isTestSource="false" />

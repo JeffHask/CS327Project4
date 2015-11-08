@@ -8,12 +8,14 @@
 
 #include "IService.h"
 
-class Service : IService {
+class Service : public IService {
 protected:
     virtual void helperMessage() = 0;
     void h_helperMessage();
     void o_helperMessage();
     void w_helperMessage();
+public:
+    virtual void run() = 0;
 };
 
 

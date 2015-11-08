@@ -8,9 +8,11 @@
 
 #include "Service.h"
 
-class MixService : Service {
+class MixService : public Service {
 protected:
     virtual void helperMessage();
+public:
+    virtual void run();
 };
 
 
