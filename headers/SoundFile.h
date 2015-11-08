@@ -16,7 +16,7 @@ private:
     int sampleRate;
     int bitDepth;
     int numberOfChannels;
-    SampleLine samples[];
+    SampleLine *samples;
     int lengthOfSound;
 
 public:

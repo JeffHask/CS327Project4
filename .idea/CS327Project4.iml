@@ -7,7 +7,6 @@
       <sourceFolder url="file://$MODULE_DIR$/IService.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/InfoService.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/MixService.cpp" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/headers/MixService.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/SampleLine.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/SampleLine.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Service.cpp" isTestSource="false" />
@@ -15,15 +14,13 @@
       <sourceFolder url="file://$MODULE_DIR$/headers/ConcatService.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/headers/IService.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/headers/InfoService.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/headers/MixService.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/headers/Service.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/headers/SoundFile.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/mains/sndcatMain.cpp" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/mains/sndcvtMain.cpp" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/mains/sndfxMain.cpp" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/mains/sndgenMain.cpp" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/mains/sndinfoMain.cpp" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/mains/sndmixMain.cpp" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/mains/sndplayMain.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/similarMain.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/sndfxMain.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/sndgenMain.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/sndplayMain.cpp" isTestSource="false" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
