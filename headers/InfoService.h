@@ -5,8 +5,10 @@
 #ifndef CS327PROJECT4_INFOSERVICE_H
 #define CS327PROJECT4_INFOSERVICE_H
 
-
+#include <iostream>
 #include "Service.h"
+
+using namespace std;
 
 class InfoService : public Service {
 
@@ -15,7 +17,7 @@ private:
     void printInfo();
 public:
     InfoService();
-    InfoService(int help);
+    InfoService(int help,char** soundFiles, int numberOfSoundFiles);
     virtual void helperMessage();
     virtual void run();
 };

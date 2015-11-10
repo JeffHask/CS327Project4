@@ -4,6 +4,7 @@
 
 #include "headers/InfoService.h"
 #include "iostream"
+#include "headers/SoundFile.h"
 
 using namespace std;
 
@@ -11,8 +12,17 @@ InfoService ::InfoService() {
 
 }
 
-InfoService ::InfoService(int help) {
+InfoService ::InfoService(int help, char** soundFileNames, int numberOfSoundFiles) {
     this->help = help;
+    this->numberOfSoundFiles = numberOfSoundFiles;
+    soundFiles = (SoundFile **) new SoundFile[numberOfSoundFiles];
+    if(help != 1) {
+        int i;
+        for(i = 0; i < numberOfSoundFiles; i++) {
+            cout << soundFileNames[i] << endl;
+            soundFiles[i] = new SoundFile(soundFileNames[i], 0);
+        }
+    }
 }
 
 void InfoService::helperMessage() {
@@ -22,12 +32,22 @@ void InfoService::helperMessage() {
 }
 
 void InfoService::printInfo() {
-//    TODO
+    int i;
+    for(i = 0; i < numberOfSoundFiles; i++) {
+        cout << "File Name: " << soundFiles[i]->getFileName() << endl;
+        cout << "File Type: " << soundFiles[i]->getFileType() << endl;
+//        cout << "Sample Rate: " << soundFiles[i]->getSampleRate() << endl;
+//        cout << "Bit Depth: " << soundFiles[i]->getBitDepth() << endl;
+//        cout << "Number of Channels: " << soundFiles[i]->getNumberOfChannels() << endl;
+//        cout << "Number of Samples: " << soundFiles[i]->getSamples() << endl;
+//        cout << "Length of Sound: " << soundFiles[i]->getLengthOfSound() << endl << endl;
+    }
 }
 
 void InfoService::run() {
     if(help == 1) {
         helperMessage();
+    } else {
+        printInfo();
     }
-//    TODO
 }

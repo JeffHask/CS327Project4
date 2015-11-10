@@ -12,6 +12,8 @@ class MixService : public Service {
 protected:
     virtual void helperMessage();
 public:
+    MixService();
+    MixService(int helpMessage, char* outputFile);
     virtual void run();
 };
 

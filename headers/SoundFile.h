@@ -7,30 +7,36 @@
 
 
 #include <stdio.h>
+#include <iostream>
 #include "SampleLine.h"
+
+using namespace std;
 
 class SoundFile {
 private:
-    char *fileName;
-    char *fileType;
+    string fileName;
+    string fileType;
     int sampleRate;
     int bitDepth;
     int numberOfChannels;
     SampleLine *samples;
+    int numberOfSamples;
     int lengthOfSound;
 
-public:
-    SoundFile();
-    SoundFile(char* fileName);
+private:
     void readCS299File(char* fileName);
     void readWAVFile(char* fileName);
-    void writeFile(FILE* outputFile);
+public:
+    SoundFile();
+    SoundFile(char* fileName, int isWav);
+    void writeCS229File(char* outputFile);
+    void writeWAVFile(char* outputFile);
     int setSampleLine(int index, SampleLine sampleLine) {
         samples[index] = sampleLine;
     }
 
 
-    char *getFileName() const {
+    string getFileName() const {
         return fileName;
     }
 
@@ -38,7 +44,7 @@ public:
         SoundFile::fileName = fileName;
     }
 
-    char *getFileType() const {
+    string getFileType() const {
         return fileType;
     }
 

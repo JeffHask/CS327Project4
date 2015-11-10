@@ -13,3 +13,10 @@ void Service ::o_helperMessage() {
 void Service ::w_helperMessage() {
     cout << "-w\t: output in .wav format instead of .cs229";
 }
+
+void Service::allocate_SoundFiles(int numberSoundFiles) {
+    int i;
+    for(i = 0; i < numberSoundFiles; i++) {
+        soundFiles[i] = new SoundFile();
+    }
+}

@@ -2,6 +2,7 @@
 #include "headers/Service.h"
 #include "headers/InfoService.h"
 #include "headers/ConcatService.h"
+#include "headers/MixService.h"
 
 #define SNDINFO 1
 #define SNDCAT 2
@@ -15,7 +16,7 @@ int main(int argc, char*argv[]) {
     int switches = 1;
     int executableNumber = -1;
     string outputFile = " ";
-    string inputFiles[argc - 1];
+    char** inputFiles = (char**)malloc(sizeof(char**));
     int inputFileIndex = 0;
     int writeToWav = 0;
     Service *service;
@@ -48,7 +49,7 @@ int main(int argc, char*argv[]) {
                 }
             } else if(!string("-w").compare(argv[i]) && executableNumber == SNDCAT) {
                 writeToWav = 1;
-            } else if (string(argv[i]).find(string(".cs227")) != string::npos) {
+            } else if (string(argv[i]).find(string(".cs229")) != string::npos) {
                 inputFiles[inputFileIndex] = argv[i];
                 inputFileIndex++;
                 switches = 0;
@@ -56,7 +57,7 @@ int main(int argc, char*argv[]) {
 //                ERROR HANDLE
             }
         }  else {
-            if(string(argv[i]).find(string(".cs227")) != string::npos) {
+            if(string(argv[i]).find(string(".cs229")) != string::npos) {
                 inputFiles[inputFileIndex] = argv[i];
                 inputFileIndex++;
             } else {
@@ -65,15 +66,14 @@ int main(int argc, char*argv[]) {
         }
     }
     if(executableNumber == SNDINFO) {
-        service = new InfoService(helpSwitch);
-        service->run();
+        service = new InfoService(helpSwitch, inputFiles, inputFileIndex);
     } else if (executableNumber == SNDCAT) {
         service = new ConcatService();
-    } else if (executableNumber == SNDMIX) {
-
-    } else {
-
     }
-
+//    else if (executableNumber == SNDMIX) {
+//    } else {
+//      TODO
+//    }
+    service->run();
     return 0;
 }

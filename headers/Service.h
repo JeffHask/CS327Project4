@@ -7,13 +7,17 @@
 
 
 #include "IService.h"
+#include "SoundFile.h"
 
 class Service : public IService {
 protected:
+    int numberOfSoundFiles;
+    SoundFile **soundFiles;
     virtual void helperMessage() = 0;
     void h_helperMessage();
     void o_helperMessage();
     void w_helperMessage();
+    void allocate_SoundFiles(int numberSoundFiles);
 public:
     virtual void run() = 0;
 };

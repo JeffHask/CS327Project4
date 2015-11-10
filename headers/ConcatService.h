@@ -13,14 +13,14 @@ class ConcatService : public Service {
         int helpMessage;
         int toWav;
         char* outputFileName;
-        char* soundFiles[];
+        char**soundFiles;
         SoundFile concatFiles(char* soundFiles[]);
 
     public:
         ConcatService();
         ConcatService(int helpSwitch, int toWAV, char* soundFiles[], char* outptFileName);
         virtual void helperMessage();
-        virtual void run(int hasHSwitch);
+        virtual void run();
     };
 
 
