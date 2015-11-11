@@ -15,9 +15,10 @@ SoundFile::SoundFile() {
 }
 SoundFile::SoundFile(char *fileName, int wavFile) {
     numberOfChannels = -1;
+    maxSamples = 2;
     bitDepth = -1;
     sampleRate = -1;
-
+    samples = (SampleLine**)new SampleLine[maxSamples];
         this->fileName = fileName;
     if(!wavFile) {
         fileType = ".cs229";
@@ -39,7 +40,7 @@ void SoundFile::readCS299File(char *fileName) {
         if(line.compare("CS229")) {
 //            ERROR
         }
-        cout << line << '\n';
+//        cout << line << '\n';
     } else {
 //        ERROR
     }
@@ -83,29 +84,28 @@ void SoundFile::readCS299File(char *fileName) {
                     if(keywordVal < 0) {
 //                        ERROR
                     }
-                    numberOfSamples = keywordVal;
+                    numSamples = keywordVal;
                 } else if (!kw.compare("CHANNELS")) {
                     if(keywordVal > 127) {
 //                        ERROR
                     }
                     numberOfChannels = keywordVal;
                 } else if (!kw.compare("BITRES")) {
-                    if(keywordVal != 8 || keywordVal != 16 || keywordVal != 32) {
+                    if(!(keywordVal == 8 || keywordVal == 16 || keywordVal == 32)) {
 //                        ERROR
+                    } else {
+                        bitDepth = keywordVal;
                     }
                 } else {
 //                    ERROR
                 }
             }
         } else {
-                unsigned long p = 0l;
-            while((p = line.find(' '), p) != string::npos) {
-//                cout << p << endl;
-                cout << line.substr(0,p) << endl;
-                line = line.substr(p+1);
-//                TODO
-            }
+          addSample(new SampleLine(line,numberOfChannels, bitDepth));
         }
+    }
+    if (numSamples != numberOfSamples) {
+//        ERROR
     }
 }
 
@@ -119,4 +119,23 @@ void SoundFile::readWAVFile(char *fileName) {
 
 void SoundFile::writeWAVFile(char *outputFile) {
 
+}
+
+void SoundFile::addSample(SampleLine *soundLine) {
+    if(numberOfSamples == maxSamples) {
+        SampleLine** pSampleLine = (SampleLine**)new SampleLine[maxSamples * 2];
+        maxSamples = maxSamples * 2;
+        int i;
+        for(i = 0; i < numberOfSamples; i++) {
+            pSampleLine[i] = new SampleLine(samples[i]);
+        }
+//        delete[](samples);
+        samples = pSampleLine;
+    }
+    samples[numberOfSamples] = soundLine;
+    numberOfSamples++;
+}
+
+float SoundFile::lengthOfSound() {
+    return  numberOfSamples / (float)sampleRate;
 }

@@ -6,19 +6,22 @@
 #define CS327PROJECT4_SAMPLELINE_H
 
 
+#include <iostream>
+
 class SampleLine {
 private:
-    int samples[];
-    int numberOfSamples;
-    void handleSamples(char* samples);
+    int *channels;
+    int numberOfChannels;
+    void handleSamples(std::string samples, int samplesNeeded, int bitRes);
 public:
-    SampleLine();
-    SampleLine(char* samples);
-    int* getSamples() {
-        return samples;
+    SampleLine(){}
+    SampleLine(SampleLine *copy);
+    SampleLine(std::string, int samplesNeeded, int bitRes);
+    int* getChannels() {
+        return channels;
     };
-    int getNumberOfSamples() {
-        return numberOfSamples;
+    int getNumberOfChannels() {
+        return numberOfChannels;
     };
 };
 

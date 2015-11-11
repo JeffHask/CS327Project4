@@ -19,19 +19,21 @@ private:
     int sampleRate;
     int bitDepth;
     int numberOfChannels;
-    SampleLine *samples;
+    SampleLine **samples;
     int numberOfSamples;
-    int lengthOfSound;
+    int maxSamples;
 
 private:
     void readCS299File(char* fileName);
     void readWAVFile(char* fileName);
+    void addSample(SampleLine * soundLine);
 public:
     SoundFile();
     SoundFile(char* fileName, int isWav);
     void writeCS229File(char* outputFile);
     void writeWAVFile(char* outputFile);
-    int setSampleLine(int index, SampleLine sampleLine) {
+    float lengthOfSound();
+    void setSampleLine(int index, SampleLine *sampleLine) {
         samples[index] = sampleLine;
     }
 
@@ -76,20 +78,28 @@ public:
         SoundFile::numberOfChannels = numberOfChannels;
     }
 
-    SampleLine *getSamples() const {
+    SampleLine **getSamples() const {
         return samples;
     }
 
-    void setSamples(SampleLine *Samples) {
+    void setSamples(SampleLine **Samples) {
         SoundFile::samples = Samples;
     }
 
-    int getLengthOfSound() const {
-        return lengthOfSound;
+    int getNumberOfSamples() const {
+        return numberOfSamples;
     }
 
-    void setLengthOfSound(int lengthOfSound) {
-        SoundFile::lengthOfSound = lengthOfSound;
+    void setNumberOfSamples(int numberOfSamples) {
+        SoundFile::numberOfSamples = numberOfSamples;
+    }
+
+    void setFileType(const string &fileType) {
+        SoundFile::fileType = fileType;
+    }
+
+    void setFileName(const string &fileName) {
+        SoundFile::fileName = fileName;
     }
 };
 

@@ -19,7 +19,7 @@ InfoService ::InfoService(int help, char** soundFileNames, int numberOfSoundFile
     if(help != 1) {
         int i;
         for(i = 0; i < numberOfSoundFiles; i++) {
-            cout << soundFileNames[i] << endl;
+//            cout << soundFileNames[i] << endl;
             soundFiles[i] = new SoundFile(soundFileNames[i], 0);
         }
     }
@@ -36,11 +36,12 @@ void InfoService::printInfo() {
     for(i = 0; i < numberOfSoundFiles; i++) {
         cout << "File Name: " << soundFiles[i]->getFileName() << endl;
         cout << "File Type: " << soundFiles[i]->getFileType() << endl;
-//        cout << "Sample Rate: " << soundFiles[i]->getSampleRate() << endl;
-//        cout << "Bit Depth: " << soundFiles[i]->getBitDepth() << endl;
-//        cout << "Number of Channels: " << soundFiles[i]->getNumberOfChannels() << endl;
-//        cout << "Number of Samples: " << soundFiles[i]->getSamples() << endl;
-//        cout << "Length of Sound: " << soundFiles[i]->getLengthOfSound() << endl << endl;
+        cout << "Sample Rate: " << soundFiles[i]->getSampleRate() << endl;
+        cout << "Bit Depth: " << soundFiles[i]->getBitDepth() << endl;
+        cout << "Number of Channels: " << soundFiles[i]->getNumberOfChannels() << endl;
+        cout << "Number of Samples: " << soundFiles[i]->getNumberOfSamples() << endl;
+        cout << "Sample Test: " << soundFiles[i]->getSamples()[5]->getChannels()[1] << endl;
+        cout << "Length of Sound: " << soundFiles[i]->lengthOfSound() << " Seconds" << endl << endl;
     }
 }
 
