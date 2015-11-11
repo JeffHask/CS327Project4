@@ -10,15 +10,13 @@
 
 class ConcatService : public Service {
     private:
-        int helpMessage;
         int toWav;
-        char* outputFileName;
-        char**soundFiles;
-        SoundFile concatFiles(char* soundFiles[]);
+        string outputFileName;
+        SoundFile *concatFiles(SoundFile** soundFiles);
 
     public:
         ConcatService();
-        ConcatService(int helpSwitch, int toWAV, char* soundFiles[], char* outptFileName);
+        ConcatService(int helpSwitch, int toWAV, char** soundFiles,int numberOfSoundsFiles, string outputFileName);
         virtual void helperMessage();
         virtual void run();
     };

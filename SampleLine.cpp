@@ -19,9 +19,13 @@ SampleLine::SampleLine(SampleLine* copy) {
     }
 }
 
+//SampleLine::~SampleLine() {
+////    delete[] channels;
+//}
+
 void SampleLine::handleSamples(std::string samples, int samplesNeeded, int bitRes) {
-    int maxValue = -1;
-    int minValue = 1;
+    int maxValue = 1;
+    int minValue = -1;
     int j;
     for(j = 0; j < bitRes; j++) {
         maxValue = maxValue * 2;

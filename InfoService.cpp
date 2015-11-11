@@ -25,6 +25,10 @@ InfoService ::InfoService(int help, char** soundFileNames, int numberOfSoundFile
     }
 }
 
+//InfoService::~InfoService() {
+////    delete[] soundFiles;
+//}
+
 void InfoService::helperMessage() {
     cout << "sndinfo: A program to tell you all about .cs229 files passed in as arguments" << endl << endl <<
             "Legal Switches:" << endl << endl;
@@ -40,7 +44,7 @@ void InfoService::printInfo() {
         cout << "Bit Depth: " << soundFiles[i]->getBitDepth() << endl;
         cout << "Number of Channels: " << soundFiles[i]->getNumberOfChannels() << endl;
         cout << "Number of Samples: " << soundFiles[i]->getNumberOfSamples() << endl;
-        cout << "Sample Test: " << soundFiles[i]->getSamples()[5]->getChannels()[1] << endl;
+        cout << "Sample Test: " << soundFiles[i]->getSamples()[1]->getChannels()[1] << endl;
         cout << "Length of Sound: " << soundFiles[i]->lengthOfSound() << " Seconds" << endl << endl;
     }
 }

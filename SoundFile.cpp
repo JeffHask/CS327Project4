@@ -29,6 +29,10 @@ SoundFile::SoundFile(char *fileName, int wavFile) {
     }
 }
 
+//SoundFile::~SoundFile() {
+////    delete[] samples;
+//}
+
 void SoundFile::readCS299File(char *fileName) {
     ifstream input(fileName);
     string line;
@@ -109,15 +113,28 @@ void SoundFile::readCS299File(char *fileName) {
     }
 }
 
-void SoundFile::writeCS229File(char *outputFile) {
+void SoundFile::writeCS229File(FILE* file) {
+    fprintf(file, "CS229\n");
+    fprintf(file,"Samples\t\t%d\n", numberOfSamples);
+    fprintf(file,"SampleRate\t%d\n", sampleRate);
+    fprintf(file,"Channels\t%d\n", numberOfChannels);
+    fprintf(file,"BitRes\t\t%d\n", bitDepth);
+    fprintf(file,"StartData\n");
+    int i;
+    for(i=0; i < numberOfSamples; i++) {
+        int j;
+        for(j = 0; j<numberOfChannels; j++) {
+            fprintf(file,"%d\t", samples[i]->getChannels()[j]);
+        }
+        fprintf(file,"\n");
+    }
+}
+
+void SoundFile::readWAVFile(char* fileName) {
 //    TODO
 }
 
-void SoundFile::readWAVFile(char *fileName) {
-//    TODO
-}
-
-void SoundFile::writeWAVFile(char *outputFile) {
+void SoundFile::writeWAVFile(FILE* file) {
 
 }
 
@@ -129,7 +146,7 @@ void SoundFile::addSample(SampleLine *soundLine) {
         for(i = 0; i < numberOfSamples; i++) {
             pSampleLine[i] = new SampleLine(samples[i]);
         }
-//        delete[](samples);
+        delete[](samples);
         samples = pSampleLine;
     }
     samples[numberOfSamples] = soundLine;
@@ -138,4 +155,18 @@ void SoundFile::addSample(SampleLine *soundLine) {
 
 float SoundFile::lengthOfSound() {
     return  numberOfSamples / (float)sampleRate;
+}
+
+SoundFile SoundFile::operator+=(SoundFile *soundFile) {
+    if(soundFile->getSampleRate() != this->getSampleRate() ||
+            soundFile->getNumberOfChannels() != this->getNumberOfChannels() ||
+            soundFile->getBitDepth() != this->getBitDepth()) {
+//        ERROR
+    }
+    int samplesToAdd = soundFile->getNumberOfSamples();
+    int i;
+    for(i = 0; i < samplesToAdd; i++) {
+        this->addSample(new SampleLine(soundFile->getSamples()[i]));
+    }
+    return *this;
 }

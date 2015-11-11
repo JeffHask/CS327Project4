@@ -15,6 +15,7 @@ private:
     void handleSamples(std::string samples, int samplesNeeded, int bitRes);
 public:
     SampleLine(){}
+//    ~SampleLine();
     SampleLine(SampleLine *copy);
     SampleLine(std::string, int samplesNeeded, int bitRes);
     int* getChannels() {

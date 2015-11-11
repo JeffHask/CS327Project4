@@ -8,6 +8,7 @@
 
 #include <stdio.h>
 #include <iostream>
+#include <fstream>
 #include "SampleLine.h"
 
 using namespace std;
@@ -25,14 +26,16 @@ private:
 
 private:
     void readCS299File(char* fileName);
-    void readWAVFile(char* fileName);
+    void readWAVFile(char*fileName);
     void addSample(SampleLine * soundLine);
 public:
     SoundFile();
     SoundFile(char* fileName, int isWav);
-    void writeCS229File(char* outputFile);
-    void writeWAVFile(char* outputFile);
+//    ~SoundFile();
+    void writeCS229File(FILE* outputFile);
+    void writeWAVFile(FILE* outputFile);
     float lengthOfSound();
+    SoundFile operator +=(SoundFile *soundFile);
     void setSampleLine(int index, SampleLine *sampleLine) {
         samples[index] = sampleLine;
     }

@@ -68,7 +68,7 @@ int main(int argc, char*argv[]) {
     if(executableNumber == SNDINFO) {
         service = new InfoService(helpSwitch, inputFiles, inputFileIndex);
     } else if (executableNumber == SNDCAT) {
-        service = new ConcatService();
+        service = new ConcatService(helpSwitch, writeToWav, inputFiles, inputFileIndex, outputFile);
     }
 //    else if (executableNumber == SNDMIX) {
 //    } else {

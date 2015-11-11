@@ -13,11 +13,11 @@ using namespace std;
 class InfoService : public Service {
 
 private:
-    int help;
     void printInfo();
 public:
     InfoService();
     InfoService(int help,char** soundFiles, int numberOfSoundFiles);
+//    ~InfoService();
     virtual void helperMessage();
     virtual void run();
 };
