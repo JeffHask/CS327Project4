@@ -7,25 +7,25 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 #add_executable(CS327Project4 ${SOURCE_FILES})
 
 set(sndinfo_files SoundFile.cpp headers/SoundFile.h IService.cpp headers/IService.h Service.cpp ConcatService.cpp headers/ConcatService.h
-        headers/Service.h InfoService.cpp headers/InfoService.h SampleLine.cpp headers/SampleLine.h similarMain.cpp MixService.cpp headers/MixService.h)
+        headers/Service.h InfoService.cpp headers/InfoService.h SampleLine.cpp headers/SampleLine.h similarMain.cpp MixService.cpp headers/MixService.h Utils.cpp headers/Utils.h)
 add_executable(sndinfo ${sndinfo_files})
 
 set(sndcat_files SoundFile.cpp headers/SoundFile.h IService.cpp headers/IService.h Service.cpp ConcatService.cpp headers/ConcatService.h
-        headers/Service.h InfoService.cpp headers/InfoService.h SampleLine.cpp headers/SampleLine.h similarMain.cpp MixService.cpp headers/MixService.h)
+        headers/Service.h InfoService.cpp headers/InfoService.h SampleLine.cpp headers/SampleLine.h similarMain.cpp MixService.cpp headers/MixService.h Utils.cpp headers/Utils.h)
 add_executable(sndcat ${sndcat_files})
 
 set(sndmix_files SoundFile.cpp headers/SoundFile.h IService.cpp headers/IService.h Service.cpp ConcatService.cpp headers/ConcatService.h
-        headers/Service.h InfoService.cpp headers/InfoService.h SampleLine.cpp headers/SampleLine.h similarMain.cpp MixService.cpp headers/MixService.h)
+        headers/Service.h InfoService.cpp headers/InfoService.h SampleLine.cpp headers/SampleLine.h similarMain.cpp MixService.cpp headers/MixService.h Utils.cpp headers/Utils.h)
 add_executable(sndmix ${sndmix_files})
 
-set(sndgen_files SoundFile.cpp headers/SoundFile.h similarMain.cpp sndgenMain.cpp)
+set(sndgen_files SoundFile.cpp headers/SoundFile.h similarMain.cpp sndgenMain.cpp Utils.cpp headers/Utils.h)
 add_executable(sndgen ${sndgen_files})
 
-set(sndcvt_files similarMain.cpp)
+set(sndcvt_files similarMain.cpp Utils.cpp headers/Utils.h)
 add_executable(sndcvt ${sndcvt_files})
 
-set(sndfx_files similarMain.cpp sndfxMain.cpp)
+set(sndfx_files similarMain.cpp sndfxMain.cpp Utils.cpp headers/Utils.h)
 add_executable(sndfx ${sndfx_files})
 
-set(sndplay_files similarMain.cpp sndplayMain.cpp)
+set(sndplay_files similarMain.cpp sndplayMain.cpp Utils.cpp headers/Utils.h)
 add_executable(sndplay ${sndplay_files})

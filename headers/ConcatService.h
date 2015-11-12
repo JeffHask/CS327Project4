@@ -12,7 +12,7 @@ class ConcatService : public Service {
     private:
         int toWav;
         string outputFileName;
-        SoundFile *concatFiles(SoundFile** soundFiles);
+        void concatFiles(SoundFile** soundFiles);
 
     public:
         ConcatService();

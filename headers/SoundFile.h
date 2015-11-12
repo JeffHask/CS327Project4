@@ -31,11 +31,15 @@ private:
 public:
     SoundFile();
     SoundFile(char* fileName, int isWav);
-//    ~SoundFile();
+    ~SoundFile() {
+      delete[] samples;
+    };
     void writeCS229File(FILE* outputFile);
     void writeWAVFile(FILE* outputFile);
     float lengthOfSound();
     SoundFile operator +=(SoundFile *soundFile);
+    SoundFile operator +(SoundFile *soundFile);
+    SoundFile operator *(int multi);
     void setSampleLine(int index, SampleLine *sampleLine) {
         samples[index] = sampleLine;
     }

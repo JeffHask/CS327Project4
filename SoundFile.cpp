@@ -18,7 +18,7 @@ SoundFile::SoundFile(char *fileName, int wavFile) {
     maxSamples = 2;
     bitDepth = -1;
     sampleRate = -1;
-    samples = (SampleLine**)new SampleLine[maxSamples];
+    samples = new SampleLine*[maxSamples];
         this->fileName = fileName;
     if(!wavFile) {
         fileType = ".cs229";
@@ -140,7 +140,7 @@ void SoundFile::writeWAVFile(FILE* file) {
 
 void SoundFile::addSample(SampleLine *soundLine) {
     if(numberOfSamples == maxSamples) {
-        SampleLine** pSampleLine = (SampleLine**)new SampleLine[maxSamples * 2];
+        SampleLine** pSampleLine = new SampleLine*[maxSamples * 2];
         maxSamples = maxSamples * 2;
         int i;
         for(i = 0; i < numberOfSamples; i++) {
@@ -167,6 +167,25 @@ SoundFile SoundFile::operator+=(SoundFile *soundFile) {
     int i;
     for(i = 0; i < samplesToAdd; i++) {
         this->addSample(new SampleLine(soundFile->getSamples()[i]));
+    }
+    return *this;
+}
+
+SoundFile SoundFile::operator+(SoundFile *soundFile) {
+    int i;
+    for (i = 0; i < soundFile->getNumberOfChannels(); ++i) {
+        *samples[i] += soundFile->getSamples()[i];
+    }
+    return *this;
+}
+
+SoundFile SoundFile::operator*(int multi) {
+    int i;
+    int j;
+    for ( i = 0; i < numberOfSamples; ++i) {
+        for ( j = 0; j < numberOfChannels; ++j) {
+            samples[i]->setChannel(j,samples[i]->getChannels()[j] * multi);
+        }
     }
     return *this;
 }

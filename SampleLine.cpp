@@ -69,3 +69,11 @@ void SampleLine::handleSamples(std::string samples, int samplesNeeded, int bitRe
 //    std::cout << channels[2] << std::endl;
 
 }
+
+SampleLine SampleLine::operator+=(SampleLine *sampleLine) {
+    int i;
+    for (i = 0; i < numberOfChannels; ++i) {
+        this->channels[i]+=sampleLine->channels[i];
+    }
+    return *this;
+}

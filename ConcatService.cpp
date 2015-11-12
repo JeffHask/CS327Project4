@@ -27,7 +27,7 @@ ConcatService::ConcatService() {
 }
 
 void ConcatService ::helperMessage() {
-    cout << "sndcat: A program that allows you to conatenate .cs227 files together" << endl
+    cout << "sndcat: A program that allows you to concatenate .cs227 files together" << endl
     << endl << "Valid switches:" << endl << endl;
     h_helperMessage();
     o_helperMessage();
@@ -42,7 +42,7 @@ void ConcatService::run() {
     }
 }
 
-SoundFile* ConcatService::concatFiles(SoundFile **soundFiles) {
+void ConcatService::concatFiles(SoundFile **soundFiles) {
     SoundFile soundFile = *soundFiles[0];
     FILE* fp;
     int i;

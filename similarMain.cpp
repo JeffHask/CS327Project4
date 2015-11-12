@@ -14,6 +14,7 @@ void handleCommandArgs(int& pp);
 int main(int argc, char*argv[]) {
     int helpSwitch = 0;
     int switches = 1;
+    int multiVals[20];
     int executableNumber = -1;
     string outputFile = " ";
     char** inputFiles = (char**)malloc(sizeof(char**));
@@ -69,11 +70,11 @@ int main(int argc, char*argv[]) {
         service = new InfoService(helpSwitch, inputFiles, inputFileIndex);
     } else if (executableNumber == SNDCAT) {
         service = new ConcatService(helpSwitch, writeToWav, inputFiles, inputFileIndex, outputFile);
+    } else if (executableNumber == SNDMIX) {
+        service = new MixService(helpSwitch,inputFiles,inputFileIndex,outputFile, multiVals);
+    } else {
+
     }
-//    else if (executableNumber == SNDMIX) {
-//    } else {
-//      TODO
-//    }
     service->run();
     return 0;
 }

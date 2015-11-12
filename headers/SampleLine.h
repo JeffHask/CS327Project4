@@ -14,8 +14,10 @@ private:
     int numberOfChannels;
     void handleSamples(std::string samples, int samplesNeeded, int bitRes);
 public:
-    SampleLine(){}
-//    ~SampleLine();
+    SampleLine(){};
+    ~SampleLine() {
+        delete[] channels;
+    };
     SampleLine(SampleLine *copy);
     SampleLine(std::string, int samplesNeeded, int bitRes);
     int* getChannels() {
@@ -24,6 +26,10 @@ public:
     int getNumberOfChannels() {
         return numberOfChannels;
     };
+    void setChannel(int index, int value) {
+        channels[index] = value;
+    };
+    SampleLine operator +=(SampleLine *sampleLine);
 };
 
 

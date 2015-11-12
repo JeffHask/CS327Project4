@@ -17,7 +17,7 @@ private:
 public:
     InfoService();
     InfoService(int help,char** soundFiles, int numberOfSoundFiles);
-//    ~InfoService();
+    ~InfoService();
     virtual void helperMessage();
     virtual void run();
 };
