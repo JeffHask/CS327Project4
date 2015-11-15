@@ -18,7 +18,7 @@ public:
     ~SampleLine() {
         delete[] channels;
     };
-    SampleLine(SampleLine *copy);
+    SampleLine(const SampleLine &copy);
     SampleLine(std::string, int samplesNeeded, int bitRes);
     int* getChannels() {
         return channels;
@@ -29,7 +29,7 @@ public:
     void setChannel(int index, int value) {
         channels[index] = value;
     };
-    SampleLine operator +=(SampleLine *sampleLine);
+    void operator +=(SampleLine *sampleLine);
 };
 
 

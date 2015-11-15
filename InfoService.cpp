@@ -12,8 +12,8 @@ InfoService ::InfoService() {
 
 }
 
-InfoService ::InfoService(int help, char** soundFileNames, int numberOfSoundFiles) {
-    this->help = help;
+InfoService ::InfoService(int switches[], char** soundFileNames, int numberOfSoundFiles) {
+    this->help = switches[0];
     this->numberOfSoundFiles = numberOfSoundFiles;
     soundFiles =  new SoundFile*[numberOfSoundFiles];
     if(help != 1) {

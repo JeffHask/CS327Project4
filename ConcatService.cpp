@@ -7,9 +7,9 @@
 
 using namespace std;
 
-ConcatService::ConcatService(int helpSwitch, int toWav, char** soundFileNames, int numberOfFiles, string outputFileName) {
-    this->help = helpSwitch;
-    this->toWav = toWav;
+ConcatService::ConcatService(int switches[], char** soundFileNames, int numberOfFiles, string outputFileName) {
+    this->help = switches[0];
+    this->toWav = switches[1];
     this->outputFileName = outputFileName;
     this->numberOfSoundFiles = numberOfFiles;
     this->soundFiles = (SoundFile**)new SoundFile[numberOfFiles];

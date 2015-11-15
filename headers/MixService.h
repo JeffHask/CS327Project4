@@ -13,7 +13,7 @@ protected:
     virtual void helperMessage();
 public:
     MixService();
-    MixService(int helpSwitch, char** soundFiles,int numberOfSoundsFiles, string outputFileName, int* multiplyers);
+    MixService(int switches[], char** soundFiles,int numberOfSoundsFiles, string outputFileName, int* multiplyers);
 
     virtual void run();
 

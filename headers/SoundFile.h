@@ -37,7 +37,7 @@ public:
     void writeCS229File(FILE* outputFile);
     void writeWAVFile(FILE* outputFile);
     float lengthOfSound();
-    SoundFile operator +=(SoundFile *soundFile);
+    void operator +=(SoundFile *soundFile);
     SoundFile operator +(SoundFile *soundFile);
     SoundFile operator *(int multi);
     void setSampleLine(int index, SampleLine *sampleLine) {

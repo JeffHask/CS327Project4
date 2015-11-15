@@ -9,9 +9,9 @@ MixService::MixService() {
 
 }
 
-MixService::MixService(int helpSwitch, char **soundFileNames, int numberOfFiles, string outputFileName,
+MixService::MixService(int switches[], char **soundFileNames, int numberOfFiles, string outputFileName,
                        int *multiplyers) {
-    this->help = helpSwitch;
+    this->help = switches[0];
     this->outputFileName = outputFileName;
     this->numberOfSoundFiles = numberOfFiles;
     this->soundFiles = (SoundFile**)new SoundFile[numberOfFiles];

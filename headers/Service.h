@@ -18,6 +18,9 @@ protected:
     void h_helperMessage();
     void o_helperMessage();
     void w_helperMessage();
+    virtual ~Service() {
+        delete[] soundFiles;
+    };
 public:
     virtual void run() = 0;
 };

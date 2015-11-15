@@ -11,17 +11,13 @@ SampleLine::SampleLine(std::string line, int samplesNeeded, int bitRes) {
     handleSamples(line,samplesNeeded, bitRes);
 }
 
-SampleLine::SampleLine(SampleLine* copy) {
-    this->numberOfChannels = copy->getNumberOfChannels();
+SampleLine::SampleLine(const SampleLine &copy) {
+    this->numberOfChannels = copy.numberOfChannels;
     this->channels = new int[numberOfChannels];
     for (int i = 0; i < numberOfChannels; ++i) {
-        this->channels[i] = copy->getChannels()[i];
+        this->channels[i] = copy.channels[i];
     }
 }
-
-//SampleLine::~SampleLine() {
-////    delete[] channels;
-//}
 
 void SampleLine::handleSamples(std::string samples, int samplesNeeded, int bitRes) {
     int maxValue = 1;
@@ -70,10 +66,9 @@ void SampleLine::handleSamples(std::string samples, int samplesNeeded, int bitRe
 
 }
 
-SampleLine SampleLine::operator+=(SampleLine *sampleLine) {
+void SampleLine::operator+=(SampleLine *sampleLine) {
     int i;
     for (i = 0; i < numberOfChannels; ++i) {
         this->channels[i]+=sampleLine->channels[i];
     }
-    return *this;
 }

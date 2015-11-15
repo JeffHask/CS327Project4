@@ -5,11 +5,19 @@
 #ifndef CS327PROJECT4_UTILS_CPP_H
 #define CS327PROJECT4_UTILS_CPP_H
 
+#define SNDINFO 1
+#define SNDCAT 2
+#define SNDMIX 3
+#define SNDGEN 4
+#define SNDCVT 5
+#define SNDFX 6
+#define SNDPLAY 7
+
 #include <iostream>
 using namespace std;
 
-void handleCommandArgs(char** &inputfiles);
+int handleCommandArgs(char** &inputfiles, char*args[], int index, int numArgs);
 
-void handleSwitches();
+int handleSwitches(char* args[], int numArgs, int switches[], int executable, string &outputFile);
 
 #endif //CS327PROJECT4_UTILS_CPP_H

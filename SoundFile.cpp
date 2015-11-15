@@ -29,10 +29,6 @@ SoundFile::SoundFile(char *fileName, int wavFile) {
     }
 }
 
-//SoundFile::~SoundFile() {
-////    delete[] samples;
-//}
-
 void SoundFile::readCS299File(char *fileName) {
     ifstream input(fileName);
     string line;
@@ -144,7 +140,7 @@ void SoundFile::addSample(SampleLine *soundLine) {
         maxSamples = maxSamples * 2;
         int i;
         for(i = 0; i < numberOfSamples; i++) {
-            pSampleLine[i] = new SampleLine(samples[i]);
+            pSampleLine[i] = new SampleLine(*samples[i]);
         }
         delete[](samples);
         samples = pSampleLine;
@@ -157,7 +153,7 @@ float SoundFile::lengthOfSound() {
     return  numberOfSamples / (float)sampleRate;
 }
 
-SoundFile SoundFile::operator+=(SoundFile *soundFile) {
+void SoundFile::operator+=(SoundFile *soundFile) {
     if(soundFile->getSampleRate() != this->getSampleRate() ||
             soundFile->getNumberOfChannels() != this->getNumberOfChannels() ||
             soundFile->getBitDepth() != this->getBitDepth()) {
@@ -166,9 +162,8 @@ SoundFile SoundFile::operator+=(SoundFile *soundFile) {
     int samplesToAdd = soundFile->getNumberOfSamples();
     int i;
     for(i = 0; i < samplesToAdd; i++) {
-        this->addSample(new SampleLine(soundFile->getSamples()[i]));
+        this->addSample(new SampleLine(*soundFile->getSamples()[i]));
     }
-    return *this;
 }
 
 SoundFile SoundFile::operator+(SoundFile *soundFile) {

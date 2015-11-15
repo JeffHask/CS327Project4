@@ -11,7 +11,6 @@
       <sourceFolder url="file://$MODULE_DIR$/Service.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/SoundFile.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Utils.cpp" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/headers/Utils.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/headers/ConcatService.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/headers/IService.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/headers/InfoService.h" isTestSource="false" />
@@ -19,6 +18,7 @@
       <sourceFolder url="file://$MODULE_DIR$/headers/SampleLine.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/headers/Service.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/headers/SoundFile.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/headers/Utils.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/similarMain.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/sndfxMain.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/sndgenMain.cpp" isTestSource="false" />
