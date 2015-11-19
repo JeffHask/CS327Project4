@@ -9,7 +9,7 @@ MixService::MixService() {
 
 }
 
-MixService::MixService(int switches[], char **soundFileNames, int numberOfFiles, string outputFileName,
+MixService::MixService(int switches[], string **soundFileNames, int numberOfFiles, string outputFileName,
                        int *multiplyers) {
     this->help = switches[0];
     this->outputFileName = outputFileName;
@@ -18,17 +18,18 @@ MixService::MixService(int switches[], char **soundFileNames, int numberOfFiles,
     if(help != 1) {
         int i;
         for(i = 0; i < numberOfSoundFiles; i++) {
-//            cout << soundFileNames[i] << endl;
-            *soundFiles[i] = *(new SoundFile(soundFileNames[i], 0)) * multiplyers[i];
+            cout << *soundFileNames[i] << endl;
+            soundFiles[i] = new SoundFile(*soundFileNames[i], 0);
+            soundFiles[i] = *soundFiles[i] * multiplyers[i];
         }
     }
 }
 
 void MixService::run() {
-    if(help) {
+    if(help == 1) {
         helperMessage();
     } else {
-
+        mixSound();
     }
 }
 
@@ -40,6 +41,24 @@ void MixService::helperMessage() {
     o_helperMessage();
 }
 
-void MixService::mixSound(SoundFile **soundfiles, int numberOfFiles, int *multiplyers, string outputFileName) {
+void MixService::mixSound() {
+    int i;
+    FILE * file;
+    if(!outputFileName.compare(" ")) {
+        file = stdout;
+    } else {
+        file = fopen(outputFileName.c_str(), "w");
+        if (file == NULL) {
+//            ERROR
+        }
+    }
+    if(!numberOfSoundFiles) {
+//        ERROR
+    }
+    SoundFile *soundFile = soundFiles[0];
+    for (i = 1; i < numberOfSoundFiles; ++i) {
+        soundFile = *soundFile + soundFiles[i];
+    }
 
+    soundFile->writeCS229File(file);
 }

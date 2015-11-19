@@ -35,7 +35,7 @@ void ConcatService ::helperMessage() {
 }
 
 void ConcatService::run() {
-    if(help) {
+    if(help == 1) {
         helperMessage();
     } else {
         concatFiles(soundFiles);

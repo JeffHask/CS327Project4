@@ -1,14 +1,15 @@
 cs229
 #BLAH
 
-SampleRate 2
+SampleRate 3
 
-bitREs 16
+bitREs 8
 
-channels 3
+channels 4
 
 StartDaTa
 9 9 9
 8 8 8
 7 7 7
 6 6 6
+3 2 3

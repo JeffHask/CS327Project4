@@ -13,7 +13,7 @@ using namespace std;
 SoundFile::SoundFile() {
 
 }
-SoundFile::SoundFile(char *fileName, int wavFile) {
+SoundFile::SoundFile(string fileName, int wavFile) {
     numberOfChannels = -1;
     maxSamples = 2;
     bitDepth = -1;
@@ -29,7 +29,7 @@ SoundFile::SoundFile(char *fileName, int wavFile) {
     }
 }
 
-void SoundFile::readCS299File(char *fileName) {
+void SoundFile::readCS299File(string fileName) {
     ifstream input(fileName);
     string line;
 
@@ -126,7 +126,7 @@ void SoundFile::writeCS229File(FILE* file) {
     }
 }
 
-void SoundFile::readWAVFile(char* fileName) {
+void SoundFile::readWAVFile(string fileName) {
 //    TODO
 }
 
@@ -166,15 +166,19 @@ void SoundFile::operator+=(SoundFile *soundFile) {
     }
 }
 
-SoundFile SoundFile::operator+(SoundFile *soundFile) {
+SoundFile *SoundFile::operator+(SoundFile *soundFile) {
     int i;
-    for (i = 0; i < soundFile->getNumberOfChannels(); ++i) {
-        *samples[i] += soundFile->getSamples()[i];
+    for (i = 0; i < soundFile->getNumberOfSamples(); ++i) {
+        if(i >= numberOfSamples) {
+            addSample(soundFile->getSamples()[i]);
+        } else {
+            *samples[i] += soundFile->getSamples()[i];
+        }
     }
-    return *this;
+    return this;
 }
 
-SoundFile SoundFile::operator*(int multi) {
+SoundFile *SoundFile::operator*(int multi) {
     int i;
     int j;
     for ( i = 0; i < numberOfSamples; ++i) {
@@ -182,5 +186,5 @@ SoundFile SoundFile::operator*(int multi) {
             samples[i]->setChannel(j,samples[i]->getChannels()[j] * multi);
         }
     }
-    return *this;
+    return this;
 }

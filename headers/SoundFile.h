@@ -25,12 +25,12 @@ private:
     int maxSamples;
 
 private:
-    void readCS299File(char* fileName);
-    void readWAVFile(char*fileName);
+    void readCS299File(string fileName);
+    void readWAVFile(string fileName);
     void addSample(SampleLine * soundLine);
 public:
     SoundFile();
-    SoundFile(char* fileName, int isWav);
+    SoundFile(string fileName, int isWav);
     ~SoundFile() {
       delete[] samples;
     };
@@ -38,8 +38,8 @@ public:
     void writeWAVFile(FILE* outputFile);
     float lengthOfSound();
     void operator +=(SoundFile *soundFile);
-    SoundFile operator +(SoundFile *soundFile);
-    SoundFile operator *(int multi);
+    SoundFile *operator +(SoundFile *soundFile);
+    SoundFile *operator *(int multi);
     void setSampleLine(int index, SampleLine *sampleLine) {
         samples[index] = sampleLine;
     }

@@ -15,11 +15,10 @@ InfoService ::InfoService() {
 InfoService ::InfoService(int switches[], char** soundFileNames, int numberOfSoundFiles) {
     this->help = switches[0];
     this->numberOfSoundFiles = numberOfSoundFiles;
-    soundFiles =  new SoundFile*[numberOfSoundFiles];
+    soundFiles =  (SoundFile**)new SoundFile[numberOfSoundFiles];
     if(help != 1) {
         int i;
         for(i = 0; i < numberOfSoundFiles; i++) {
-//            cout << soundFileNames[i] << endl;
             soundFiles[i] = new SoundFile(soundFileNames[i], 0);
         }
     }
