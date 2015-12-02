@@ -30,6 +30,8 @@ public:
         channels[index] = value;
     };
     void operator +=(SampleLine *sampleLine);
+
+//    void operator = (SampleLine * sampleLine);
 };
 
 

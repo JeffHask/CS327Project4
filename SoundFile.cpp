@@ -15,7 +15,8 @@ SoundFile::SoundFile() {
 }
 SoundFile::SoundFile(string fileName, int wavFile) {
     numberOfChannels = -1;
-    maxSamples = 2;
+    numberOfSamples = 0;
+    maxSamples = 20;
     bitDepth = -1;
     sampleRate = -1;
     samples = new SampleLine*[maxSamples];
@@ -136,15 +137,17 @@ void SoundFile::writeWAVFile(FILE* file) {
 
 void SoundFile::addSample(SampleLine *soundLine) {
     if(numberOfSamples == maxSamples) {
+//        TODO FIX, need to allocate more memory
         SampleLine** pSampleLine = new SampleLine*[maxSamples * 2];
         maxSamples = maxSamples * 2;
         int i;
         for(i = 0; i < numberOfSamples; i++) {
             pSampleLine[i] = new SampleLine(*samples[i]);
         }
-        delete[](samples);
+        delete[] samples;
         samples = pSampleLine;
     }
+//    TODO error happening on the line before this
     samples[numberOfSamples] = soundLine;
     numberOfSamples++;
 }

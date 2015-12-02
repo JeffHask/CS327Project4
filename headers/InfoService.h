@@ -16,7 +16,7 @@ private:
     void printInfo();
 public:
     InfoService();
-    InfoService(int switches[],char** soundFiles, int numberOfSoundFiles);
+    InfoService(int switches[],string** soundFiles, int numberOfSoundFiles);
     ~InfoService();
     virtual void helperMessage();
     virtual void run();

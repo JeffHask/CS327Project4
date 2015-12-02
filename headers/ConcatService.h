@@ -16,7 +16,7 @@ class ConcatService : public Service {
 
     public:
         ConcatService();
-        ConcatService(int switches[], char** soundFiles,int numberOfSoundsFiles, string outputFileName);
+        ConcatService(int switches[], string** soundFiles,int numberOfSoundsFiles, string outputFileName);
         virtual void helperMessage();
         virtual void run();
     };

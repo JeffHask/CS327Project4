@@ -4,7 +4,7 @@
 
 #include "headers/Utils.h"
 
-int handleCommandArgs(char ** &inputFiles, char *args[], int index , int numArgs, int executable) {
+int handleCommandArgs(string ** inputFiles, char *args[], int index , int numArgs, int executable) {
     int i;
     int inputIndex = 0;
     for (i = index; i < numArgs; ++i) {
@@ -12,7 +12,7 @@ int handleCommandArgs(char ** &inputFiles, char *args[], int index , int numArgs
 
         } else {
             if (string(args[i]).find(string(".cs229")) != string::npos) {
-                inputFiles[inputIndex] = args[i];
+                inputFiles[inputIndex] = new string(args[i]);
                 inputIndex++;
             } else {
 //                ERROR HANDLE

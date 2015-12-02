@@ -10,9 +10,10 @@ using namespace std;
 int main(int argc, char*argv[]) {
     int multiOrSwitchArgs[20];
     int switches[20];
+    fill(switches, switches+20,0);
     int executableNumber;
     string outputFile = " ";
-    string** inputFiles = (string**)malloc(sizeof(string*) * 500);
+    string** inputFiles = (string**)malloc(sizeof(string**));
     int numberOfFiles = 0;
     Service *service;
 
@@ -36,12 +37,12 @@ int main(int argc, char*argv[]) {
     if(executableNumber == SNDMIX) {
         numberOfFiles = handleSndmixCommandArgs(inputFiles,argv,j,argc,multiOrSwitchArgs);
     } else {
-//        numberOfFiles = handleCommandArgs(inputFiles, argv, j, argc, executableNumber);
+        numberOfFiles = handleCommandArgs(inputFiles, argv, j, argc, executableNumber);
     }
     if(executableNumber == SNDINFO) {
-//        service = new InfoService(switches, inputFiles, numberOfFiles);
+        service = new InfoService(switches, inputFiles, numberOfFiles);
     } else if (executableNumber == SNDCAT) {
-//        service = new ConcatService(switches, inputFiles, numberOfFiles, outputFile);
+        service = new ConcatService(switches, inputFiles, numberOfFiles, outputFile);
     } else if (executableNumber == SNDMIX) {
         service = new MixService(switches,inputFiles,numberOfFiles,outputFile, multiOrSwitchArgs);
     } else {

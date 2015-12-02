@@ -12,14 +12,14 @@ InfoService ::InfoService() {
 
 }
 
-InfoService ::InfoService(int switches[], char** soundFileNames, int numberOfSoundFiles) {
+InfoService ::InfoService(int switches[], string** soundFileNames, int numberOfSoundFiles) {
     this->help = switches[0];
     this->numberOfSoundFiles = numberOfSoundFiles;
-    soundFiles =  (SoundFile**)new SoundFile[numberOfSoundFiles];
     if(help != 1) {
+        soundFiles = (SoundFile**)new SoundFile[numberOfSoundFiles];
         int i;
         for(i = 0; i < numberOfSoundFiles; i++) {
-            soundFiles[i] = new SoundFile(soundFileNames[i], 0);
+            soundFiles[i] = new SoundFile((soundFileNames[i][0]), 0);
         }
     }
 }

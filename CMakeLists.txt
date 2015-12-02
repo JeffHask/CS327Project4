@@ -18,7 +18,7 @@ set(sndmix_files SoundFile.cpp headers/SoundFile.h IService.cpp headers/IService
         headers/Service.h InfoService.cpp headers/InfoService.h SampleLine.cpp headers/SampleLine.h similarMain.cpp MixService.cpp headers/MixService.h Utils.cpp headers/Utils.h)
 add_executable(sndmix ${sndmix_files})
 
-set(sndgen_files SoundFile.cpp headers/SoundFile.h similarMain.cpp sndgenMain.cpp Utils.cpp headers/Utils.h)
+set(sndgen_files SoundFile.cpp SampleLine.cpp headers/SampleLine.h headers/SoundFile.h sndgenMain.cpp SoundGenerator.cpp headers/SoundGenerator.h)
 add_executable(sndgen ${sndgen_files})
 
 set(sndcvt_files similarMain.cpp Utils.cpp headers/Utils.h)

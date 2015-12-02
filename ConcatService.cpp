@@ -7,7 +7,7 @@
 
 using namespace std;
 
-ConcatService::ConcatService(int switches[], char** soundFileNames, int numberOfFiles, string outputFileName) {
+ConcatService::ConcatService(int switches[], string** soundFileNames, int numberOfFiles, string outputFileName) {
     this->help = switches[0];
     this->toWav = switches[1];
     this->outputFileName = outputFileName;
@@ -17,7 +17,7 @@ ConcatService::ConcatService(int switches[], char** soundFileNames, int numberOf
         int i;
         for(i = 0; i < numberOfSoundFiles; i++) {
 //            cout << soundFileNames[i] << endl;
-            soundFiles[i] = new SoundFile(soundFileNames[i], toWav);
+            soundFiles[i] = new SoundFile(*soundFileNames[i], toWav);
         }
     }
 }

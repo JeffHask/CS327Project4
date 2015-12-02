@@ -1,0 +1,12 @@
+cs229
+#BLAH
+
+SampleRate 2
+
+bitREs 16
+
+channels 3
+
+StartDaTa
+3 2 1
+2 9 11

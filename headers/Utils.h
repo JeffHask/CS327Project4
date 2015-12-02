@@ -16,7 +16,7 @@
 #include <iostream>
 using namespace std;
 
-int handleCommandArgs(char** &inputfiles, char*args[], int index, int numArgs, int executable);
+int handleCommandArgs(string** inputfiles, char*args[], int index, int numArgs, int executable);
 int handleSndmixCommandArgs(string** inputFiles, char *args[], int index , int numArgs, int multiples[]);
 
 int handleSwitches(char* args[], int numArgs, int switches[], int executable, string &outputFile);

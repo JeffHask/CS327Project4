@@ -72,3 +72,9 @@ void SampleLine::operator+=(SampleLine *sampleLine) {
         this->channels[i]+=sampleLine->channels[i];
     }
 }
+
+//void SampleLine::operator=(SampleLine *sampleLine) {
+//    for (int i = 0; i <  this->numberOfChannels; ++i) {
+//        this->channels[i] = sampleLine->channels[i];
+//    }
+//}
