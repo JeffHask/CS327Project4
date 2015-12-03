@@ -3,6 +3,7 @@
 //
 #include <iostream>
 #include "headers/ConcatService.h"
+#include "headers/Utils.h"
 
 
 using namespace std;
@@ -16,7 +17,6 @@ ConcatService::ConcatService(int switches[], string** soundFileNames, int number
     if(help != 1) {
         int i;
         for(i = 0; i < numberOfSoundFiles; i++) {
-//            cout << soundFileNames[i] << endl;
             soundFiles[i] = new SoundFile(*soundFileNames[i], toWav);
         }
     }
@@ -52,6 +52,9 @@ void ConcatService::concatFiles(SoundFile **soundFiles) {
     if(!outputFileName.compare(" ")) {
        fp = stdout;
     } else {
+        if((!toWav && outputFileName.find(".cs229") == string::npos) || toWav && outputFileName.find(".wav") == string::npos) {
+            __throw_invalid_argument("Invalid output file, make sure you specify .wav file if you use the -w switch, otherwise use an output file that ends with .cs229");
+        }
         fp = fopen(outputFileName.c_str(), "w");
     }
     if(!toWav) {

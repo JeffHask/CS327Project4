@@ -24,28 +24,30 @@ private:
     int sustain;
     int release;
     int type;
+    int pulseTime;
     FILE * outputFile;
     SoundFile setupFile();
 
     SoundGenerator(const int bitDepth, const int sampleRate, const int frequency, const int duration, const int volume, const int attack,
-                   const int decay, const int sustain, const int release, const int type, FILE * outputFile) :
+                   const int decay, const int sustain, const int release, const int type, FILE * outputFile, const int pulseTime) :
             bitDepth(bitDepth), sampleRate(sampleRate), frequency(frequency),duration(duration),volume(volume), attack(attack), decay(decay), sustain(sustain),
-            release(release),type(type), outputFile(outputFile){};
+            release(release),type(type), outputFile(outputFile), pulseTime(pulseTime){};
 };
 
 class SoundGenerator::SoundBuilder {
 private:
     int bitDepth = 16;
     int sampleRate = 4;
-    int frequency;
+    int frequency = 2;
     int duration = 10;
     int volume = 1;
     int attack = 3;
     int decay = 2;
     int sustain = 3;
     int release = 2;
+    int pulseTime = 1;
     int type = 1;
-    FILE *outputFile;
+    FILE *outputFile = stdout;
 
 public:
     SoundBuilder(){};
@@ -64,6 +66,11 @@ public:
         this->frequency = frequency;
         return *this;
     };
+
+    SoundBuilder& setDuration(const int duration) {
+        this->duration = duration;
+        return *this;
+    }
 
     SoundBuilder& setVolume(const int volume) {
         this->volume = volume;
@@ -87,17 +94,23 @@ public:
         this->release = release;
         return *this;
     };
+
+    SoundBuilder& setPulseTime(const int pulseTime) {
+        this->pulseTime = pulseTime;
+        return *this;
+    }
+
     SoundBuilder& setType(const int type) {
         this->type = type;
         return *this;
     };
-    SoundBuilder& setOutputFile(const int duration) {
-        this->duration = duration;
+    SoundBuilder& setOutputFile(FILE * outputFile) {
+        this->outputFile = outputFile;
         return *this;
     };
 
     SoundGenerator build() {
-        return SoundGenerator(bitDepth,sampleRate,frequency,duration,volume,attack,decay,sustain,release,type,outputFile);
+        return SoundGenerator(bitDepth,sampleRate,frequency,duration,volume,attack,decay,sustain,release,type,outputFile, pulseTime);
     };
 };
 

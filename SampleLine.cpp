@@ -4,8 +4,11 @@
 
 #include "headers/SampleLine.h"
 #include <iostream>
+#include <stdexcept>
 
-SampleLine::SampleLine(std::string line, int samplesNeeded, int bitRes) {
+using namespace std;
+
+SampleLine::SampleLine(string line, int samplesNeeded, int bitRes) {
     numberOfChannels = samplesNeeded;
     channels = new int[samplesNeeded];
     handleSamples(line,samplesNeeded, bitRes);
@@ -19,7 +22,7 @@ SampleLine::SampleLine(const SampleLine &copy) {
     }
 }
 
-void SampleLine::handleSamples(std::string samples, int samplesNeeded, int bitRes) {
+void SampleLine::handleSamples(string samples, int samplesNeeded, int bitRes) {
     int maxValue = 1;
     int minValue = -1;
     int j;
@@ -33,9 +36,12 @@ void SampleLine::handleSamples(std::string samples, int samplesNeeded, int bitRe
     char sample[10];
     for(char c : samples) {
         if(c > '9') {
-//            ERROR
+            __throw_invalid_argument("Invalid Sample: Not a number");
         }
         if(c < '0') {
+            if(i == 0) {
+                continue;
+            }
             sample[i] = '\0';
             sscanf(sample,"%d", &singleChannel);
             if(singleChannel > maxValue) {
@@ -57,7 +63,7 @@ void SampleLine::handleSamples(std::string samples, int samplesNeeded, int bitRe
     channels[numChannels] = singleChannel;
     numChannels++;
     if(numChannels != samplesNeeded) {
-//        ERROR!
+        throw invalid_argument("Invalid number of channels in the sample data");
     }
 
 //    std::cout << channels[0] << std::endl;

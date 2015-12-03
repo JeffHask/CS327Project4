@@ -16,6 +16,9 @@ class ConcatService : public Service {
 
     public:
         ConcatService();
+        virtual ~ConcatService() {
+            delete[] soundFiles;
+        }
         ConcatService(int switches[], string** soundFiles,int numberOfSoundsFiles, string outputFileName);
         virtual void helperMessage();
         virtual void run();

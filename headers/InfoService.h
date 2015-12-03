@@ -17,7 +17,10 @@ private:
 public:
     InfoService();
     InfoService(int switches[],string** soundFiles, int numberOfSoundFiles);
-    ~InfoService();
+    virtual ~InfoService() {
+        delete[] soundFiles;
+
+    };
     virtual void helperMessage();
     virtual void run();
 };

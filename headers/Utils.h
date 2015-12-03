@@ -21,4 +21,8 @@ int handleSndmixCommandArgs(string** inputFiles, char *args[], int index , int n
 
 int handleSwitches(char* args[], int numArgs, int switches[], int executable, string &outputFile);
 
+void h_helpermessage();
+void h_helperMessage();
+void o_helperMessage();
+void w_helperMessage();
 #endif //CS327PROJECT4_UTILS_CPP_H

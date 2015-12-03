@@ -3,6 +3,7 @@
 //
 
 #include "headers/MixService.h"
+#include "headers/Utils.h"
 
 
 MixService::MixService() {
@@ -18,7 +19,6 @@ MixService::MixService(int switches[], string **soundFileNames, int numberOfFile
     if(help != 1) {
         int i;
         for(i = 0; i < numberOfSoundFiles; i++) {
-            cout << *soundFileNames[i] << endl;
             soundFiles[i] = new SoundFile(*soundFileNames[i], 0);
             soundFiles[i] = *soundFiles[i] * multiplyers[i];
         }
@@ -48,12 +48,9 @@ void MixService::mixSound() {
         file = stdout;
     } else {
         file = fopen(outputFileName.c_str(), "w");
-        if (file == NULL) {
-//            ERROR
-        }
     }
     if(!numberOfSoundFiles) {
-//        ERROR
+        __throw_invalid_argument("Please specify atleast one .cs229 file");
     }
     SoundFile *soundFile = soundFiles[0];
     for (i = 1; i < numberOfSoundFiles; ++i) {

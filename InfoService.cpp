@@ -2,9 +2,11 @@
 // Created by jeffrey on 11/7/15.
 //
 
+#include <stdexcept>
 #include "headers/InfoService.h"
 #include "iostream"
 #include "headers/SoundFile.h"
+#include "headers/Utils.h"
 
 using namespace std;
 
@@ -19,19 +21,20 @@ InfoService ::InfoService(int switches[], string** soundFileNames, int numberOfS
         soundFiles = (SoundFile**)new SoundFile[numberOfSoundFiles];
         int i;
         for(i = 0; i < numberOfSoundFiles; i++) {
-            soundFiles[i] = new SoundFile((soundFileNames[i][0]), 0);
-        }
-    }
-}
 
-InfoService::~InfoService() {
-    delete[] soundFiles;
+            try {
+                soundFiles[i] = new SoundFile((soundFileNames[i][0]), 0);
+            } catch (invalid_argument &e) {
+                __throw_invalid_argument(e.what());
+            }
+            }
+    }
 }
 
 void InfoService::helperMessage() {
     cout << "sndinfo: A program to tell you all about .cs229 files passed in as arguments" << endl << endl <<
             "Legal Switches:" << endl << endl;
-    Service::h_helperMessage();
+    h_helperMessage();
 }
 
 void InfoService::printInfo() {
@@ -43,7 +46,6 @@ void InfoService::printInfo() {
         cout << "Bit Depth: " << soundFiles[i]->getBitDepth() << endl;
         cout << "Number of Channels: " << soundFiles[i]->getNumberOfChannels() << endl;
         cout << "Number of Samples: " << soundFiles[i]->getNumberOfSamples() << endl;
-//        cout << "Sample Test: " << soundFiles[i]->getSamples()[1]->getChannels()[1] << endl;
         cout << "Length of Sound: " << soundFiles[i]->lengthOfSound() << " Seconds" << endl << endl;
     }
 }

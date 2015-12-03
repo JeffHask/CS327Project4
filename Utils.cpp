@@ -11,11 +11,11 @@ int handleCommandArgs(string ** inputFiles, char *args[], int index , int numArg
         if (executable == SNDMIX) {
 
         } else {
-            if (string(args[i]).find(string(".cs229")) != string::npos) {
+            if (string(args[i]).find(string(".cs229")) != string::npos || executable == SNDCVT && string(args[i]).find(string(".wav")) != string::npos) {
                 inputFiles[inputIndex] = new string(args[i]);
                 inputIndex++;
             } else {
-//                ERROR HANDLE
+                __throw_invalid_argument((std::string("ERROR: Unknown argument '") + std::string(args[i]) + std::string("'")).c_str());
             }
         }
     }
@@ -30,19 +30,18 @@ int handleSwitches(char* args[],int numArgs, int switches[], int executable, str
             if(!string("-h").compare(args[i])) {
                 switches[0] = 1;
             } else if (!string("-o").compare(args[i]) && executable != SNDINFO) {
-                string oFile = string(args[i+1]);
-                if(!oFile.substr(oFile.length()-6,oFile.length()-1).compare(".cs229")) {
-                    outputFile = oFile;
+                if(i+1 < numArgs || (string(args[i + 1]).find(string(".cs229")) != string::npos || string(args[i + 1]).find(string(".wav")) != string::npos )) {
+                    outputFile = args[i+1];
                     i++;
                 } else {
-//                    ERROR HANDLE
+                    __throw_invalid_argument((std::string("ERROR: Invalid output file '") + std::string(args[i + 1]) + std::string("'")).c_str());
                 }
             } else if(!string("-w").compare(args[i]) && executable == SNDCAT) {
                 switches[1] = 1;
             } else if (string(args[i]).find(string(".cs229")) != string::npos || (SNDMIX == executable && sscanf(args[i],"%d", &mixCheck) == 1)) {
                 return i;
             } else {
-//                ERROR HANDLE
+                __throw_invalid_argument((std::string("ERROR: Unknown argument '") + std::string(args[i]) + std::string("'")).c_str());
             }
     }
     return 0;
@@ -51,6 +50,9 @@ int handleSwitches(char* args[],int numArgs, int switches[], int executable, str
 int handleSndmixCommandArgs(string**inputFiles, char *args[], int index , int numArgs, int multiples[]) {
     int numFiles = 0;
     int i;
+    if((numArgs - index) % 2 != 0) {
+        __throw_invalid_argument("Invalid number of arguments, make sure you have an integer value followed by a string");
+    }
     for (i = index; i < numArgs - 1; i+=2) {
         int numberSet;
         int val;
@@ -63,9 +65,21 @@ int handleSndmixCommandArgs(string**inputFiles, char *args[], int index , int nu
             inputFiles[numFiles] = (new string(fileName));
             numFiles++;
         } else {
-//            ERROR
+            __throw_invalid_argument("Invalid arguments, make sure you have an integer value followed by a string");
         }
     }
     return numFiles;
 
+}
+
+void h_helperMessage() {
+    cout << "-h\t: show the help screen" << endl;
+}
+
+void o_helperMessage() {
+    cout << "-o file\t: specify the output file name; if omitted, write to standard output" << endl;
+}
+
+void w_helperMessage() {
+    cout << "-w\t: output in .wav format instead of .cs229";
 }

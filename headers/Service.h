@@ -15,13 +15,8 @@ protected:
     int help;
     SoundFile **soundFiles;
     virtual void helperMessage() = 0;
-    void h_helperMessage();
-    void o_helperMessage();
-    void w_helperMessage();
-    virtual ~Service() {
-        delete[] soundFiles;
-    };
 public:
+    virtual ~Service() { };
     virtual void run() = 0;
 };
 

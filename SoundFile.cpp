@@ -7,6 +7,7 @@
 #include <stdio.h>
 #include <fstream>
 #include <string.h>
+#include <stdexcept>
 
 using namespace std;
 
@@ -39,74 +40,78 @@ void SoundFile::readCS299File(string fileName) {
         line[0] = (char)toupper(line[0]);
         line[1] = (char)toupper(line[1]);
         if(line.compare("CS229")) {
-//            ERROR
+            __throw_invalid_argument("Error: No 'CS229' in the first line, invalid cs229 file.");
         }
-//        cout << line << '\n';
     } else {
-//        ERROR
+        __throw_invalid_argument("Error: the first line should just have 'CS229', and nothing else.");
     }
 
 
     int i;
     int startData = 0;
-    int numSamples = 0;
+    int lineScan;
+    int numSamples = -1;
     while(getline( input, line ) ) {
         int keywordVal = -1;
         char keyword[20] = " ";
         if(!startData) {
             if (line[0] == '#') {
-//                cout << "Lol thats a comment silly" << endl;
 
             } else {
                 sscanf(line.c_str(), "%s%d", keyword, &keywordVal);
                 if(keyword[0] == ' ') {
-//                    cout << "Blank line" << endl;
                     continue;
                 }
-//                cout << keyword << endl;
-//                printf("%d\n", keywordVal);
                 for(i = 0; i < strlen(keyword); i++) {
                     keyword[i] = (char)toupper(keyword[i]);
                 }
                 string kw = string(keyword);
                 if(kw.compare("STARTDATA")) {
                     if(keywordVal == -1) {
-//                        ERROR
+                        __throw_invalid_argument((string("ERROR: Invalid cs229 file, value needed after header ") + kw).c_str());
                     }
                 } else {
                     if(numberOfChannels == -1 || bitDepth == -1 || sampleRate == -1) {
-//                        ERROR
+                        __throw_invalid_argument("ERROR: Invalid cs229 file, it is missing a neccesary header. Headers that are needed include 'Channels', 'SampleRate', and 'BitRes'.");
                     }
                     startData = 1;
+                    continue;
                 }
                 if(!kw.compare("SAMPLERATE")) {
                     sampleRate = keywordVal;
                 } else if (!kw.compare("SAMPLES")) {
                     if(keywordVal < 0) {
-//                        ERROR
+                        __throw_invalid_argument("ERROR: The Samples header should not have a negative value.");
                     }
                     numSamples = keywordVal;
                 } else if (!kw.compare("CHANNELS")) {
-                    if(keywordVal > 127) {
-//                        ERROR
+                    if(keywordVal > 127 || keywordVal < 0) {
+                        __throw_invalid_argument("ERROR: The Channels header should be exclusively between 0 and 128.");
                     }
                     numberOfChannels = keywordVal;
                 } else if (!kw.compare("BITRES")) {
                     if(!(keywordVal == 8 || keywordVal == 16 || keywordVal == 32)) {
-//                        ERROR
+                        __throw_invalid_argument("ERROR: The bit depth must be either 8, 16, or 32");
                     } else {
                         bitDepth = keywordVal;
                     }
                 } else {
-//                    ERROR
+                    __throw_invalid_argument((string("ERROR:Invalid cs229 file, unknown header ") + kw).c_str());
                 }
+                keywordVal = -1;
             }
         } else {
-          addSample(new SampleLine(line,numberOfChannels, bitDepth));
+            try {
+                addSample(new SampleLine(line, numberOfChannels, bitDepth));
+            } catch (invalid_argument &e) {
+                string errorLine = " in sample " +to_string(numberOfSamples + 1) + " in file " + fileName;
+                __throw_invalid_argument((string(e.what()) + errorLine).c_str());
+
+            }
         }
     }
-    if (numSamples != numberOfSamples) {
-//        ERROR
+    if (numSamples != -1 && numSamples != numberOfSamples) {
+        __throw_invalid_argument("Mismatch in the number of samples specifed in the file and the actual number of samples");
     }
 }
 
@@ -137,7 +142,6 @@ void SoundFile::writeWAVFile(FILE* file) {
 
 void SoundFile::addSample(SampleLine *soundLine) {
     if(numberOfSamples == maxSamples) {
-//        TODO FIX, need to allocate more memory
         SampleLine** pSampleLine = new SampleLine*[maxSamples * 2];
         maxSamples = maxSamples * 2;
         int i;
@@ -147,7 +151,6 @@ void SoundFile::addSample(SampleLine *soundLine) {
         delete[] samples;
         samples = pSampleLine;
     }
-//    TODO error happening on the line before this
     samples[numberOfSamples] = soundLine;
     numberOfSamples++;
 }
@@ -160,7 +163,7 @@ void SoundFile::operator+=(SoundFile *soundFile) {
     if(soundFile->getSampleRate() != this->getSampleRate() ||
             soundFile->getNumberOfChannels() != this->getNumberOfChannels() ||
             soundFile->getBitDepth() != this->getBitDepth()) {
-//        ERROR
+        __throw_invalid_argument("ERROR: To concatenate cs229 files together, the sample rate, number of channels, and bit depth all need to be the same.");
     }
     int samplesToAdd = soundFile->getNumberOfSamples();
     int i;

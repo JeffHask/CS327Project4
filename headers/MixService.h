@@ -14,7 +14,9 @@ protected:
 public:
     MixService();
     MixService(int switches[], string** soundFiles,int numberOfSoundsFiles, string outputFileName, int* multiplyers);
-
+    virtual ~MixService() {
+        delete[] soundFiles;
+    }
     virtual void run();
 
 private:
