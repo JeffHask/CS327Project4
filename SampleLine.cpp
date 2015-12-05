@@ -14,6 +14,12 @@ SampleLine::SampleLine(string line, int samplesNeeded, int bitRes) {
     handleSamples(line,samplesNeeded, bitRes);
 }
 
+SampleLine::SampleLine(int val) {
+    numberOfChannels = 1;
+    channels = new int[1];
+    channels[0] = val;
+}
+
 SampleLine::SampleLine(const SampleLine &copy) {
     this->numberOfChannels = copy.numberOfChannels;
     this->channels = new int[numberOfChannels];

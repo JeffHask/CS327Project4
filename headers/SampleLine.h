@@ -20,6 +20,7 @@ public:
     };
     SampleLine(const SampleLine &copy);
     SampleLine(std::string, int samplesNeeded, int bitRes);
+    SampleLine(int val);
     const int* getChannels() {
         return channels;
     };

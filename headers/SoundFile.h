@@ -27,7 +27,6 @@ private:
 private:
     void readCS299File(string fileName);
     void readWAVFile(string fileName);
-    void addSample(SampleLine * soundLine);
 public:
     SoundFile();
     SoundFile(string fileName, int isWav);
@@ -37,6 +36,7 @@ public:
     void writeCS229File(FILE* outputFile);
     void writeWAVFile(FILE* outputFile);
     float lengthOfSound();
+    void addSample(SampleLine * soundLine);
     void operator +=(SoundFile *soundFile);
     SoundFile *operator +(SoundFile *soundFile);
     SoundFile *operator *(int multi);
@@ -55,10 +55,6 @@ public:
 
     string getFileType() const {
         return fileType;
-    }
-
-    void setFileType(char *fileType) {
-        SoundFile::fileType = fileType;
     }
 
     int getSampleRate() const {

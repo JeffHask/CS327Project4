@@ -12,7 +12,8 @@
 using namespace std;
 
 SoundFile::SoundFile() {
-
+    maxSamples = 2;
+    samples = new SampleLine*[maxSamples];
 }
 SoundFile::SoundFile(string fileName, int wavFile) {
     numberOfChannels = -1;

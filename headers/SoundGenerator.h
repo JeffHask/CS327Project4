@@ -12,6 +12,7 @@ class SoundGenerator {
 public:
     class SoundBuilder;
     void print();
+    void run(int helpMessage);
 
 private:
     int bitDepth;
@@ -24,28 +25,33 @@ private:
     int sustain;
     int release;
     int type;
-    int pulseTime;
+    float pulseTime;
     FILE * outputFile;
-    SoundFile setupFile();
+    SoundFile *setupFile();
+    void handleEnvelop(SoundFile* soundFile);
+    void create_sine_wave(SoundFile* soundFile);
+    void create_triangle_wave(SoundFile * soundFile);
+    void create_sawtooth_wave(SoundFile * soundFile);
+    void create_pulse_wave(SoundFile * soundFile);
 
     SoundGenerator(const int bitDepth, const int sampleRate, const int frequency, const int duration, const int volume, const int attack,
-                   const int decay, const int sustain, const int release, const int type, FILE * outputFile, const int pulseTime) :
+                   const int decay, const int sustain, const int release, const int type, FILE * outputFile, const float pulseTime) :
             bitDepth(bitDepth), sampleRate(sampleRate), frequency(frequency),duration(duration),volume(volume), attack(attack), decay(decay), sustain(sustain),
             release(release),type(type), outputFile(outputFile), pulseTime(pulseTime){};
 };
 
 class SoundGenerator::SoundBuilder {
 private:
-    int bitDepth = 16;
+    int bitDepth = 8;
     int sampleRate = 4;
     int frequency = 2;
     int duration = 10;
-    int volume = 1;
+    float volume = 1;
     int attack = 3;
     int decay = 2;
-    int sustain = 3;
+    float sustain = .5;
     int release = 2;
-    int pulseTime = 1;
+    float pulseTime = .5;
     int type = 1;
     FILE *outputFile = stdout;
 
@@ -86,7 +92,7 @@ public:
         this->decay = decay;
         return *this;
     };
-    SoundBuilder& setSustain(const int sustain) {
+    SoundBuilder& setSustain(const float sustain) {
         this->sustain = sustain;
         return *this;
     };
@@ -95,7 +101,7 @@ public:
         return *this;
     };
 
-    SoundBuilder& setPulseTime(const int pulseTime) {
+    SoundBuilder& setPulseTime(const float pulseTime) {
         this->pulseTime = pulseTime;
         return *this;
     }
@@ -114,5 +120,9 @@ public:
     };
 };
 
+union sndgen_handler {
+    float f;
+    int i = -1;
+};
 
 #endif //CS327PROJECT4_SOUNDGENERATOR_H
