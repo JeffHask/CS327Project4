@@ -5,6 +5,7 @@
 #include "headers/ConcatService.h"
 #include "headers/MixService.h"
 #include "headers/Utils.h"
+#include "headers/ConvertService.h"
 
 using namespace std;
 
@@ -53,7 +54,7 @@ int main(int argc, char*argv[]) {
         } else if (executableNumber == SNDMIX) {
             service = new MixService(switches, inputFiles, numberOfFiles, outputFile, multiOrSwitchArgs);
         } else {
-
+            service = new ConvertService(switches[0],**inputFiles,outputFile);
         }
         service->run();
         return 0;

@@ -27,6 +27,7 @@ ConcatService::ConcatService() {
 }
 
 void ConcatService ::helperMessage() {
+//    TODO
     cout << "sndcat: A program that allows you to concatenate .cs227 files together" << endl
     << endl << "Valid switches:" << endl << endl;
     h_helperMessage();
@@ -58,8 +59,8 @@ void ConcatService::concatFiles(SoundFile **soundFiles) {
         fp = fopen(outputFileName.c_str(), "w");
     }
     if(!toWav) {
-        soundFile.writeCS229File(fp);
+        soundFile.writeCS229File(outputFileName);
     } else {
-        soundFile.writeWAVFile(fp);
+        soundFile.writeWAVFile(outputFileName);
     }
 }

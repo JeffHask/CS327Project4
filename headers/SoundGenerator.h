@@ -7,6 +7,7 @@
 
 #include "iostream"
 #include "SoundFile.h"
+//TODO documentation
 
 class SoundGenerator {
 public:
@@ -19,10 +20,10 @@ private:
     int sampleRate;
     int frequency;
     int duration;
-    int volume;
+    float volume;
     int attack;
     int decay;
-    int sustain;
+    float sustain;
     int release;
     int type;
     float pulseTime;
@@ -34,8 +35,8 @@ private:
     void create_sawtooth_wave(SoundFile * soundFile);
     void create_pulse_wave(SoundFile * soundFile);
 
-    SoundGenerator(const int bitDepth, const int sampleRate, const int frequency, const int duration, const int volume, const int attack,
-                   const int decay, const int sustain, const int release, const int type, FILE * outputFile, const float pulseTime) :
+    SoundGenerator(const int bitDepth, const int sampleRate, const int frequency, const int duration, const float volume, const int attack,
+                   const int decay, const float sustain, const int release, const int type, FILE * outputFile, const float pulseTime) :
             bitDepth(bitDepth), sampleRate(sampleRate), frequency(frequency),duration(duration),volume(volume), attack(attack), decay(decay), sustain(sustain),
             release(release),type(type), outputFile(outputFile), pulseTime(pulseTime){};
 };
@@ -78,7 +79,7 @@ public:
         return *this;
     }
 
-    SoundBuilder& setVolume(const int volume) {
+    SoundBuilder& setVolume(const float volume) {
         this->volume = volume;
         return *this;
     };
@@ -122,7 +123,7 @@ public:
 
 union sndgen_handler {
     float f;
-    int i = -1;
+    int i;
 };
 
 #endif //CS327PROJECT4_SOUNDGENERATOR_H

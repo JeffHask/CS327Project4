@@ -3,6 +3,7 @@
 //
 
 #include "headers/SoundFile.h"
+#include "headers/Utils.h"
 #include <iostream>
 #include <stdio.h>
 #include <fstream>
@@ -116,20 +117,27 @@ void SoundFile::readCS299File(string fileName) {
     }
 }
 
-void SoundFile::writeCS229File(FILE* file) {
-    fprintf(file, "CS229\n");
-    fprintf(file,"Samples\t\t%d\n", numberOfSamples);
-    fprintf(file,"SampleRate\t%d\n", sampleRate);
-    fprintf(file,"Channels\t%d\n", numberOfChannels);
-    fprintf(file,"BitRes\t\t%d\n", bitDepth);
-    fprintf(file,"StartData\n");
+void SoundFile::writeCS229File(string fileName) {
+    ofstream fout(fileName.c_str(),ofstream::out);
+    ostream & out = !fileName.compare(" ") ? cout : fout;
+    out << "CS229" << endl;
+    out << "Samples\t\t" << numberOfSamples << endl;
+    out <<"SampleRate\t" <<sampleRate << endl;
+    out <<"Channels\t" << numberOfChannels << endl;
+    out << "BitRes\t\t" << bitDepth << endl;
+    out <<"StartData" << endl;
     int i;
     for(i=0; i < numberOfSamples; i++) {
         int j;
         for(j = 0; j<numberOfChannels; j++) {
-            fprintf(file,"%d\t", samples[i]->getChannels()[j]);
+            out << samples[i]->getChannels()[j];
+            if(j != numberOfChannels -1) {
+                out << "\t";
+            }
         }
-        fprintf(file,"\n");
+        if(i != numberOfSamples -1) {
+            out << endl;
+        }
     }
 }
 
@@ -137,8 +145,50 @@ void SoundFile::readWAVFile(string fileName) {
 //    TODO
 }
 
-void SoundFile::writeWAVFile(FILE* file) {
+void SoundFile::writeWAVFile(string fileName) {
+//    FIRST PART: RIFF
+//    THEN total size of file - 8 bytes
+//    int = 4 bytes, short = 2 btyes
+//    remaining chunk size for fmt: 8
+    ofstream fout(fileName.c_str(), ofstream::out);
+    ostream & out = !fileName.compare(" ") ? cout : fout;
+    int twosCompNeeded = 1;
+    short audioFormat = 1;
+    short numChannels = (short)numberOfChannels;
+    int sampleRate = this->sampleRate;
+    int byteRate = sampleRate * numberOfChannels * bitDepth;
+    short blockAlign;
+    if(bitDepth == 8) {
+        twosCompNeeded = 0;
+        blockAlign = (short)numberOfChannels;
+    } else if (bitDepth == 16) {
+        blockAlign = (short)(numberOfChannels * 2);
+    } else {
+        blockAlign = (short)(4 * numberOfChannels);
+    }
+    short bitdepth = (short)this->bitDepth;
+    int fmtSize = 16;
+    int dataSize = twosCompNeeded ? 4 * numberOfChannels * numberOfSamples : numberOfChannels * numberOfSamples;
+    int totalSize = dataSize + fmtSize + 16;
+    out<< "RIFF" << littleEndianInt(totalSize) << "WAVE";
+    out << "fmt " << littleEndianInt(fmtSize) << audioFormat << numChannels;
+    out << sampleRate << byteRate << blockAlign << bitdepth;
+    out << "data" << dataSize << endl;
+    out << (unsigned int)(numChannels) << endl;
+    int i;
+    for(i = 0; i < numberOfSamples; i++) {
+        int j;
+        for (j = 0; j < numberOfChannels; ++j) {
+            if(twosCompNeeded) {
+//                TODO, signed 2's complement
+            } else {
+//                TODO, binary unsigned ints
+            }
+        }
+    }
+//    out total size of file
 
+    cout << littleEndianInt(76) << endl;
 }
 
 void SoundFile::addSample(SampleLine *soundLine) {

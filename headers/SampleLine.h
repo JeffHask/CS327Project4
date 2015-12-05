@@ -4,6 +4,7 @@
 
 #ifndef CS327PROJECT4_SAMPLELINE_H
 #define CS327PROJECT4_SAMPLELINE_H
+//TODO documentation
 
 
 #include <iostream>

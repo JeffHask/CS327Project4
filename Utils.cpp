@@ -8,16 +8,13 @@ int handleCommandArgs(string ** inputFiles, char *args[], int index , int numArg
     int i;
     int inputIndex = 0;
     for (i = index; i < numArgs; ++i) {
-        if (executable == SNDMIX) {
-
+        if (string(args[i]).find(string(".cs229")) != string::npos || executable == SNDCVT && string(args[i]).find(string(".wav")) != string::npos) {
+            inputFiles[inputIndex] = new string(args[i]);
+            inputIndex++;
         } else {
-            if (string(args[i]).find(string(".cs229")) != string::npos || executable == SNDCVT && string(args[i]).find(string(".wav")) != string::npos) {
-                inputFiles[inputIndex] = new string(args[i]);
-                inputIndex++;
-            } else {
-                __throw_invalid_argument((std::string("ERROR: Unknown argument '") + std::string(args[i]) + std::string("'")).c_str());
-            }
+            __throw_invalid_argument((std::string("ERROR: Unknown argument '") + std::string(args[i]) + std::string("'")).c_str());
         }
+
     }
     return inputIndex;
 }
@@ -38,9 +35,12 @@ int handleSwitches(char* args[],int numArgs, int switches[], int executable, str
                 }
             } else if(!string("-w").compare(args[i]) && executable == SNDCAT) {
                 switches[1] = 1;
-            } else if (string(args[i]).find(string(".cs229")) != string::npos || (SNDMIX == executable && sscanf(args[i],"%d", &mixCheck) == 1)) {
+            } else if ((string(args[i]).find(string(".cs229")) != string::npos || (SNDMIX == executable && sscanf(args[i],"%d", &mixCheck) == 1)) && executable != SNDCVT) {
                 return i;
-            } else {
+            } else if(executable == SNDCVT && (string(args[i]).find(string(".cs229")) != string::npos || string(args[i]).find(string(".wav")) != string::npos)) {
+                return i;
+            }
+            else {
                 __throw_invalid_argument((std::string("ERROR: Unknown argument '") + std::string(args[i]) + std::string("'")).c_str());
             }
     }
@@ -70,6 +70,16 @@ int handleSndmixCommandArgs(string**inputFiles, char *args[], int index , int nu
     }
     return numFiles;
 
+}
+
+int littleEndianInt(int value) {
+    uint x = (uint)value;
+    int valueShifted =
+            ( x << 24) |                // Move 4th byte to 1st
+            ((x << 8) & 0x00ff0000) |  // Move 2nd byte to 3rd
+            ((x >> 8) & 0x0000ff00) |  // Move 3rd byte to 2nd
+            ( x >> 24);                 // Move 4th byte to 1st
+    return valueShifted;
 }
 
 void h_helperMessage() {

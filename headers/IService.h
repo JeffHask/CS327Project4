@@ -5,6 +5,7 @@
 #ifndef CS327PROJECT4_ISERVICE_H
 #define CS327PROJECT4_ISERVICE_H
 
+//TODO documentation
 
 class IService {
     virtual void helperMessage() = 0;

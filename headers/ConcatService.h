@@ -7,9 +7,11 @@
 
 #include "Service.h"
 #include "SoundFile.h"
-
+//TODO documentation
 class ConcatService : public Service {
     private:
+        SoundFile **soundFiles;
+        int numberOfSoundFiles;
         int toWav;
         string outputFileName;
         void concatFiles(SoundFile** soundFiles);

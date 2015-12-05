@@ -11,8 +11,11 @@
 using namespace std;
 
 class InfoService : public Service {
+//TODO documentation
 
 private:
+    SoundFile **soundFiles;
+    int numberOfSoundFiles;
     void printInfo();
 public:
     InfoService();

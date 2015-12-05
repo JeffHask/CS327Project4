@@ -10,10 +10,12 @@
 #include <iostream>
 #include <fstream>
 #include "SampleLine.h"
+#include "Sound.h"
+//TODO documentation
 
 using namespace std;
 
-class SoundFile {
+class SoundFile : public Sound {
 private:
     string fileName;
     string fileType;
@@ -33,13 +35,14 @@ public:
     ~SoundFile() {
       delete[] samples;
     };
-    void writeCS229File(FILE* outputFile);
-    void writeWAVFile(FILE* outputFile);
+    void writeCS229File(string outputFileName);
+    void writeWAVFile(string outputFileName);
     float lengthOfSound();
     void addSample(SampleLine * soundLine);
     void operator +=(SoundFile *soundFile);
     SoundFile *operator +(SoundFile *soundFile);
     SoundFile *operator *(int multi);
+    virtual void update(){}
     void setSampleLine(int index, SampleLine *sampleLine) {
         samples[index] = sampleLine;
     }

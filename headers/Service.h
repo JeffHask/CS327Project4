@@ -5,15 +5,14 @@
 #ifndef CS327PROJECT4_SERVICE_H
 #define CS327PROJECT4_SERVICE_H
 
+//TODO documentation
 
 #include "IService.h"
 #include "SoundFile.h"
 
 class Service : public IService {
 protected:
-    int numberOfSoundFiles;
     int help;
-    SoundFile **soundFiles;
     virtual void helperMessage() = 0;
 public:
     virtual ~Service() { };

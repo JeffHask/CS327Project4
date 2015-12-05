@@ -57,5 +57,5 @@ void MixService::mixSound() {
         soundFile = *soundFile + soundFiles[i];
     }
 
-    soundFile->writeCS229File(file);
+    soundFile->writeCS229File(outputFileName);
 }

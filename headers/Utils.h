@@ -12,6 +12,7 @@
 #define SNDCVT 5
 #define SNDFX 6
 #define SNDPLAY 7
+//TODO documentation
 
 #include <iostream>
 using namespace std;
@@ -21,6 +22,7 @@ int handleSndmixCommandArgs(string** inputFiles, char *args[], int index , int n
 
 int handleSwitches(char* args[], int numArgs, int switches[], int executable, string &outputFile);
 
+int littleEndianInt(int val);
 void h_helpermessage();
 void h_helperMessage();
 void o_helperMessage();

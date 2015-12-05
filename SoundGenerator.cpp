@@ -23,7 +23,30 @@ SoundFile *SoundGenerator::setupFile() {
 }
 
 void SoundGenerator::handleEnvelop(SoundFile *soundFile) {
-
+//    TODO, how tf does this work?
+    int tempAttack;
+    int tempSustain;
+    int tempDecay;
+    int timeLeft = duration;
+    if(release >= timeLeft) {
+        soundFile = *soundFile * 0;
+    } else {
+        timeLeft -=release;
+        if(attack >= timeLeft) {
+            tempAttack = timeLeft;
+            tempDecay = 0;
+            tempSustain = 0;
+        } else {
+            timeLeft -=attack;
+            if(decay >= timeLeft) {
+                tempDecay = timeLeft;
+                tempSustain = 0;
+            } else {
+                timeLeft -=decay;
+                tempSustain = timeLeft;
+            }
+        }
+    }
 }
 
 void SoundGenerator::run(int helpMessage) {
@@ -37,7 +60,7 @@ void SoundGenerator::run(int helpMessage) {
 }
 
 void SoundGenerator::print() {
-
+//todo :NOT NEEDED
     cout << "Bit Rate: " << bitDepth << endl;
     cout << "Sample Rate: " << sampleRate << endl;
     cout <<"Frequency: " << frequency << endl;
@@ -54,7 +77,7 @@ void SoundGenerator::print() {
 
 void SoundGenerator::create_sine_wave(SoundFile *soundFile) {
     int numSamples = duration * sampleRate;
-    double maxVal = pow(2,bitDepth) - 1;
+    double maxVal = (pow(2,bitDepth) - 1);
     double period = (frequency * 2 * M_PI) / numSamples;
     int i;
     for(i = 0; i < numSamples; i++) {
@@ -101,8 +124,6 @@ void SoundGenerator::create_pulse_wave(SoundFile * soundFile) {
     int maxVal = (int)pow(2,bitDepth) - 1;
     double interval = round(numSamples / frequency * 1.0);
     int samplesUp = (int)round(interval * pulseTime);
-    int pulsed = 0;
-    int sampleCount = 0;
     int i;
     int samplesDown = (int)interval - samplesUp;
     for(i = 0; i < frequency; i++) {
@@ -118,16 +139,5 @@ void SoundGenerator::create_pulse_wave(SoundFile * soundFile) {
             soundFile->addSample(sampleLine);
             j++;
         }
-//        int sampleVal = pulsed ? maxVal : -1*maxVal;
-//        SampleLine* sampleLine = new SampleLine(sampleVal);
-//        soundFile->addSample(sampleLine);
-//        sampleCount++;
-//        if(sampleCount == samplesUp) {
-//            pulsed = 0;
-//        }
-//        if(interval == sampleCount) {
-//            pulsed = 1;
-//            sampleCount = 0;
-//        }
     }
 }

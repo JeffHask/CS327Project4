@@ -1,22 +1,26 @@
 #include <iostream>
+#include <bitset>
+
 using namespace std;
 
 #include "headers/SoundGenerator.h"
 
 int main(int argc, char* argv[]) {
+
+    cout <<sizeof(int)<< endl;
     sndgen_handler switchArgs[10];
     int fill;
     for(fill = 0; fill < 10; fill++) {
         switchArgs[fill].i = -1;
     }
-//    fill(switchArgs, switchArgs+10,-1);
     int type = 0;
     int helpMessage = 0;
     string outputFileName = " ";
     int i;
-//    TODO need to make it so it can receive floats
+//    TODO: close file pointers
 //    TODO check for duplicate switches
 //    TODO check bitdepth, negative numbers
+//    TODO: how does volume effect the waves? Does it only effect the top, or what?
     for (i = 1; i < argc; i++) {
         if(!string("-h").compare(argv[i])) {
             helpMessage = 1;
