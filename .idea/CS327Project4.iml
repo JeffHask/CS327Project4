@@ -4,37 +4,37 @@
     <content url="file://$MODULE_DIR$">
       <sourceFolder url="file://$MODULE_DIR$/CMakeLists.txt" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/ChannelDecorator.cpp" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/headers/ChannelDecorator.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/ConcatService.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/ConvertService.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/EchoDecorator.cpp" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/headers/EchoDecorator.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/EffectDecorator.cpp" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/headers/EffectDecorator.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/EffectsService.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/IService.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/InfoService.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/MixService.cpp" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/RandomDecorator.cpp" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/headers/RandomDecorator.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/ReverseDecorator.cpp" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/headers/ReverseDecorator.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/SampleDownDecorator.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/headers/SampleDownDecorator.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/SampleLine.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/SampleUpDecorator.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Service.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/ShuffleDecorator.cpp" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/headers/ShuffleDecorator.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Sound.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/SoundFile.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/SoundGenerator.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Utils.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/headers/ChannelDecorator.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/headers/ConcatService.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/headers/ConvertService.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/headers/EffectsService.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/headers/EchoDecorator.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/headers/EffectDecorator.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/headers/IService.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/headers/InfoService.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/headers/MixService.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/headers/ReverseDecorator.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/headers/SampleLine.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/headers/SampleUpDecorator.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/headers/Service.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/headers/ShuffleDecorator.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/headers/Sound.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/headers/SoundFile.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/headers/SoundGenerator.h" isTestSource="false" />

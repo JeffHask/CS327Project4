@@ -27,7 +27,7 @@ private:
     int release;
     int type;
     float pulseTime;
-    FILE * outputFile;
+    string outputFileName;
     SoundFile *setupFile();
     void handleEnvelop(SoundFile* soundFile);
     void create_sine_wave(SoundFile* soundFile);
@@ -36,9 +36,9 @@ private:
     void create_pulse_wave(SoundFile * soundFile);
 
     SoundGenerator(const int bitDepth, const int sampleRate, const int frequency, const int duration, const float volume, const int attack,
-                   const int decay, const float sustain, const int release, const int type, FILE * outputFile, const float pulseTime) :
+                   const int decay, const float sustain, const int release, const int type, string outputFileName, const float pulseTime) :
             bitDepth(bitDepth), sampleRate(sampleRate), frequency(frequency),duration(duration),volume(volume), attack(attack), decay(decay), sustain(sustain),
-            release(release),type(type), outputFile(outputFile), pulseTime(pulseTime){};
+            release(release),type(type), outputFileName(outputFileName), pulseTime(pulseTime){};
 };
 
 class SoundGenerator::SoundBuilder {
@@ -54,7 +54,7 @@ private:
     int release = 2;
     float pulseTime = .5;
     int type = 1;
-    FILE *outputFile = stdout;
+    string outputFileName = " ";
 
 public:
     SoundBuilder(){};
@@ -111,13 +111,13 @@ public:
         this->type = type;
         return *this;
     };
-    SoundBuilder& setOutputFile(FILE * outputFile) {
-        this->outputFile = outputFile;
+    SoundBuilder& setOutputFile(string outputFileName) {
+        this->outputFileName = outputFileName;
         return *this;
     };
 
     SoundGenerator build() {
-        return SoundGenerator(bitDepth,sampleRate,frequency,duration,volume,attack,decay,sustain,release,type,outputFile, pulseTime);
+        return SoundGenerator(bitDepth,sampleRate,frequency,duration,volume,attack,decay,sustain,release,type,outputFileName, pulseTime);
     };
 };
 

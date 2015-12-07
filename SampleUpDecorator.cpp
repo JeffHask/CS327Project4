@@ -1,9 +1,10 @@
 //
 // Created by jeffrey on 12/5/15.
 //
-#include "headers/ShuffleDecorator.h"
+#include "headers/SampleUpDecorator.h"
 
-void ShuffleDecorator::mutate() {
+void SampleUpDecorator::mutate() {
+
 //    TODO
     EffectDecorator::mutate();
 }

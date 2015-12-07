@@ -31,6 +31,12 @@ public:
     void setChannel(int index, int value) {
         channels[index] = value;
     };
+    void setNumberOfChannels(int channels){
+        numberOfChannels = channels;
+    }
+    void allocateChannels(int numChannels) {
+        channels = new int[numChannels];
+    }
     void operator +=(SampleLine *sampleLine);
 
 //    void operator = (SampleLine * sampleLine);

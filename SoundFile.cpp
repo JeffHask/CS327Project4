@@ -118,8 +118,8 @@ void SoundFile::readCS299File(string fileName) {
 }
 
 void SoundFile::writeCS229File(string fileName) {
-    ofstream fout(fileName.c_str(),ofstream::out);
-    ostream & out = !fileName.compare(" ") ? cout : fout;
+    ofstream* fout = !fileName.compare(" ") ? NULL : new ofstream(fileName.c_str(),ofstream::out) ;
+    ostream & out = !fileName.compare(" ") ? cout : *fout;
     out << "CS229" << endl;
     out << "Samples\t\t" << numberOfSamples << endl;
     out <<"SampleRate\t" <<sampleRate << endl;
@@ -189,6 +189,14 @@ void SoundFile::writeWAVFile(string fileName) {
 //    out total size of file
 
     cout << littleEndianInt(76) << endl;
+}
+
+void SoundFile::mutate() {
+//    TODO
+}
+
+void SoundFile::print(string outputFile) {
+    writeCS229File(" ");
 }
 
 void SoundFile::addSample(SampleLine *soundLine) {

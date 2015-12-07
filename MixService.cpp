@@ -43,12 +43,6 @@ void MixService::helperMessage() {
 
 void MixService::mixSound() {
     int i;
-    FILE * file;
-    if(!outputFileName.compare(" ")) {
-        file = stdout;
-    } else {
-        file = fopen(outputFileName.c_str(), "w");
-    }
     if(!numberOfSoundFiles) {
         __throw_invalid_argument("Please specify atleast one .cs229 file");
     }

@@ -5,9 +5,14 @@
 #ifndef CS327PROJECT4_SHUFFLEDECORATOR_H
 #define CS327PROJECT4_SHUFFLEDECORATOR_H
 
-//TODO
-class ShuffleDecorator {
+#include "EffectDecorator.h"
 
+//TODO
+class ShuffleDecorator : public EffectDecorator {
+public:
+    ShuffleDecorator(Sound * soundFile) : EffectDecorator(soundFile){};
+    virtual void mutate();
+    virtual ~ShuffleDecorator(){};
 };
 
 

@@ -6,8 +6,6 @@ using namespace std;
 #include "headers/SoundGenerator.h"
 
 int main(int argc, char* argv[]) {
-
-    cout <<sizeof(int)<< endl;
     sndgen_handler switchArgs[10];
     int fill;
     for(fill = 0; fill < 10; fill++) {
@@ -166,15 +164,11 @@ int main(int argc, char* argv[]) {
             return 0;
         }
     }
-    if(outputFileName.compare(" ")) {
-       FILE * file = fopen(outputFileName.c_str(),"w");
-        builder.setOutputFile(file);
-    }
+//    if(outputFileName.compare(" ")) {
+//
+//    }
     builder.setType(type);
     SoundGenerator gen = builder.build();
     gen.run(helpMessage);
-    cout << "Hello World!" << endl;
-    cout << "Hello World!" << endl;
-    cout << "Hello World!" << endl;
     return 0;
 }

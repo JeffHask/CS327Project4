@@ -17,14 +17,14 @@ using namespace std;
 
 class SoundFile : public Sound {
 private:
-    string fileName;
-    string fileType;
-    int sampleRate;
-    int bitDepth;
-    int numberOfChannels;
-    SampleLine **samples;
-    int numberOfSamples;
-    int maxSamples;
+//    string fileName;
+//    string fileType;
+//    int sampleRate;
+//    int bitDepth;
+//    int numberOfChannels;
+//    SampleLine **samples;
+//    int numberOfSamples;
+//    int maxSamples;
 
 private:
     void readCS299File(string fileName);
@@ -32,7 +32,7 @@ private:
 public:
     SoundFile();
     SoundFile(string fileName, int isWav);
-    ~SoundFile() {
+    virtual ~SoundFile() {
       delete[] samples;
     };
     void writeCS229File(string outputFileName);
@@ -42,69 +42,71 @@ public:
     void operator +=(SoundFile *soundFile);
     SoundFile *operator +(SoundFile *soundFile);
     SoundFile *operator *(int multi);
-    virtual void update(){}
-    void setSampleLine(int index, SampleLine *sampleLine) {
+    virtual void mutate();
+    virtual void print(string outputFile);
+    virtual void setSampleLine(int index, SampleLine *sampleLine) {
         samples[index] = sampleLine;
     }
 
 
-    string getFileName() const {
+    virtual string getFileName() const {
         return fileName;
     }
 
-    void setFileName(char *fileName) {
+    virtual void setFileName(char *fileName) {
         SoundFile::fileName = fileName;
     }
 
-    string getFileType() const {
+    virtual string getFileType() const {
         return fileType;
     }
 
-    int getSampleRate() const {
+    virtual int getSampleRate() const {
         return sampleRate;
     }
 
-    void setSampleRate(int sampleRate) {
+    virtual void setSampleRate(int sampleRate) {
         SoundFile::sampleRate = sampleRate;
+        cout << "setting rate" << endl;
     }
 
-    int getBitDepth() const {
+    virtual int getBitDepth() const {
         return bitDepth;
     }
 
-    void setBitDepth(int bitDepth) {
+    virtual void setBitDepth(int bitDepth) {
         SoundFile::bitDepth = bitDepth;
     }
 
-    int getNumberOfChannels() const {
+    virtual int getNumberOfChannels() const {
         return numberOfChannels;
     }
 
-    void setNumberOfChannels(int numberOfChannels) {
+    virtual void setNumberOfChannels(int numberOfChannels) {
         SoundFile::numberOfChannels = numberOfChannels;
     }
 
-    SampleLine **getSamples() const {
+    virtual SampleLine **getSamples() const {
         return samples;
     }
 
-    void setSamples(SampleLine **Samples) {
+    virtual void setSamples(SampleLine **Samples) {
         SoundFile::samples = Samples;
     }
 
-    int getNumberOfSamples() const {
+    virtual int getNumberOfSamples() const {
         return numberOfSamples;
     }
 
-    void setNumberOfSamples(int numberOfSamples) {
+    virtual void setNumberOfSamples(int numberOfSamples) {
         SoundFile::numberOfSamples = numberOfSamples;
     }
 
-    void setFileType(const string &fileType) {
+    virtual void setFileType(const string &fileType) {
         SoundFile::fileType = fileType;
     }
 
-    void setFileName(const string &fileName) {
+    virtual void setFileName(const string &fileName) {
         SoundFile::fileName = fileName;
     }
 };

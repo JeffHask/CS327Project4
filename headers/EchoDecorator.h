@@ -6,8 +6,16 @@
 #define CS327PROJECT4_ECHODECORATOR_H
 
 
-class EchoDecorator {
-//TODO
+#include "Sound.h"
+#include "EffectDecorator.h"
+
+class EchoDecorator : public EffectDecorator  {
+public:
+    EchoDecorator(Sound *soundFile): EffectDecorator(soundFile){};
+    virtual void mutate();
+    virtual ~EchoDecorator() {
+    cout << "Deleting echo" << endl;
+    };
 };
 
 

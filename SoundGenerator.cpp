@@ -54,7 +54,7 @@ void SoundGenerator::run(int helpMessage) {
 //        TODO: print help message
     } else {
         SoundFile *soundFile = setupFile();
-        soundFile->writeCS229File(stdout);
+        soundFile->writeCS229File(outputFileName);
         handleEnvelop(soundFile);
     }
 }

@@ -6,8 +6,18 @@
 #define CS327PROJECT4_CHANNELDECORATOR_H
 
 
-class ChannelDecorator {
-//TODO
+#include "Sound.h"
+#include "EffectDecorator.h"
+
+class ChannelDecorator : public EffectDecorator {
+public:
+    ChannelDecorator(Sound * soundFile, int numChannelsToAdd) :
+            EffectDecorator(soundFile), numChannelsToAdd(numChannelsToAdd){ }
+    virtual void mutate();
+    virtual ~ChannelDecorator() {};
+
+private:
+    int numChannelsToAdd;
 };
 
 

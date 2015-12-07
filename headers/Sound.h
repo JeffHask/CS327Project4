@@ -7,8 +7,56 @@
 
 //TODO documentation
 
+#include "SampleLine.h"
+
+using namespace std;
+
 class Sound {
+
+protected:
+    string fileName;
+    string fileType;
+    int sampleRate;
+    int bitDepth;
+    int numberOfChannels;
+    SampleLine **samples;
+    int numberOfSamples;
+    int maxSamples;
+public:
+    virtual void print(string outputFile)= 0;
     virtual void mutate() = 0;
+    virtual void setSampleLine(int index, SampleLine *sampleLine) = 0;
+
+
+    virtual string getFileName() const = 0;
+
+    virtual void setFileName(char *fileName) =0;
+
+    virtual string getFileType() const = 0;
+
+    virtual int getSampleRate() const =0;
+
+    virtual void setSampleRate(int sampleRate) =0;
+
+    virtual int getBitDepth() const =0;
+
+    virtual void setBitDepth(int bitDepth) =0;
+
+    virtual int getNumberOfChannels() const =0;
+
+    virtual void setNumberOfChannels(int numberOfChannels) =0;
+
+    virtual SampleLine **getSamples() const =0;
+
+    virtual void setSamples(SampleLine **Samples) =0;
+
+    virtual int getNumberOfSamples() const =0;
+
+    virtual void setNumberOfSamples(int numberOfSamples) =0;
+
+    virtual void setFileType(const string &fileType) = 0;
+
+    virtual void setFileName(const string &fileName) =0;
 };
 
 
