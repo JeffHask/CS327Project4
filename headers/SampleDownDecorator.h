@@ -12,6 +12,7 @@ class SampleDownDecorator : public EffectDecorator {
 public:
     SampleDownDecorator(Sound * soundFile):EffectDecorator(soundFile){};
     virtual void mutate();
+    virtual ~SampleDownDecorator() {}
 };
 
 

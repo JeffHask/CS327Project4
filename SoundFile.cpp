@@ -14,7 +14,7 @@ using namespace std;
 
 SoundFile::SoundFile() {
     maxSamples = 2;
-    samples = new SampleLine*[maxSamples];
+    numberOfSamples = 0;
 }
 SoundFile::SoundFile(string fileName, int wavFile) {
     numberOfChannels = -1;
@@ -22,7 +22,7 @@ SoundFile::SoundFile(string fileName, int wavFile) {
     maxSamples = 20;
     bitDepth = -1;
     sampleRate = -1;
-    samples = new SampleLine*[maxSamples];
+//    samples = new SampleLine*[maxSamples];
         this->fileName = fileName;
     if(!wavFile) {
         fileType = ".cs229";
@@ -55,7 +55,7 @@ void SoundFile::readCS299File(string fileName) {
     int numSamples = -1;
     while(getline( input, line ) ) {
         int keywordVal = -1;
-        char keyword[20] = " ";
+        char keyword[255] = " ";
         if(!startData) {
             if (line[0] == '#') {
 
@@ -104,7 +104,9 @@ void SoundFile::readCS299File(string fileName) {
             }
         } else {
             try {
-                addSample(new SampleLine(line, numberOfChannels, bitDepth));
+                samples.push_back(new SampleLine(line, numberOfChannels, bitDepth));
+                numberOfSamples++;
+//                addSample(new SampleLine(line, numberOfChannels, bitDepth));
             } catch (invalid_argument &e) {
                 string errorLine = " in sample " +to_string(numberOfSamples + 1) + " in file " + fileName;
                 __throw_invalid_argument((string(e.what()) + errorLine).c_str());
@@ -200,17 +202,7 @@ void SoundFile::print(string outputFile) {
 }
 
 void SoundFile::addSample(SampleLine *soundLine) {
-    if(numberOfSamples == maxSamples) {
-        SampleLine** pSampleLine = new SampleLine*[maxSamples * 2];
-        maxSamples = maxSamples * 2;
-        int i;
-        for(i = 0; i < numberOfSamples; i++) {
-            pSampleLine[i] = new SampleLine(*samples[i]);
-        }
-        delete[] samples;
-        samples = pSampleLine;
-    }
-    samples[numberOfSamples] = soundLine;
+    samples.push_back(soundLine);
     numberOfSamples++;
 }
 
@@ -227,7 +219,9 @@ void SoundFile::operator+=(SoundFile *soundFile) {
     int samplesToAdd = soundFile->getNumberOfSamples();
     int i;
     for(i = 0; i < samplesToAdd; i++) {
-        this->addSample(new SampleLine(*soundFile->getSamples()[i]));
+        samples.push_back(new SampleLine(*soundFile->getSamples()[i]));
+        numberOfSamples++;
+//        this->addSample(new SampleLine(*soundFile->getSamples()[i]));
     }
 }
 
@@ -235,7 +229,9 @@ SoundFile *SoundFile::operator+(SoundFile *soundFile) {
     int i;
     for (i = 0; i < soundFile->getNumberOfSamples(); ++i) {
         if(i >= numberOfSamples) {
-            addSample(soundFile->getSamples()[i]);
+            samples.push_back(soundFile->getSamples()[i]);
+            numberOfSamples++;
+//            addSample(soundFile->getSamples()[i]);
         } else {
             *samples[i] += soundFile->getSamples()[i];
         }

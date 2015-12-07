@@ -1,4 +1,5 @@
 #include <iostream>
+#include <stdexcept>
 #include "headers/Sound.h"
 #include "headers/SoundFile.h"
 #include "headers/ReverseDecorator.h"
@@ -25,7 +26,7 @@ int main(int argc, char* argv[]) {
     string outputFile = " ";
     int intVal = 0;
     int i;
-    for(i = 1; i < argc - 1 ; i++) {
+    for(i = argc - 2; i > 0 ; i--) {
         if(!string(argv[i]).compare("-h")) {
 //            TODO
         } else if(!string(argv[i]).compare("-o")) {
@@ -52,16 +53,8 @@ int main(int argc, char* argv[]) {
         } else if(!string(argv[i]).compare("-sh")) {
             soundFile = new ShuffleDecorator(soundFile);
         } else if(!string(argv[i]).compare("-su")) {
-            if(soundFile->getBitDepth() == 32) {
-                fprintf(stderr,"ERROR: Trying to up-sample over 32 bit not allowed");
-                return 0;
-            }
             soundFile = new SampleUpDecorator(soundFile);
         }else if(!string(argv[i]).compare("-sd")) {
-            if(soundFile->getBitDepth() == 8) {
-                fprintf(stderr,"Error: Trying to down-sample under 8 bit not allowed");
-                return 0;
-            }
             soundFile = new SampleDownDecorator(soundFile);
         }
         else if(!string(argv[i]).compare("-ch")) {
@@ -75,7 +68,11 @@ int main(int argc, char* argv[]) {
             return 0;
         }
     }
-    soundFile->mutate();
-    soundFile->print(outputFile);
+    try {
+        soundFile->mutate();
+        soundFile->print(outputFile);
+    } catch (invalid_argument & e) {
+        fprintf(stderr, e.what());
+    }
 
 }

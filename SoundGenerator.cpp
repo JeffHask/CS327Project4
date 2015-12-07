@@ -77,7 +77,7 @@ void SoundGenerator::print() {
 
 void SoundGenerator::create_sine_wave(SoundFile *soundFile) {
     int numSamples = duration * sampleRate;
-    double maxVal = (pow(2,bitDepth) - 1);
+    double maxVal = (pow(2,bitDepth-1) - 1);
     double period = (frequency * 2 * M_PI) / numSamples;
     int i;
     for(i = 0; i < numSamples; i++) {
@@ -88,7 +88,7 @@ void SoundGenerator::create_sine_wave(SoundFile *soundFile) {
 
 void SoundGenerator::create_triangle_wave(SoundFile * soundFile) {
     int numSamples = duration * sampleRate;
-    double  maxVal = pow(2,bitDepth) - 1;
+    double  maxVal = pow(2,bitDepth - 1) - 1;
     double slope = maxVal / (numSamples / (frequency * 4));
     int i;
 //    Set first value, as not doing so will screw up the pattern
@@ -108,7 +108,7 @@ void SoundGenerator::create_triangle_wave(SoundFile * soundFile) {
 
 void SoundGenerator::create_sawtooth_wave(SoundFile* soundFile) {
     int numSamples = duration * sampleRate;
-    int maxVal = (int)pow(2,bitDepth) - 1;
+    int maxVal = (int)pow(2,bitDepth - 1) - 1;
 
     double slope = maxVal / (numSamples / frequency);
     int i;
@@ -121,7 +121,7 @@ void SoundGenerator::create_sawtooth_wave(SoundFile* soundFile) {
 
 void SoundGenerator::create_pulse_wave(SoundFile * soundFile) {
     int numSamples = duration * sampleRate;
-    int maxVal = (int)pow(2,bitDepth) - 1;
+    int maxVal = (int)pow(2,bitDepth - 1) - 1;
     double interval = round(numSamples / frequency * 1.0);
     int samplesUp = (int)round(interval * pulseTime);
     int i;

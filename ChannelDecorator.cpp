@@ -5,6 +5,7 @@
 #include "headers/ChannelDecorator.h"
 
 void ChannelDecorator::mutate() {
-
+int numChannels = soundFile->getNumberOfChannels();
+int numSamples = soundFile->getNumberOfSamples();
 }
-//TODO
+//TODO maybe?

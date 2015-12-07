@@ -7,10 +7,11 @@
 
 //TODO documentation
 
+#include <vector>
 #include "SampleLine.h"
 
 using namespace std;
-
+class SampleLine;
 class Sound {
 
 protected:
@@ -19,10 +20,14 @@ protected:
     int sampleRate;
     int bitDepth;
     int numberOfChannels;
-    SampleLine **samples;
+    std::vector<SampleLine*> samples;
+//    SampleLine **samples;
     int numberOfSamples;
     int maxSamples;
 public:
+    virtual ~Sound() {
+        samples.clear();
+    }
     virtual void print(string outputFile)= 0;
     virtual void mutate() = 0;
     virtual void setSampleLine(int index, SampleLine *sampleLine) = 0;
@@ -46,9 +51,9 @@ public:
 
     virtual void setNumberOfChannels(int numberOfChannels) =0;
 
-    virtual SampleLine **getSamples() const =0;
+    virtual vector<SampleLine*> getSamples() const =0;
 
-    virtual void setSamples(SampleLine **Samples) =0;
+    virtual void setSamples(vector<SampleLine*> samples) =0;
 
     virtual int getNumberOfSamples() const =0;
 

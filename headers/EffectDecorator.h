@@ -44,9 +44,9 @@ public:
 
     virtual void setNumberOfChannels(int numberOfChannels);
 
-    virtual SampleLine **getSamples() const;
+    virtual vector<SampleLine*> getSamples() const;
 
-    virtual void setSamples(SampleLine **Samples);
+    virtual void setSamples(vector<SampleLine*> samples);
 
     virtual int getNumberOfSamples() const;
 

@@ -15,11 +15,10 @@ MixService::MixService(int switches[], string **soundFileNames, int numberOfFile
     this->help = switches[0];
     this->outputFileName = outputFileName;
     this->numberOfSoundFiles = numberOfFiles;
-    this->soundFiles = (SoundFile**)new SoundFile[numberOfFiles];
     if(help != 1) {
         int i;
         for(i = 0; i < numberOfSoundFiles; i++) {
-            soundFiles[i] = new SoundFile(*soundFileNames[i], 0);
+            soundFiles.push_back(new SoundFile(*soundFileNames[i], 0));
             soundFiles[i] = *soundFiles[i] * multiplyers[i];
         }
     }

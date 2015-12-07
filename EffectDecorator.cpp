@@ -53,11 +53,11 @@ void EffectDecorator::setNumberOfChannels(int numberOfChannels) {
     ((SoundFile*)(soundFile))->setNumberOfChannels(numberOfChannels);
 }
 
-SampleLine **EffectDecorator::getSamples() const {
+vector<SampleLine*> EffectDecorator::getSamples() const {
     return ((SoundFile*)(soundFile))->getSamples();
 }
 
-void EffectDecorator::setSamples(SampleLine **samples) {
+void EffectDecorator::setSamples(vector<SampleLine*>samples) {
     ((SoundFile*)(soundFile))->setSamples(samples);
 }
 

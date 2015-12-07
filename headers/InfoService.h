@@ -14,15 +14,14 @@ class InfoService : public Service {
 //TODO documentation
 
 private:
-    SoundFile **soundFiles;
+    vector<SoundFile *> soundFiles;
     int numberOfSoundFiles;
     void printInfo();
 public:
     InfoService();
     InfoService(int switches[],string** soundFiles, int numberOfSoundFiles);
     virtual ~InfoService() {
-        delete[] soundFiles;
-
+        soundFiles.clear();
     };
     virtual void helperMessage();
     virtual void run();

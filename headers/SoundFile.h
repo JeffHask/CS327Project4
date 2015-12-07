@@ -16,15 +16,6 @@
 using namespace std;
 
 class SoundFile : public Sound {
-private:
-//    string fileName;
-//    string fileType;
-//    int sampleRate;
-//    int bitDepth;
-//    int numberOfChannels;
-//    SampleLine **samples;
-//    int numberOfSamples;
-//    int maxSamples;
 
 private:
     void readCS299File(string fileName);
@@ -33,7 +24,7 @@ public:
     SoundFile();
     SoundFile(string fileName, int isWav);
     virtual ~SoundFile() {
-      delete[] samples;
+
     };
     void writeCS229File(string outputFileName);
     void writeWAVFile(string outputFileName);
@@ -86,12 +77,12 @@ public:
         SoundFile::numberOfChannels = numberOfChannels;
     }
 
-    virtual SampleLine **getSamples() const {
+    virtual vector<SampleLine*> getSamples() const {
         return samples;
     }
 
-    virtual void setSamples(SampleLine **Samples) {
-        SoundFile::samples = Samples;
+    virtual void setSamples(vector<SampleLine*> samples) {
+        SoundFile::samples = samples;
     }
 
     virtual int getNumberOfSamples() const {

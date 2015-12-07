@@ -83,13 +83,32 @@ int littleEndianInt(int value) {
 }
 
 void h_helperMessage() {
-    cout << "-h\t: show the help screen" << endl;
+    cout << "-h\t: Show the help screen" << endl;
 }
 
 void o_helperMessage() {
-    cout << "-o file\t: specify the output file name; if omitted, write to standard output" << endl;
+    cout << "-o file\t: Specify the output file name; if omitted, write to standard output" << endl;
 }
 
 void w_helperMessage() {
-    cout << "-w\t: output in .wav format instead of .cs229";
+    cout << "-w\t: write the output in .wav format instead of .cs229" << endl;
+}
+void sndgen_helperMessage() {
+    cout  << "--bits n\t : use a bit depth of n. Defaults is 8" << endl;
+    cout  << "--sr n\t: use a sample rate of n. Defaults to 4" << endl;
+    cout  << "-f r\t: use a frequency of r Hz" << endl;
+    cout  << "-t r\t: total duration of r seconds" << endl;
+    cout  << "-v p\t: peak volume, between 0 and 1. Defaults to 1" << endl;
+    cout  << "-a r\t: release time of r seconds" << endl;
+    cout  << "-d r\t: decay time of r seconds" << endl;
+    cout  << "-s p\t: sustain volume, between 0 and 1." << endl;
+    cout  << "-r r\t: release time of r seconds" << endl;
+    cout << endl << "Wave types: If no wave type is specified, it defaults to sine wave. "
+    << "Only one type of wave is allowed at a time." << endl;
+    cout  << "--sine\t: generate a sine wave. This is default value if no type of wave is specified" << endl;
+    cout  << "--triangle\t: generate a triangle wave" << endl;
+    cout  << "--sawtooth\t: generate a sawtooth wave" << endl;
+    cout  << "--pulse\t: generate a pulse wave" << endl;
+    cout  << "--pf p\t: percentage of time the pulse wave is 'up'" << endl;
+
 }

@@ -5,7 +5,7 @@
 #include "headers/SampleLine.h"
 #include <iostream>
 #include <stdexcept>
-
+//TODO, max of 8 bit is 125, or 2^7 - 1
 using namespace std;
 
 SampleLine::SampleLine(string line, int samplesNeeded, int bitRes) {
@@ -39,7 +39,7 @@ void SampleLine::handleSamples(string samples, int samplesNeeded, int bitRes) {
     int numChannels = 0;
     int i = 0;
     int singleChannel;
-    char sample[10];
+    char sample[33];
     for(char c : samples) {
         if(c > '9') {
             __throw_invalid_argument("Invalid Sample: Not a number");

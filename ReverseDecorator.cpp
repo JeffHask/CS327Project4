@@ -6,7 +6,7 @@
 
 void ReverseDecorator::mutate() {
     int i;
-    SampleLine ** pSampleLine = soundFile->getSamples();
+    vector<SampleLine*> pSampleLine = soundFile->getSamples();
     int numSamples = soundFile->getNumberOfSamples();
     for(i = 0; i < numSamples / 2; i++) {
         SampleLine * sampleLine = pSampleLine[i];

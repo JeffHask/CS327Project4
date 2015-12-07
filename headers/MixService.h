@@ -16,12 +16,12 @@ public:
     MixService();
     MixService(int switches[], string** soundFiles,int numberOfSoundsFiles, string outputFileName, int* multiplyers);
     virtual ~MixService() {
-        delete[] soundFiles;
+        soundFiles.clear();
     }
     virtual void run();
 
 private:
-    SoundFile **soundFiles;
+    vector<SoundFile *> soundFiles;
     int numberOfSoundFiles;
     string outputFileName;
     void mixSound();

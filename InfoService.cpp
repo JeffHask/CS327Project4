@@ -18,12 +18,11 @@ InfoService ::InfoService(int switches[], string** soundFileNames, int numberOfS
     this->help = switches[0];
     this->numberOfSoundFiles = numberOfSoundFiles;
     if(help != 1) {
-        soundFiles = (SoundFile**)new SoundFile[numberOfSoundFiles];
         int i;
         for(i = 0; i < numberOfSoundFiles; i++) {
 
             try {
-                soundFiles[i] = new SoundFile((soundFileNames[i][0]), 0);
+                soundFiles.push_back(new SoundFile((soundFileNames[i][0]), 0));
             } catch (invalid_argument &e) {
                 __throw_invalid_argument(e.what());
             }
