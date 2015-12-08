@@ -32,7 +32,7 @@ void SampleLine::handleSamples(string samples, int samplesNeeded, int bitRes) {
     int maxValue = 1;
     int minValue = -1;
     int j;
-    for(j = 0; j < bitRes; j++) {
+    for(j = 1; j < bitRes; j++) {
         maxValue = maxValue * 2;
         minValue = minValue * 2;
     }

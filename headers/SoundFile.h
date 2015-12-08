@@ -36,7 +36,7 @@ public:
     virtual void mutate();
     virtual void print(string outputFile);
     virtual void setSampleLine(int index, SampleLine *sampleLine) {
-        samples[index] = sampleLine;
+        *samples[index] = *sampleLine;
     }
 
 

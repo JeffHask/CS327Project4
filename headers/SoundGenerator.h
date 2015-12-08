@@ -44,8 +44,8 @@ private:
 class SoundGenerator::SoundBuilder {
 private:
     int bitDepth = 8;
-    int sampleRate = 4;
-    int frequency = 2;
+    int sampleRate = 20;
+    int frequency = 3;
     int duration = 10;
     float volume = 1;
     int attack = 3;
