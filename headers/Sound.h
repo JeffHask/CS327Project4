@@ -21,9 +21,7 @@ protected:
     int bitDepth;
     int numberOfChannels;
     std::vector<SampleLine*> samples;
-//    SampleLine **samples;
     int numberOfSamples;
-    int maxSamples;
 public:
     virtual ~Sound() {
         samples.clear();

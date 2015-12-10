@@ -13,11 +13,10 @@ ConcatService::ConcatService(int switches[], string** soundFileNames, int number
     this->toWav = switches[1];
     this->outputFileName = outputFileName;
     this->numberOfSoundFiles = numberOfFiles;
-    this->soundFiles = (SoundFile**)new SoundFile[numberOfFiles];
     if(help != 1) {
         int i;
         for(i = 0; i < numberOfSoundFiles; i++) {
-            soundFiles[i] = new SoundFile(*soundFileNames[i], toWav);
+            soundFiles.push_back(new SoundFile(*soundFileNames[i], toWav));
         }
     }
 }
@@ -43,20 +42,16 @@ void ConcatService::run() {
     }
 }
 
-void ConcatService::concatFiles(SoundFile **soundFiles) {
+void ConcatService::concatFiles(vector<SoundFile*> soundFiles) {
     SoundFile soundFile = *soundFiles[0];
-    FILE* fp;
     int i;
     for(i = 1; i < numberOfSoundFiles; i++) {
         soundFile += soundFiles[i];
     }
-    if(!outputFileName.compare(" ")) {
-       fp = stdout;
-    } else {
+    if(outputFileName.compare(" ")) {
         if((!toWav && outputFileName.find(".cs229") == string::npos) || toWav && outputFileName.find(".wav") == string::npos) {
             __throw_invalid_argument("Invalid output file, make sure you specify .wav file if you use the -w switch, otherwise use an output file that ends with .cs229");
         }
-        fp = fopen(outputFileName.c_str(), "w");
     }
     if(!toWav) {
         soundFile.writeCS229File(outputFileName);

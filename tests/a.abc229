@@ -1,0 +1,57 @@
+ABC229
+%
+%
+%
+TEMPO 60
+
+Instrument 0
+Waveform Sine
+Volume 0.2
+Attack 0.1
+Decay 1.5
+Sustain 0
+Release 0.2
+
+Score
+[
+a b c
+]
+
+Instrument 1
+Waveform Sine
+Volume 1
+Attack 1
+Decay .5
+Sustain .5
+Release .5
+
+Score
+[
+gggfaga
+]
+
+Instrument 2
+Waveform Sine
+Volume 1
+Attack 1
+Decay .5
+Sustain .5
+Release .5
+
+Score
+[
+gggfaga
+]
+
+Instrument 3
+Waveform Sine
+Volume 1
+Attack 1
+Decay .5
+Sustain .5
+Release .5
+
+Score
+[
+gggfaga
+]

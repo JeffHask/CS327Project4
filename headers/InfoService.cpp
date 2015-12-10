@@ -7,12 +7,12 @@
 #include "iostream"
 #include "headers/SoundFile.h"
 #include "headers/Utils.h"
+#include "InfoService.h"
+#include "Utils.h"
 
 using namespace std;
 
-InfoService ::InfoService() {
 
-}
 
 InfoService ::InfoService(int switches[], string** soundFileNames, int numberOfSoundFiles) {
     this->help = switches[0];
@@ -31,7 +31,6 @@ InfoService ::InfoService(int switches[], string** soundFileNames, int numberOfS
 }
 
 void InfoService::helperMessage() {
-//    TODO
     cout << "sndinfo: A program to tell you all about .cs229 files passed in as arguments" << endl << endl <<
             "Legal Switches:" << endl << endl;
     h_helperMessage();

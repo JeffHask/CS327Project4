@@ -5,11 +5,6 @@
 #include "headers/MixService.h"
 #include "headers/Utils.h"
 
-
-MixService::MixService() {
-
-}
-
 MixService::MixService(int switches[], string **soundFileNames, int numberOfFiles, string outputFileName,
                        int *multiplyers) {
     this->help = switches[0];

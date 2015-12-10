@@ -9,22 +9,36 @@
 #include "Sound.h"
 #include "SoundFile.h"
 
+/**
+ * Abstract Decorator for sndfx.
+ */
 class EffectDecorator : public Sound {
 protected:
+    /**
+     * The sound file that it being manipulated
+     */
     Sound *soundFile;
 public:
+    /**
+     * The Constructor for this abstract class. It sets the soundFile variable to what is passed
+     */
     EffectDecorator(Sound *sound);
 
+    /**
+     * Not much cool happening here, as the soundFile's mutate is empty
+     */
     virtual void mutate() {
         soundFile->mutate();
     };
+    /**
+     * It prints the file manipulated to the desired output file
+     */
     virtual void print(string outputFile);
     virtual ~EffectDecorator() {
         delete  soundFile;
     };
 
     virtual void setSampleLine(int index, SampleLine *sampleLine);
-
 
     virtual string getFileName() const;
 
@@ -55,7 +69,6 @@ public:
     virtual void setFileType(const string &fileType);
 
     virtual void setFileName(const string &fileName);
-//TODO
 };
 
 

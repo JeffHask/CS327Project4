@@ -13,16 +13,13 @@
 using namespace std;
 
 SoundFile::SoundFile() {
-    maxSamples = 2;
     numberOfSamples = 0;
 }
 SoundFile::SoundFile(string fileName, int wavFile) {
     numberOfChannels = -1;
     numberOfSamples = 0;
-    maxSamples = 20;
     bitDepth = -1;
     sampleRate = -1;
-//    samples = new SampleLine*[maxSamples];
         this->fileName = fileName;
     if(!wavFile) {
         fileType = ".cs229";
@@ -35,6 +32,9 @@ SoundFile::SoundFile(string fileName, int wavFile) {
 
 void SoundFile::readCS299File(string fileName) {
     ifstream input(fileName);
+    if(!fileName.compare(" ")) {
+//        TODO
+    }
     string line;
 
     getline(input, line);
@@ -60,6 +60,7 @@ void SoundFile::readCS299File(string fileName) {
             if (line[0] == '#') {
 
             } else {
+//                TODO
                 sscanf(line.c_str(), "%s%d", keyword, &keywordVal);
                 if(keyword[0] == ' ') {
                     continue;
@@ -210,7 +211,7 @@ float SoundFile::lengthOfSound() {
     return  numberOfSamples / (float)sampleRate;
 }
 
-void SoundFile::operator+=(SoundFile *soundFile) {
+void SoundFile ::operator+=(SoundFile *soundFile) {
     if(soundFile->getSampleRate() != this->getSampleRate() ||
             soundFile->getNumberOfChannels() != this->getNumberOfChannels() ||
             soundFile->getBitDepth() != this->getBitDepth()) {
@@ -248,4 +249,10 @@ SoundFile *SoundFile::operator*(int multi) {
         }
     }
     return this;
+}
+
+void SoundFile::operator|(SoundFile *soundFile) {
+    for (int i = 0; i < numberOfSamples; ++i) {
+        samples[i]->addNewChannel(soundFile->getSamples()[i]->getChannels()[0]);
+    }
 }

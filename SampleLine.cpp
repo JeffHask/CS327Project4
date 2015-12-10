@@ -10,21 +10,18 @@ using namespace std;
 
 SampleLine::SampleLine(string line, int samplesNeeded, int bitRes) {
     numberOfChannels = samplesNeeded;
-    channels = new int[samplesNeeded];
     handleSamples(line,samplesNeeded, bitRes);
 }
 
 SampleLine::SampleLine(int val) {
     numberOfChannels = 1;
-    channels = new int[1];
-    channels[0] = val;
+    channels.push_back(val);
 }
 
 SampleLine::SampleLine(const SampleLine &copy) {
     this->numberOfChannels = copy.numberOfChannels;
-    this->channels = new int[numberOfChannels];
     for (int i = 0; i < numberOfChannels; ++i) {
-        this->channels[i] = copy.channels[i];
+        channels.push_back(copy.channels[i]);
     }
 }
 
@@ -71,11 +68,6 @@ void SampleLine::handleSamples(string samples, int samplesNeeded, int bitRes) {
     if(numChannels != samplesNeeded) {
         throw invalid_argument("Invalid number of channels in the sample data");
     }
-
-//    std::cout << channels[0] << std::endl;
-//    std::cout << channels[1] << std::endl;
-//    std::cout << channels[2] << std::endl;
-
 }
 
 void SampleLine::operator+=(SampleLine *sampleLine) {

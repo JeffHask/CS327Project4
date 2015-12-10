@@ -22,6 +22,7 @@ int handleSndmixCommandArgs(string** inputFiles, char *args[], int index , int n
 
 int handleSwitches(char* args[], int numArgs, int switches[], int executable, string &outputFile);
 
+string toUpperCase(string keyword);
 int littleEndianInt(int val);
 void h_helpermessage();
 void h_helperMessage();

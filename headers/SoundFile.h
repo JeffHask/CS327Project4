@@ -33,6 +33,7 @@ public:
     void operator +=(SoundFile *soundFile);
     SoundFile *operator +(SoundFile *soundFile);
     SoundFile *operator *(int multi);
+    void operator |(SoundFile * soundFile);
     virtual void mutate();
     virtual void print(string outputFile);
     virtual void setSampleLine(int index, SampleLine *sampleLine) {
@@ -58,7 +59,6 @@ public:
 
     virtual void setSampleRate(int sampleRate) {
         SoundFile::sampleRate = sampleRate;
-        cout << "setting rate" << endl;
     }
 
     virtual int getBitDepth() const {

@@ -72,6 +72,14 @@ int handleSndmixCommandArgs(string**inputFiles, char *args[], int index , int nu
 
 }
 
+string toUpperCase(string keyword) {
+    int i;
+    for(i = 0; i < keyword.length(); i++) {
+        keyword[i] = (char)toupper(keyword[i]);
+    }
+    return keyword;
+}
+
 int littleEndianInt(int value) {
     uint x = (uint)value;
     int valueShifted =

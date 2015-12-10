@@ -7,10 +7,9 @@
 
 //TODO documentation
 
-#include "IService.h"
 #include "SoundFile.h"
 
-class Service : public IService {
+class Service {
 protected:
     int help;
     virtual void helperMessage() = 0;

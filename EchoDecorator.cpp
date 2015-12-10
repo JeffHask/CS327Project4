@@ -10,21 +10,18 @@ void EchoDecorator::mutate() {
     int numSamples = soundFile->getNumberOfSamples();
     vector<SampleLine*> soundFileSamples = soundFile->getSamples();
     vector<SampleLine*> echoSamples;
-    echoSamples.resize(numSamples);
     SampleLine *lowValSample = new SampleLine();
     int channels = soundFile->getNumberOfChannels();
     lowValSample->setNumberOfChannels(channels);
     lowValSample->allocateChannels(channels);
-    int lowVal = ((int)pow(2,soundFile->getBitDepth()) -1) * -1;
-    int echoSampleIndex = 0;
     int i;
     for(i = 0; i < channels; i++) {
-        lowValSample->setChannel(i,lowVal);
+        lowValSample->setChannel(i,0);
     }
     for(i = 0; i < numSamples; i++) {
-        echoSamples[echoSampleIndex++] = soundFileSamples[i];
-        echoSamples[echoSampleIndex++] = lowValSample;
-        echoSamples[echoSampleIndex++] = soundFileSamples[i];
+        echoSamples.push_back(soundFileSamples[i]);
+        echoSamples.push_back(lowValSample);
+        echoSamples.push_back(soundFileSamples[i]);
     }
     soundFile->setSamples(echoSamples);
     soundFile->setNumberOfSamples(numSamples * 3);

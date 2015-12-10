@@ -8,21 +8,24 @@
 
 
 #include <iostream>
+#include <vector>
+
+using namespace std;
 
 class SampleLine {
 private:
-    int *channels;
+    vector<int> channels;
     int numberOfChannels;
     void handleSamples(std::string samples, int samplesNeeded, int bitRes);
 public:
     SampleLine(){};
     ~SampleLine() {
-        delete[] channels;
+        channels.clear();
     };
     SampleLine(const SampleLine &copy);
     SampleLine(std::string, int samplesNeeded, int bitRes);
     SampleLine(int val);
-    const int* getChannels() {
+    const vector<int> getChannels() {
         return channels;
     };
     int getNumberOfChannels() {
@@ -34,8 +37,9 @@ public:
     void setNumberOfChannels(int channels){
         numberOfChannels = channels;
     }
-    void allocateChannels(int numChannels) {
-        channels = new int[numChannels];
+    void addNewChannel(int val) {
+        channels.push_back(val);
+        numberOfChannels++;
     }
     void operator +=(SampleLine *sampleLine);
 

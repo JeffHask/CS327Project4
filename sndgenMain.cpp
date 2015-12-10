@@ -45,44 +45,44 @@ int main(int argc, char* argv[]) {
             }
             i++;
         } else if(!string("-f").compare(argv[i])) {
-            if(i+1 == argc || !sscanf(argv[i + 1],"%d",&switchArgs[2].i)) {
-                fprintf(stderr, "No integer value after the -f switch");
+            if(i+1 == argc || !sscanf(argv[i + 1],"%f",&switchArgs[2].f)) {
+                fprintf(stderr, "No float value after the -f switch");
                 return 0;
             }
             i++;
         } else if(!string("-t").compare(argv[i])) {
-            if(i+1 == argc || !sscanf(argv[i + 1],"%d",&switchArgs[3].i)) {
-                fprintf(stderr, "No integer value after the -t switch");
+            if(i+1 == argc || !sscanf(argv[i + 1],"%f",&switchArgs[3].f)) {
+                fprintf(stderr, "No float value after the -t switch");
                 return 0;
             }
             i++;
         } else if (!string("-v").compare(argv[i])) {
             if(i+1 == argc || !sscanf(argv[i + 1],"%f",&switchArgs[4].f)) {
-                fprintf(stderr, "No integer value after the -v switch");
+                fprintf(stderr, "No float value after the -v switch");
                 return 0;
             }
             i++;
         } else if (!string("-a").compare(argv[i])) {
-            if(i+1 == argc || !sscanf(argv[i + 1],"%d",&switchArgs[5].i)) {
-                fprintf(stderr, "No integer value after the -a switch");
+            if(i+1 == argc || !sscanf(argv[i + 1],"%f",&switchArgs[5].f)) {
+                fprintf(stderr, "No float value after the -a switch");
                 return 0;
             }
             i++;
         } else if (!string("-d").compare(argv[i])) {
-            if(i+1 == argc || !sscanf(argv[i + 1],"%d",&switchArgs[6].i)) {
-                fprintf(stderr, "No integer value after the -d switch");
+            if(i+1 == argc || !sscanf(argv[i + 1],"%f",&switchArgs[6].f)) {
+                fprintf(stderr, "No float value after the -d switch");
                 return 0;
             }
             i++;
         } else if (!string("-s").compare(argv[i])) {
             if(i+1 == argc || !sscanf(argv[i + 1],"%f",&switchArgs[7].f)) {
-                fprintf(stderr, "No integer value after the -s switch");
+                fprintf(stderr, "No float value after the -s switch");
                 return 0;
             }
             i++;
         } else if (!string("-r").compare(argv[i])) {
-            if(i+1 == argc || !sscanf(argv[i + 1],"%d",&switchArgs[8])) {
-                fprintf(stderr, "No integer value after the -r switch");
+            if(i+1 == argc || !sscanf(argv[i + 1],"%f",&switchArgs[8].f)) {
+                fprintf(stderr, "No float value after the -r switch");
                 return 0;
             }
             i++;
@@ -136,25 +136,25 @@ int main(int argc, char* argv[]) {
         builder.setSampleRate(switchArgs[1].i);
     }
     if(switchArgs[2].i != -1) {
-        builder.setFrequency(switchArgs[2].i);
+        builder.setFrequency(switchArgs[2].f);
     }
     if(switchArgs[3].i != -1) {
-        builder.setDuration(switchArgs[3].i);
+        builder.setDuration(switchArgs[3].f);
     }
     if(switchArgs[4].i != -1) {
         builder.setVolume(switchArgs[4].f);
     }
     if(switchArgs[5].i != -1) {
-        builder.setAttack(switchArgs[5].i);
+        builder.setAttack(switchArgs[5].f);
     }
     if(switchArgs[6].i != -1) {
-        builder.setDecay(switchArgs[6].i);
+        builder.setDecay(switchArgs[6].f);
     }
     if(switchArgs[7].i != -1) {
         builder.setSustain(switchArgs[7].f);
     }
     if(switchArgs[8].i != -1) {
-        builder.setRelease(switchArgs[8].i);
+        builder.setRelease(switchArgs[8].f);
     }
     if(switchArgs[9].i != -1) {
         if(type == 4) {

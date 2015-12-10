@@ -9,11 +9,20 @@
 
 #include "Service.h"
 
+/**
+ * Mix Service is used to multiply sound file samples by a constant value,
+ * and then add the different sound files samples together
+ */
 class MixService : public Service {
 protected:
+    /**
+     * Prints to stdout infomation about the sndmix program and the acceptable switches
+     */
     virtual void helperMessage();
 public:
-    MixService();
+    /**
+     *
+     */
     MixService(int switches[], string** soundFiles,int numberOfSoundsFiles, string outputFileName, int* multiplyers);
     virtual ~MixService() {
         soundFiles.clear();

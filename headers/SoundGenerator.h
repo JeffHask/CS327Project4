@@ -14,29 +14,30 @@ public:
     class SoundBuilder;
     void print();
     void run(int helpMessage);
+    void handleEnvelop(SoundFile* soundFile);
+
 
 private:
     int bitDepth;
     int sampleRate;
-    int frequency;
-    int duration;
+    float frequency;
+    float duration;
     float volume;
-    int attack;
-    int decay;
+    float attack;
+    float decay;
     float sustain;
-    int release;
+    float release;
     int type;
     float pulseTime;
     string outputFileName;
     SoundFile *setupFile();
-    void handleEnvelop(SoundFile* soundFile);
     void create_sine_wave(SoundFile* soundFile);
     void create_triangle_wave(SoundFile * soundFile);
     void create_sawtooth_wave(SoundFile * soundFile);
     void create_pulse_wave(SoundFile * soundFile);
 
-    SoundGenerator(const int bitDepth, const int sampleRate, const int frequency, const int duration, const float volume, const int attack,
-                   const int decay, const float sustain, const int release, const int type, string outputFileName, const float pulseTime) :
+    SoundGenerator(const int bitDepth, const int sampleRate, const float frequency, const float duration, const float volume, const float attack,
+                   const float decay, const float sustain, const float release, const int type, string outputFileName, const float pulseTime) :
             bitDepth(bitDepth), sampleRate(sampleRate), frequency(frequency),duration(duration),volume(volume), attack(attack), decay(decay), sustain(sustain),
             release(release),type(type), outputFileName(outputFileName), pulseTime(pulseTime){};
 };
@@ -45,13 +46,13 @@ class SoundGenerator::SoundBuilder {
 private:
     int bitDepth = 8;
     int sampleRate = 20;
-    int frequency = 3;
-    int duration = 10;
+    float frequency = 3;
+    float duration = 10;
     float volume = 1;
-    int attack = 3;
-    int decay = 2;
+    float attack = 1;
+    float decay = 1;
     float sustain = .5;
-    int release = 2;
+    float release = 2;
     float pulseTime = .5;
     int type = 1;
     string outputFileName = " ";
@@ -69,12 +70,12 @@ public:
         return *this;
     };
 
-    SoundBuilder& setFrequency(const int frequency) {
+    SoundBuilder& setFrequency(const float frequency) {
         this->frequency = frequency;
         return *this;
     };
 
-    SoundBuilder& setDuration(const int duration) {
+    SoundBuilder& setDuration(const float duration) {
         this->duration = duration;
         return *this;
     }
@@ -84,12 +85,12 @@ public:
         return *this;
     };
 
-    SoundBuilder& setAttack(const int attack) {
+    SoundBuilder& setAttack(const float attack) {
         this->attack = attack;
         return *this;
     };
 
-    SoundBuilder& setDecay(const int decay) {
+    SoundBuilder& setDecay(const float decay) {
         this->decay = decay;
         return *this;
     };
@@ -97,7 +98,7 @@ public:
         this->sustain = sustain;
         return *this;
     };
-    SoundBuilder& setRelease(const int release) {
+    SoundBuilder& setRelease(const float release) {
         this->release = release;
         return *this;
     };

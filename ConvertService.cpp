@@ -14,13 +14,11 @@ ConvertService::ConvertService(int help, string fileName, string outputFileName)
 
 void ConvertService::run() {
     SoundFile * soundFile;
-    FILE * outputFile;
     if(help) {
         helperMessage();
     } else {
         if(isWav) {
             soundFile = new SoundFile(inputFileName,1);
-            outputFile = fopen(outputFileName.c_str(), "w");
             soundFile->writeCS229File(outputFileName);
         } else {
             soundFile = new SoundFile(inputFileName,0);
