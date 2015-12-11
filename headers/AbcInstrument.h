@@ -10,38 +10,45 @@
 #include "Note.h"
 
 using namespace std;
-
+/**
+ * Class used in as a data store for the AbcFile class. A new one is created everytime there is an instrument section in
+ * an abc229 file.
+ */
 class AbcInstrument {
 private:
-    string waveform;
+    int waveform;
     float volume;
     float attack;
     float decay;
     float release;
     float sustain;
+    /**
+     * A vector of all the notes contained. They are stored with their frequency and count
+     */
     vector<Note *> score;
     float handleScores(string note, double & freq, int hasSharp);
 public:
     AbcInstrument(){};
     void addScore(string note);
     int findTotalCount();
-    string getWaveform() const {
+    int getWaveform() const {
         return waveform;
     }
 
     void setWaveform(string waveform) {
+        int c;
         if(!waveform.compare("SINE")) {
-            waveform = 1;
+            c = 1;
         } else if (!waveform.compare("SAWTOOTH")) {
-            waveform = 2;
+            c = 2;
         } else if (!waveform.compare("TRIANGLE")) {
-            waveform = 3;
+            c = 3;
         } else if (!waveform.compare("PULSE")) {
-            waveform = 4;
+            c = 4;
         } else {
             __throw_invalid_argument("Unkown wave type");
         }
-        AbcInstrument::waveform = waveform;
+        AbcInstrument::waveform = c;
     }
 
     float getVolume() const {

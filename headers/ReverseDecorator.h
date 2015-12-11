@@ -7,13 +7,18 @@
 
 #include "EffectDecorator.h"
 
-//TODO
+/**
+ * Reverse Decorator is one of the concrete classes for sndfx.
+ */
 class ReverseDecorator : public EffectDecorator {
 public:
     ReverseDecorator(Sound * soundFile) : EffectDecorator(soundFile){};
+    /**
+     * ReverseDecorator mutate() does exactly what the class name implies, it reverses the samples.
+     *
+     */
     virtual void mutate();
     virtual ~ReverseDecorator() {
-
     };
 };
 

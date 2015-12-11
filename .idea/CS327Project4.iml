@@ -5,11 +5,11 @@
       <sourceFolder url="file://$MODULE_DIR$/AbcFile.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/AbcInstrument.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/CMakeLists.txt" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/ChannelDecorator.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/ConcatService.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/ConvertService.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/EchoDecorator.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/EffectDecorator.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/InfoService.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/MixService.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Note.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/ReverseDecorator.cpp" isTestSource="false" />
@@ -24,12 +24,10 @@
       <sourceFolder url="file://$MODULE_DIR$/Utils.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/headers/AbcFile.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/headers/AbcInstrument.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/headers/ChannelDecorator.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/headers/ConcatService.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/headers/ConvertService.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/headers/EchoDecorator.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/headers/EffectDecorator.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/headers/InfoService.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/headers/InfoService.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/headers/MixService.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/headers/Note.h" isTestSource="false" />

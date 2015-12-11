@@ -13,7 +13,6 @@ void EchoDecorator::mutate() {
     SampleLine *lowValSample = new SampleLine();
     int channels = soundFile->getNumberOfChannels();
     lowValSample->setNumberOfChannels(channels);
-    lowValSample->allocateChannels(channels);
     int i;
     for(i = 0; i < channels; i++) {
         lowValSample->setChannel(i,0);

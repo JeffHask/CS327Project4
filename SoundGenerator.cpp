@@ -2,7 +2,7 @@
 // Created by jeffrey on 11/30/15.
 //
 
-#include <math.h>
+#include <cmath>
 #include "headers/SoundGenerator.h"
 
 SoundFile *SoundGenerator::setupFile() {
@@ -52,15 +52,16 @@ void SoundGenerator::handleEnvelop(SoundFile *soundFile) {
         int i;
         for (i = 0; i < sampleRate * tempAttack; i++) {
             SampleLine *sampleLine = soundFile->getSamples()[i];
-            int newVal = (int) (sampleLine->getChannels()[0] * attackSlope * i);
+            int newVal = (int)round(sampleLine->getChannels()[0] * attackSlope * i);
             sampleLine->setChannel(0, newVal);
         }
+        double peakSlope = attackSlope * i;
         int j;
         for (j = 1; j < (sampleRate * tempDecay) + 1; j++) {
 //        TODO: fix, volume needs to be changed to a different value if attack is cut off
-            decaySlope = (volume) - (j * sustain) / (1.0 * sampleRate * decay);
+            decaySlope = (peakSlope) - (j * sustain) / (1.0 * sampleRate * decay);
             SampleLine *sampleLine = soundFile->getSamples()[i];
-            int newVal = (int) (sampleLine->getChannels()[0] * (decaySlope));
+            int newVal = (int) round(sampleLine->getChannels()[0] * (decaySlope));
             sampleLine->setChannel(0, newVal);
             i++;
         }
@@ -80,7 +81,10 @@ void SoundGenerator::handleEnvelop(SoundFile *soundFile) {
             SampleLine *sampleLine = soundFile->getSamples()[i];
             int newVal = (int) (sampleLine->getChannels()[0] * (releaseSlope * l));
             sampleLine->setChannel(0, newVal);
-            i++;
+
+            if(++i == soundFile->getNumberOfSamples()) {
+                return;
+            };
         }
 //    soundFile->writeCS229File(" ");
 }
@@ -124,21 +128,12 @@ void SoundGenerator::create_sine_wave(SoundFile *soundFile) {
 
 void SoundGenerator::create_triangle_wave(SoundFile * soundFile) {
     int numSamples = (int)round(duration * sampleRate);
-    double  maxVal = pow(2,bitDepth - 1) - 1;
-    double slope = maxVal * frequency * 4 / numSamples;
-    int i;
-//    Set first value, as not doing so will screw up the pattern
-    soundFile->addSample(new SampleLine((int)maxVal * -1));
-    int j = 1;
-    int direction = 1;
-    for(i = 1; i < numSamples;i++) {
-        int sampleValue = (int)round(slope * j) - (int)maxVal;
+    double  maxVal = pow(2,bitDepth) - 1;
+    for(int i = 0; i < numSamples;i++) {
+        double val8 = maxVal/M_PI*asin(sin(2*i*M_PI/(sampleRate/frequency)));
+        int sampleValue = (int)val8;
         SampleLine *sampleLine = new SampleLine(sampleValue);
         soundFile->addSample(sampleLine);
-        if(sampleValue <= -1 * maxVal || sampleValue >= (int)maxVal) {
-            direction = (direction == 1) ? 0 : 1;
-        }
-        (direction) ? j++ : j--;
     }
 }
 
@@ -148,21 +143,21 @@ void SoundGenerator::create_sawtooth_wave(SoundFile* soundFile) {
     int maxVal = (int)pow(2,bitDepth) - 1;
 
     double slope =  (maxVal * frequency) / sampleRate;
-    int i;
+    float i;
     for(i = 0; i < numSamples; i++) {
-        int sampleVal = (int)((slope + slope * (i % ((int)(round(sampleRate / frequency * 1.0))))));
-        SampleLine * sampleLine = new SampleLine(sampleVal - (int)(((maxVal)*.5)));
+//        int sampleVal = (int)((slope + slope * (i % ((int)(round(sampleRate / frequency * 1.0))))));
+        int sampleVal = (int)(maxVal*((i/sampleRate * frequency)-floor(.5+(i/sampleRate * frequency))));
+        SampleLine * sampleLine = new SampleLine(sampleVal);
         soundFile->addSample(sampleLine);
     }
 }
 
 void SoundGenerator::create_pulse_wave(SoundFile * soundFile) {
-    int numSamples = (int)round(duration * sampleRate);
     int maxVal = (int)pow(2,bitDepth - 1) - 1;
-    double interval = round(numSamples / duration  / frequency * 1.0);
-    int samplesUp = (int)round(interval * pulseTime);
+    int samplesPerPeriod = (int)ceil(sampleRate / frequency);
+    int samplesUp = (int)round(sampleRate * pulseTime / frequency);
     int i;
-    int samplesDown = (int)interval - samplesUp;
+    int samplesDown = samplesPerPeriod - samplesUp;
     for(i = 0; i < frequency * duration; i++) {
         int j = 0;
         while(j < samplesUp) {
@@ -170,11 +165,11 @@ void SoundGenerator::create_pulse_wave(SoundFile * soundFile) {
             soundFile->addSample(sampleLine);
             j++;
         }
-        j = 0;
-        while (j < samplesDown) {
-            SampleLine *sampleLine = new SampleLine(maxVal * -1);
+        while(j < samplesDown) {
+            SampleLine *sampleLine = new SampleLine(maxVal*-1);
             soundFile->addSample(sampleLine);
             j++;
         }
+//        double val =  maxVal * (1.0/(sin(2*M_PI*i * frequency /sampleRate )))*abs(sin(2*M_PI * i * frequency / sampleRate));
     }
 }

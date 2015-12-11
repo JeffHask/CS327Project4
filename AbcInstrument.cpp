@@ -3,6 +3,7 @@
 //
 
 #include <cmath>
+#include <iostream>
 #include "headers/AbcInstrument.h"
 
 
@@ -65,6 +66,7 @@ void AbcInstrument::addScore(string note) {
         else {
             __throw_invalid_argument("Invalid character in score");
         }
+        cout << val << endl;
         score.push_back(new Note((int)val,count));
     } else {
         __throw_invalid_argument("Invalid score");

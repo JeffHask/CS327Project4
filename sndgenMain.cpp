@@ -164,9 +164,9 @@ int main(int argc, char* argv[]) {
             return 0;
         }
     }
-//    if(outputFileName.compare(" ")) {
-//
-//    }
+    if(outputFileName.compare(" ")) {
+        builder.setOutputFile(outputFileName);
+    }
     builder.setType(type);
     SoundGenerator gen = builder.build();
     gen.run(helpMessage);

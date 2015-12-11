@@ -5,7 +5,7 @@
 #include "headers/SampleLine.h"
 #include <iostream>
 #include <stdexcept>
-//TODO, max of 8 bit is 125, or 2^7 - 1
+#include <cmath>
 using namespace std;
 
 SampleLine::SampleLine(string line, int samplesNeeded, int bitRes) {
@@ -26,13 +26,10 @@ SampleLine::SampleLine(const SampleLine &copy) {
 }
 
 void SampleLine::handleSamples(string samples, int samplesNeeded, int bitRes) {
-    int maxValue = 1;
-    int minValue = -1;
-    int j;
-    for(j = 1; j < bitRes; j++) {
-        maxValue = maxValue * 2;
-        minValue = minValue * 2;
-    }
+    int maxValue;
+    int minValue;
+    maxValue = pow(2, bitRes -1) -1;
+    minValue = maxValue * -1;
     int numChannels = 0;
     int i = 0;
     int singleChannel;
@@ -53,7 +50,7 @@ void SampleLine::handleSamples(string samples, int samplesNeeded, int bitRes) {
             if(singleChannel < minValue) {
                 singleChannel = minValue;
             }
-            channels[numChannels] = singleChannel;
+            channels.push_back(singleChannel);
             numChannels++;
             i = 0;
         } else {
@@ -63,7 +60,7 @@ void SampleLine::handleSamples(string samples, int samplesNeeded, int bitRes) {
     }
     sample[i] = '\0';
     sscanf(sample,"%d", &singleChannel);
-    channels[numChannels] = singleChannel;
+    channels.push_back(singleChannel);
     numChannels++;
     if(numChannels != samplesNeeded) {
         throw invalid_argument("Invalid number of channels in the sample data");

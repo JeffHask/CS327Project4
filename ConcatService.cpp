@@ -8,7 +8,7 @@
 
 using namespace std;
 
-ConcatService::ConcatService(int switches[], string** soundFileNames, int numberOfFiles, string outputFileName) {
+ConcatService::ConcatService(int switches[], vector<string*> soundFileNames, int numberOfFiles, string outputFileName) {
     this->help = switches[0];
     this->toWav = switches[1];
     this->outputFileName = outputFileName;
@@ -56,6 +56,6 @@ void ConcatService::concatFiles(vector<SoundFile*> soundFiles) {
     if(!toWav) {
         soundFile.writeCS229File(outputFileName);
     } else {
-        soundFile.writeWAVFile(outputFileName);
+//        soundFile.writeWAVFile(outputFileName);
     }
 }

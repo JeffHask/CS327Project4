@@ -2,14 +2,15 @@
 // Created by jeffrey on 11/11/15.
 //
 
+#include <vector>
 #include "headers/Utils.h"
 
-int handleCommandArgs(string ** inputFiles, char *args[], int index , int numArgs, int executable) {
+int handleCommandArgs(vector<string*> & inputFiles, char *args[], int index , int numArgs, int executable) {
     int i;
     int inputIndex = 0;
     for (i = index; i < numArgs; ++i) {
-        if (string(args[i]).find(string(".cs229")) != string::npos || executable == SNDCVT && string(args[i]).find(string(".wav")) != string::npos) {
-            inputFiles[inputIndex] = new string(args[i]);
+        if (string(args[i]).find(string(".cs229")) != string::npos) {
+            inputFiles.push_back(new string(args[i]));
             inputIndex++;
         } else {
             __throw_invalid_argument((std::string("ERROR: Unknown argument '") + std::string(args[i]) + std::string("'")).c_str());
@@ -35,9 +36,9 @@ int handleSwitches(char* args[],int numArgs, int switches[], int executable, str
                 }
             } else if(!string("-w").compare(args[i]) && executable == SNDCAT) {
                 switches[1] = 1;
-            } else if ((string(args[i]).find(string(".cs229")) != string::npos || (SNDMIX == executable && sscanf(args[i],"%d", &mixCheck) == 1)) && executable != SNDCVT) {
+            } else if ((string(args[i]).find(string(".cs229")) != string::npos || (SNDMIX == executable && sscanf(args[i],"%d", &mixCheck) == 1))) {
                 return i;
-            } else if(executable == SNDCVT && (string(args[i]).find(string(".cs229")) != string::npos || string(args[i]).find(string(".wav")) != string::npos)) {
+            } else if((string(args[i]).find(string(".cs229")) != string::npos || string(args[i]).find(string(".wav")) != string::npos)) {
                 return i;
             }
             else {
@@ -47,7 +48,7 @@ int handleSwitches(char* args[],int numArgs, int switches[], int executable, str
     return 0;
 }
 
-int handleSndmixCommandArgs(string**inputFiles, char *args[], int index , int numArgs, int multiples[]) {
+int handleSndmixCommandArgs(vector<string*> & inputFiles, char *args[], int index , int numArgs, vector<float> multiples) {
     int numFiles = 0;
     int i;
     if((numArgs - index) % 2 != 0) {
@@ -55,14 +56,14 @@ int handleSndmixCommandArgs(string**inputFiles, char *args[], int index , int nu
     }
     for (i = index; i < numArgs - 1; i+=2) {
         int numberSet;
-        int val;
+        float val;
         char fileName[20];
 
-        numberSet = sscanf(args[i], "%d", &val) + sscanf(args[i+1], "%s", fileName);
+        numberSet = sscanf(args[i], "%f", &val) + sscanf(args[i+1], "%s", fileName);
 
         if(numberSet == 2) {
-            multiples[numFiles] = val;
-            inputFiles[numFiles] = (new string(fileName));
+            multiples.push_back(val);
+            inputFiles.push_back(new string(fileName));
             numFiles++;
         } else {
             __throw_invalid_argument("Invalid arguments, make sure you have an integer value followed by a string");
@@ -80,15 +81,15 @@ string toUpperCase(string keyword) {
     return keyword;
 }
 
-int littleEndianInt(int value) {
-    uint x = (uint)value;
-    int valueShifted =
-            ( x << 24) |                // Move 4th byte to 1st
-            ((x << 8) & 0x00ff0000) |  // Move 2nd byte to 3rd
-            ((x >> 8) & 0x0000ff00) |  // Move 3rd byte to 2nd
-            ( x >> 24);                 // Move 4th byte to 1st
-    return valueShifted;
-}
+//int littleEndianInt(int value) {
+//    uint x = (uint)value;
+//    int valueShifted =
+//            ( x << 24) |                // Move 4th byte to 1st
+//            ((x << 8) & 0x00ff0000) |  // Move 2nd byte to 3rd
+//            ((x >> 8) & 0x0000ff00) |  // Move 3rd byte to 2nd
+//            ( x >> 24);                 // Move 4th byte to 1st
+//    return valueShifted;
+//}
 
 void h_helperMessage() {
     cout << "-h\t: Show the help screen" << endl;

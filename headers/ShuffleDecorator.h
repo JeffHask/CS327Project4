@@ -8,11 +8,19 @@
 #include "EffectDecorator.h"
 
 //TODO
+/**
+ * Concrete Decorator for the sndfx program.
+ */
 class ShuffleDecorator : public EffectDecorator {
 public:
     ShuffleDecorator(Sound * soundFile) : EffectDecorator(soundFile){};
+    /**
+     * This function shuffles the samples around, while keeping the channels together.
+     */
     virtual void mutate();
-    virtual ~ShuffleDecorator(){};
+    virtual ~ShuffleDecorator(){
+
+    };
 };
 
 

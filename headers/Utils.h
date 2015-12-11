@@ -8,24 +8,37 @@
 #define SNDINFO 1
 #define SNDCAT 2
 #define SNDMIX 3
-#define SNDGEN 4
-#define SNDCVT 5
-#define SNDFX 6
-#define SNDPLAY 7
-//TODO documentation
 
 #include <iostream>
 using namespace std;
 
-int handleCommandArgs(string** inputfiles, char*args[], int index, int numArgs, int executable);
-int handleSndmixCommandArgs(string** inputFiles, char *args[], int index , int numArgs, int multiples[]);
-
+/**
+ * This handles all the input files for sndinfo and sndcat, making sure they are all .cs229 files
+ */
+int handleCommandArgs(vector<string*> &inputFiles, char*args[], int index, int numArgs, int executable);
+/**
+ * This is a specialized command args handler, as sndmix also has float values that are passed in with a file name.
+ */
+int handleSndmixCommandArgs(vector<string*> & inputFiles, char *args[], int index , int numArgs, vector<float> multiples);
+/**
+ * This handles switches for  sndinfo, sndmix, and sndcat.
+ */
 int handleSwitches(char* args[], int numArgs, int switches[], int executable, string &outputFile);
 
+/**
+ * Simple little function to set return an uppercased string.
+ */
 string toUpperCase(string keyword);
-int littleEndianInt(int val);
-void h_helpermessage();
+/**
+ * Help message for the -h switch
+ */
 void h_helperMessage();
+/**
+ * Help message for the -o switch
+ */
 void o_helperMessage();
+/**
+ * Help message for the -w switch
+ */
 void w_helperMessage();
 #endif //CS327PROJECT4_UTILS_CPP_H

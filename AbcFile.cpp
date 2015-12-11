@@ -24,7 +24,6 @@ void AbcFile::readAbcFile(string inputFile) {
     string keyword;
     float keywordVal;
     getline(input, line);
-//    cout << line << endl;
     if(line.length() == 6) {
         line[0] = (char)toupper(line[0]);
         line[1] = (char)toupper(line[1]);
@@ -39,12 +38,10 @@ void AbcFile::readAbcFile(string inputFile) {
     }
     while(getline(input,line)) {
         if(line[0] == '%' || isspace(line[0]) || !line.compare("")) {
-//            cout << "Comment/WhiteSpace"  << endl;
             continue;
         }
         if(sscanf(line.c_str(),"%s%f", temp, &keywordVal) == 2) {
             keyword = toUpperCase(string(temp));
-//            cout << keyword << endl;
         } else {
             __throw_invalid_argument("Invalid .abc229 file, in the headers section, make sure everything is keyword, then value");
         }
@@ -55,7 +52,6 @@ void AbcFile::readAbcFile(string inputFile) {
             getline(input,line);
             int notDone = 1;
             while (notDone && !input.eof()) {
-//                cout << line << endl;
                 if(isspace(line[0])) {
                     getline(input,line);
                     continue;
@@ -63,7 +59,6 @@ void AbcFile::readAbcFile(string inputFile) {
                 int varSet = sscanf(line.c_str(),"%s%f", temp, &keywordVal);
                 if(varSet == 2) {
                    keyword = toUpperCase(string(temp));
-//                    cout << keyword << endl;
                     if(!keyword.compare("VOLUME")) {
                         instrument->setVolume(keywordVal);
                     } else if (!keyword.compare("ATTACK")) {
@@ -75,7 +70,7 @@ void AbcFile::readAbcFile(string inputFile) {
                     } else if (!keyword.compare("RELEASE")) {
                         instrument->setRelease(keywordVal);
                     } else {
-//                        ERROR
+                        __throw_invalid_argument(string(string("Invalid header: ") + keyword + string(" is not a valid header")).c_str());
                     }
                 } else if( varSet == 1) {
                     keyword = toUpperCase(string(temp));
@@ -85,7 +80,7 @@ void AbcFile::readAbcFile(string inputFile) {
                     } else if(!keyword.compare("SCORE")) {
                         getline(input,line);
                         if(line[0] != '[') {
-//                            ERROR
+                            __throw_invalid_argument("ERROR: line after the keyword 'Score' must start with the '[' character ");
                         }
                         string  note = "";
                         while(notDone) {
@@ -125,48 +120,42 @@ void AbcFile::readAbcFile(string inputFile) {
 }
 
 void AbcFile::writeToCs229File(string outputFile) {
-//    cout <<"bitrate: " << bitRate << endl;
-//    cout << "sampleRate: " <<sampleRate << endl;
-//    cout <<"waveform: " << instruments[0]->getWaveform() << endl;
-//    cout << "Number of notes: " << instruments[0]->getNumberOfNotes() << endl;
-//    for(int j = 0; j < instruments.size(); j++) {
-//        cout << endl << endl << "Instrument " << j <<  endl;
-//        for (int i = 0; i < instruments[j]->getNumberOfNotes(); i++) {
-//            cout << "Frequency: " << instruments[j]->getScore()[i]->getFrequency() << endl;
-//            cout << "Count: " << instruments[j]->getScore()[i]->getCount() << endl;
-//        }
-//    }
     SoundFile * soundFile = createSoundFile();
-    soundFile->writeCS229File(" ");
-}
-
-void AbcFile::writeToWavFile(string outputFile) {
-
+    soundFile->writeCS229File(outputFile);
 }
 
 SoundFile* AbcFile::createSoundFile() {
     SoundFile * soundFile = new SoundFile();
-    SoundFile * otherChannels = new SoundFile();
     soundFile->setBitDepth(bitRate);
     soundFile->setSampleRate(sampleRate);
     soundFile->setNumberOfChannels((int)instruments.size());
-    otherChannels->setBitDepth(bitRate);
-    otherChannels->setSampleRate(sampleRate);
-    otherChannels->setNumberOfChannels((int)instruments.size());
     cout << getMaxSamples(instruments) <<endl;
     int samplesPerCount = (int)ceil(60.0*sampleRate/tempo);
     cout << instruments.size() << endl;
     for(int i = 0; i < instruments.size(); i++) {
+        SoundFile * otherChannels = new SoundFile();
+        otherChannels->setBitDepth(bitRate);
+        otherChannels->setSampleRate(sampleRate);
+        otherChannels->setNumberOfChannels((int)instruments.size());
         SoundGenerator::SoundBuilder builder;
-        builder.setAttack(instruments[i]->getAttack()).setDecay(instruments[i]->getDecay()).setRelease(instruments[i]->getRelease()).setDuration((instruments[i]->findTotalCount() * 60 / tempo)).setSampleRate(sampleRate);
+        builder.setAttack(instruments[i]->getAttack()).setDecay(instruments[i]->getDecay()).setRelease(instruments[i]->getRelease()).setDuration((instruments[i]->findTotalCount() * 60 / tempo)).setSampleRate(sampleRate).setSustain(instruments[i]->getSustain());
         int numSamples = 0;
         for(int j = 0; j < instruments[i]->getScore().size(); j++) {
             SoundFile * tempFile = new SoundFile();
             tempFile->setBitDepth(bitRate);
             tempFile->setSampleRate(sampleRate);
-            SoundGenerator soundGenerator = builder.setDuration((instruments[i]->getScore()[j]->getCount() * 60 / tempo)).build();
+            SoundGenerator soundGenerator = builder.setDuration((instruments[i]->getScore()[j]->getCount() * 60 / tempo)).setBitDepth(bitRate).build();
             tempFile->setNumberOfChannels((int)instruments.size());
-            numSamples +=sineWave(instruments[i]->getScore()[j],samplesPerCount,tempFile,i);
+            int waveForm = instruments[i]->getWaveform();
+            if(waveForm == 1) {
+                numSamples +=sineWave(instruments[i]->getScore()[j],samplesPerCount,tempFile);
+            } else if(waveForm == 2) {
+                numSamples +=sawtoothWave(instruments[i]->getScore()[j],samplesPerCount,tempFile);
+            } else if (waveForm == 3) {
+                numSamples +=triangleWave(instruments[i]->getScore()[j],samplesPerCount,tempFile);
+            } else {
+                numSamples +=pulseWave(instruments[i]->getScore()[j],samplesPerCount,tempFile);
+            }
             soundGenerator.handleEnvelop(tempFile);
             if(i == 0) {
                 *soundFile += tempFile;
@@ -198,7 +187,7 @@ SoundFile* AbcFile::createSoundFile() {
     return soundFile;
 }
 
-int AbcFile::sineWave(Note *note, int numSamplesPerCount, SoundFile * soundFile, int newChannel) {
+int AbcFile::sineWave(Note *note, int numSamplesPerCount, SoundFile * soundFile) {
     int numSamples = (int)ceil(numSamplesPerCount * note->getCount());
     double maxVal = (pow(2,bitRate-1) - 1);
     double period = (note->getFrequency() * 2 * M_PI) / sampleRate;
@@ -210,34 +199,54 @@ int AbcFile::sineWave(Note *note, int numSamplesPerCount, SoundFile * soundFile,
     return numSamples;
 }
 
-int AbcFile::triangleWave(Note note, int numSamplesPerCount, SoundFile * soundFile) {
-    int numSamples = (int)round(numSamplesPerCount * note.getCount());
-    double  maxVal = pow(2,bitRate - 1) - 1;
-    double slope = maxVal * note.getFrequency() * 4 / numSamples;
-    int i;
-//    Set first value, as not doing so will screw up the pattern
-    soundFile->addSample(new SampleLine((int)maxVal * -1));
-    int j = 1;
-    int direction = 1;
-    for(i = 1; i < numSamples;i++) {
-        int sampleValue = (int)round(slope * j) - (int)maxVal;
+int AbcFile::triangleWave(Note *note, int numSamplesPerCount, SoundFile * soundFile) {
+    int numSamples = (int)ceil(numSamplesPerCount * note->getCount());
+    double  maxVal = pow(2,bitRate) - 1;
+    for(int i = 0; i < numSamples;i++) {
+        double val8 = maxVal/M_PI*asin(sin(note->getFrequency()*2.0*i*M_PI/sampleRate));
+        int sampleValue = (int)val8;
         SampleLine *sampleLine = new SampleLine(sampleValue);
         soundFile->addSample(sampleLine);
-        if(sampleValue <= -1 * maxVal || sampleValue >= (int)maxVal) {
-            direction = (direction == 1) ? 0 : 1;
-        }
-        (direction) ? j++ : j--;
     }
 
-return -1;
+return numSamples;
 }
 
-int AbcFile::pulseWave(Note note, int numSamplesPerCount, SoundFile * soundFile) {
-return -1;
+int AbcFile::pulseWave(Note *note, int numSamplesPerCount, SoundFile * soundFile) {
+    int maxVal = (int)pow(2,bitRate - 1) - 1;
+    int samplesPerPeriod = (int)ceil(sampleRate / note->getFrequency());
+    int samplesUp = (int)round(sampleRate * 0.5 / note->getFrequency());
+    int i;
+    int numSamples = 0;
+    int samplesDown = samplesPerPeriod - samplesUp;
+    for(i = 0; i < note->getFrequency() * note->getCount(); i++) {
+        int j = 0;
+        while (j < samplesUp) {
+            SampleLine *sampleLine = new SampleLine(maxVal);
+            soundFile->addSample(sampleLine);
+            j++;
+            numSamples++;
+        }
+        while (j < samplesPerPeriod) {
+            SampleLine *sampleLine = new SampleLine(maxVal * -1);
+            soundFile->addSample(sampleLine);
+            j++;
+            numSamples++;
+        }
+    }
+    return numSamples;
 }
 
-int AbcFile::sawtoothWave(Note note, int numSamplesPerCount, SoundFile * soundFile) {
-return -1;
+int AbcFile::sawtoothWave(Note *note, int numSamplesPerCount, SoundFile * soundFile) {
+    int numSamples = (int)ceil(note->getCount()* numSamplesPerCount);
+    int maxVal = (int)pow(2,bitRate) - 1;
+    float i;
+    for(i = 0; i < numSamples; i++) {
+        int sampleVal = (int)(maxVal*((i/sampleRate * note->getFrequency())-floor(.5+(i/sampleRate * note->getFrequency()))));
+        SampleLine * sampleLine = new SampleLine(sampleVal);
+        soundFile->addSample(sampleLine);
+    }
+return (int)i;
 }
 
 int AbcFile::getMaxSamples(vector<AbcInstrument *> instruments) {

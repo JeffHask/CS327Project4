@@ -50,7 +50,7 @@ class ConcatService : public Service {
          * Constructor for ConcatService.
          * param switches - filled with switch information. For sndcat, the only important switches are at index 0 and 1.
          * switches[0] contains information about the -h switch, 0 if it is not present, 1 if it is.
-         * switches[1] contains information about the -w siwtch, o if it is not present, 1 if it is.
+         * switches[1] contains information about the -w switch, o if it is not present, 1 if it is.
          *
          * param soundFiles- filled with file names that are opened and read inside this constructor.
          *
@@ -61,7 +61,7 @@ class ConcatService : public Service {
          *
          * If the help switch is present, the constructor does not read the input files
          */
-        ConcatService(int switches[], string** soundFiles,int numberOfSoundsFiles, string outputFileName);
+        ConcatService(int switches[], vector<string*> soundFiles,int numberOfSoundsFiles, string outputFileName);
         /**
          * Prints out information about the sndcat service, and lists the acceptable switches
          */

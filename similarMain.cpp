@@ -13,12 +13,12 @@ using namespace std;
 //TODO: need to check file extensions of outputfile if the -w switch is present
 int main(int argc, char*argv[]) {
     try {
-        int multiOrSwitchArgs[20];
+        vector<float> multiValues;
         int switches[20];
         fill(switches, switches + 20, 0);
         int executableNumber;
         string outputFile = " ";
-        string **inputFiles = (string **) malloc(sizeof(string **));
+        vector<string*> inputFiles;
         int numberOfFiles = 0;
         Service *service;
 
@@ -30,19 +30,18 @@ int main(int argc, char*argv[]) {
             executableNumber = SNDCAT;
         } else if (!executable.compare("sndmix")) {
             executableNumber = SNDMIX;
-        } else if (!executable.compare("sndcvt")) {
-            executableNumber = SNDCVT;
         } else {
             executableNumber = SNDINFO;
         }
         int j;
         j = handleSwitches(argv, argc, switches, executableNumber, outputFile);
-        if(j == 0) {
-//            Read from standard input
+        if(j == 0 && executableNumber == SNDINFO) {
+            inputFiles.push_back(new string("STDIN"));
+            numberOfFiles = -1;
         }
         else if(!switches[0]) {
             if (executableNumber == SNDMIX) {
-                numberOfFiles = handleSndmixCommandArgs(inputFiles, argv, j, argc, multiOrSwitchArgs);
+                numberOfFiles = handleSndmixCommandArgs(inputFiles, argv, j, argc, multiValues);
             } else {
                 numberOfFiles = handleCommandArgs(inputFiles, argv, j, argc, executableNumber);
             }
@@ -52,9 +51,9 @@ int main(int argc, char*argv[]) {
         } else if (executableNumber == SNDCAT) {
             service = new ConcatService(switches, inputFiles, numberOfFiles, outputFile);
         } else if (executableNumber == SNDMIX) {
-            service = new MixService(switches, inputFiles, numberOfFiles, outputFile, multiOrSwitchArgs);
+            service = new MixService(switches, inputFiles, numberOfFiles, outputFile, multiValues);
         } else {
-            service = new ConvertService(switches[0],**inputFiles,outputFile);
+//            service = new ConvertService(switches[0], inputFiles,outputFile);
         }
         service->run();
         return 0;

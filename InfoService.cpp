@@ -7,22 +7,26 @@
 #include "iostream"
 #include "headers/SoundFile.h"
 #include "headers/Utils.h"
-#include "InfoService.h"
-#include "Utils.h"
+#include "headers/InfoService.h"
+#include "headers/Utils.h"
 
 using namespace std;
 
 
 
-InfoService ::InfoService(int switches[], string** soundFileNames, int numberOfSoundFiles) {
+InfoService ::InfoService(int switches[], vector<string*> & soundFileNames, int numberOfSoundFiles) {
     this->help = switches[0];
     this->numberOfSoundFiles = numberOfSoundFiles;
-    if(help != 1) {
+    if(numberOfSoundFiles == -1) {
+        SoundFile* soundFile = new SoundFile(string(" "),0);
+        soundFiles.push_back(soundFile);
+        this->numberOfSoundFiles = 1;
+    } else if(help != 1) {
         int i;
         for(i = 0; i < numberOfSoundFiles; i++) {
 
             try {
-                soundFiles.push_back(new SoundFile((soundFileNames[i][0]), 0));
+                soundFiles.push_back(new SoundFile((*soundFileNames[i]), 0));
             } catch (invalid_argument &e) {
                 __throw_invalid_argument(e.what());
             }
@@ -31,9 +35,12 @@ InfoService ::InfoService(int switches[], string** soundFileNames, int numberOfS
 }
 
 void InfoService::helperMessage() {
-    cout << "sndinfo: A program to tell you all about .cs229 files passed in as arguments" << endl << endl <<
-            "Legal Switches:" << endl << endl;
+    cout << "sndinfo: A program to tell you all about .cs229 files passed in as arguments. Information includes:" << endl << endl <<
+            "File Name" << endl << "File Type(Only cs229 is supported currently)" << endl << "Sample Rate" << endl <<
+            "Bit Depth" << endl << "Number of Channels" << endl << "Number of Samples" << "Length of Sound (In seconds)"
+            << endl << endl << "Legal Switches:" << endl << endl;
     h_helperMessage();
+    cout << "In no files are passed as arguments, then the program will read from standard input";
 }
 
 void InfoService::printInfo() {

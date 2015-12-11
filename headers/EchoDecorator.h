@@ -24,7 +24,6 @@ public:
      */
     virtual void mutate();
     virtual ~EchoDecorator() {
-    cout << "Deleting echo" << endl;
     };
 };
 

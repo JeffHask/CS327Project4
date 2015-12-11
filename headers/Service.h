@@ -9,12 +9,20 @@
 
 #include "SoundFile.h"
 
+/**
+ * Interface for the InfoService, MixService, and ConcatService. It was created to simplify the use of the 3 programs,
+ * allowing them to reuse code.
+ */
 class Service {
 protected:
     int help;
     virtual void helperMessage() = 0;
 public:
     virtual ~Service() { };
+
+    /**
+     * Starts what needs to be ran,
+     */
     virtual void run() = 0;
 };
 

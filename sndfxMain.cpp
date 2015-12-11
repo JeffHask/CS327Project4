@@ -6,7 +6,6 @@
 #include "headers/SampleUpDecorator.h"
 #include "headers/EchoDecorator.h"
 #include "headers/ShuffleDecorator.h"
-#include "headers/ChannelDecorator.h"
 #include "headers/SampleDownDecorator.h"
 
 using namespace std;
@@ -56,13 +55,6 @@ int main(int argc, char* argv[]) {
             soundFile = new SampleUpDecorator(soundFile);
         }else if(!string(argv[i]).compare("-sd")) {
             soundFile = new SampleDownDecorator(soundFile);
-        }
-        else if(!string(argv[i]).compare("-ch")) {
-            if(i + 2 != argc && sscanf(argv[i+1],"%d",&intVal)) {
-                soundFile = new ChannelDecorator(soundFile, intVal);
-            } else {
-                fprintf(stderr, "ERROR: no integer value after --ch");
-            }
         } else {
             cout << "ERROR: unknown argument '"<< argv[i] << "'" << endl;
             return 0;

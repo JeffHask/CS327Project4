@@ -2,56 +2,56 @@ ABC229
 %
 %
 %
-TEMPO 60
+TEMPO 90
 
 Instrument 0
-Waveform Sine
-Volume 0.2
-Attack 0.1
-Decay 1.5
-Sustain 0
-Release 0.2
+Waveform triangle
+Volume 1
+Attack 15
+Decay 7
+Sustain 0.7
+Release 10
 
 Score
 [
-a b c
+abc#d#bbccadgefgabcd#efgabcdef#g
 ]
 
 Instrument 1
-Waveform Sine
+Waveform triangle
 Volume 1
 Attack 1
 Decay .5
-Sustain .5
-Release .5
+Sustain .8
+Release 3
 
 Score
 [
-gggfaga
+gggfagaabcdefgfafafaaabcd
 ]
 
-Instrument 2
-Waveform Sine
-Volume 1
-Attack 1
-Decay .5
-Sustain .5
-Release .5
+%Instrument 2
+%Waveform triangle
+%Volume 1
+%Attack 1
+%Decay .5
+%Sustain .5
+%Release .5
 
-Score
-[
-gggfaga
-]
+%Score
+%[
+%gggfagaafdgc#
+%]
 
-Instrument 3
-Waveform Sine
-Volume 1
-Attack 1
-Decay .5
-Sustain .5
-Release .5
-
-Score
-[
-gggfaga
-]
+%Instrument 3
+%Waveform sawtooth
+%Volume 1
+%Attack 1
+%Decay .5
+%Sustain .5
+%Release .5
+%
+%Score
+%[
+%gggfaga
+%]

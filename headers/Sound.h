@@ -11,7 +11,9 @@
 #include "SampleLine.h"
 
 using namespace std;
-class SampleLine;
+/**
+ * Interface class used for the sndfx program. Its subclasses include SoundFile and EffectDecorator
+ */
 class Sound {
 
 protected:

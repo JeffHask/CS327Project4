@@ -42,7 +42,7 @@ public:
      *
      * throws invalid argument exception if one of the sound files are invalid
      */
-    InfoService(int switches[],string** soundFiles, int numberOfSoundFiles);
+    InfoService(int switches[], vector<string*> & soundFiles, int numberOfSoundFiles);
     virtual ~InfoService() {
         soundFiles.clear();
     };
