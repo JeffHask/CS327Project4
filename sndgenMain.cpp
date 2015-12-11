@@ -15,10 +15,6 @@ int main(int argc, char* argv[]) {
     int helpMessage = 0;
     string outputFileName = " ";
     int i;
-//    TODO: close file pointers
-//    TODO check for duplicate switches
-//    TODO check bitdepth, negative numbers
-//    TODO: how does volume effect the waves? Does it only effect the top, or what?
     for (i = 1; i < argc; i++) {
         if(!string("-h").compare(argv[i])) {
             helpMessage = 1;
@@ -130,7 +126,12 @@ int main(int argc, char* argv[]) {
     }
     SoundGenerator::SoundBuilder builder = SoundGenerator::SoundBuilder();
     if(switchArgs[0].i != -1) {
-        builder.setBitDepth(switchArgs[0].i);
+        if(switchArgs[0].i == 8 || switchArgs[0].i == 16 || switchArgs[0].i == 32) {
+            builder.setBitDepth(switchArgs[0].i);
+        } else {
+            cerr << "Invalid bit rate, valid rates include 8, 16, and 32";
+            return 0;
+        }
     }
     if(switchArgs[1].i != -1) {
         builder.setSampleRate(switchArgs[1].i);

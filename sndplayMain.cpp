@@ -4,6 +4,7 @@
 #include <iostream>
 #include <vector>
 #include "headers/AbcFile.h"
+#include "headers/Utils.h"
 
 using namespace std;
 
@@ -12,7 +13,6 @@ int main(int argc, char* argv[]) {
     string outputFileName = " ";
     int bitDepth = 8;
     int sampleRate = 10;
-    int toWav = 0;
     int instrumentNum = 0;
     int type = 0;
     std::vector<int> mute;
@@ -26,8 +26,12 @@ int main(int argc, char* argv[]) {
     }
     for (i = 1; i < argc - 1; i++) {
         if(!string("-h").compare(argv[i])) {
-            helpMessage = 1;
-//
+                cout << "sndplay: a program that accepts .abc229 files and outputs them to .cs229 files" <<
+                        endl << "Acceptable switches:" << endl;
+            h_helperMessage();
+            o_helperMessage();
+            cout << "--bits n: use a bit depth n, defaults to 8" << endl << "--sr n: set sampleRate to n. Default is 10"
+            << endl << "--mute n: do not play instrument n. Can call this switch multiple times";
             return 0;
         } else if (!string("-o").compare(argv[i])) {
             string oFile = string(argv[i+1]);
@@ -58,13 +62,11 @@ int main(int argc, char* argv[]) {
                 mute.push_back(instrumentNum);
             }
             i++;
-        } else if(!string("-w").compare(argv[i])) {
-            toWav = 1;
         } else {
             fprintf(stderr,"Unknown argument '%s'",argv[i]);
             return 0;
         }
     }
-    AbcFile* file = new AbcFile(helpMessage,outputFileName,mute,toWav,inputFile,bitDepth,sampleRate);
+    AbcFile* file = new AbcFile(helpMessage,outputFileName,mute,inputFile,bitDepth,sampleRate);
     file->writeToCs229File(outputFileName);
 }

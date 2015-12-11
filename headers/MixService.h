@@ -5,8 +5,6 @@
 #ifndef CS327PROJECT4_MIXSERVICE_H
 #define CS327PROJECT4_MIXSERVICE_H
 
-//TODO documentation
-
 #include "Service.h"
 
 /**

@@ -21,10 +21,6 @@ class ConcatService : public Service {
          */
         int numberOfSoundFiles;
         /**
-         * Indicates that the sound file needs to be outputted as a wav file
-         */
-        int toWav;
-        /**
          * holds the name of the concatenated output file
          */
         string outputFileName;
@@ -67,7 +63,7 @@ class ConcatService : public Service {
          */
         virtual void helperMessage();
         /**
-         * Inherited method from Service.cpp. It checks to see if protected variable 'help' equals one, and if it is,
+         * Inherited method from the Service class . It checks to see if protected variable 'help' equals one, and if it is,
          * it calls helperMessage(). Otherwise, it continues with the concatenation and calls concatFiles()
          */
         virtual void run();

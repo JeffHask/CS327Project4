@@ -10,8 +10,8 @@
 #include "headers/Utils.h"
 #include "headers/SoundGenerator.h"
 
-AbcFile::AbcFile(int help, string outputFile, vector<int> mute, int toWav, string inputFile, int bits,
-                 int sampleRate) : help(help), outputfile(outputFile), mute(mute), toWav(toWav), inputFile(inputFile),
+AbcFile::AbcFile(int help, string outputFile, vector<int> mute, string inputFile, int bits,
+                 int sampleRate) : help(help), outputfile(outputFile), mute(mute), inputFile(inputFile),
                     bitRate(bits), sampleRate(sampleRate) {
     readAbcFile(inputFile);
 }

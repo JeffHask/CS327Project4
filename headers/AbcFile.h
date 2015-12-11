@@ -26,7 +26,6 @@ private:
     int bitRate;
     int sampleRate;
     vector<int> mute;
-    int toWav;
     /**
      * The big method for this class. It goes through each instrument, determines wave type, then adds all the instruments
      * to a single SoundFile.
@@ -50,9 +49,8 @@ private:
     int pulseWave(Note *note, int numSamplesPerCount, SoundFile * soundFile);
 
 public:
-    AbcFile(int help, string outputFile,  vector<int> mute, int toWav, string inputFile, int bits, int sampleRate);
+    AbcFile(int help, string outputFile,  vector<int> mute, string inputFile, int bits, int sampleRate);
     void writeToCs229File(string outputFile);
-//    void writeToWavFile(string outputFile);
     int const getNumberOfInstruments() {
         return (int)instruments.size();
     }

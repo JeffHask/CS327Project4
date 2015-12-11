@@ -5,12 +5,8 @@
 #include "headers/ConcatService.h"
 #include "headers/MixService.h"
 #include "headers/Utils.h"
-#include "headers/ConvertService.h"
-
 using namespace std;
 
-//TODO: need to add support for stdin if no files are specified
-//TODO: need to check file extensions of outputfile if the -w switch is present
 int main(int argc, char*argv[]) {
     try {
         vector<float> multiValues;
@@ -50,10 +46,8 @@ int main(int argc, char*argv[]) {
             service = new InfoService(switches, inputFiles, numberOfFiles);
         } else if (executableNumber == SNDCAT) {
             service = new ConcatService(switches, inputFiles, numberOfFiles, outputFile);
-        } else if (executableNumber == SNDMIX) {
-            service = new MixService(switches, inputFiles, numberOfFiles, outputFile, multiValues);
         } else {
-//            service = new ConvertService(switches[0], inputFiles,outputFile);
+            service = new MixService(switches, inputFiles, numberOfFiles, outputFile, multiValues);
         }
         service->run();
         return 0;

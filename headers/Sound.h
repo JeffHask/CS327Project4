@@ -5,8 +5,6 @@
 #ifndef CS327PROJECT4_SOUND_H
 #define CS327PROJECT4_SOUND_H
 
-//TODO documentation
-
 #include <vector>
 #include "SampleLine.h"
 

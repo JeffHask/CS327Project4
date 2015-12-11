@@ -41,4 +41,8 @@ void o_helperMessage();
  * Help message for the -w switch
  */
 void w_helperMessage();
+/**
+ * Prints out all the switches for sndgen
+ */
+void sndgen_helperMessage();
 #endif //CS327PROJECT4_UTILS_CPP_H

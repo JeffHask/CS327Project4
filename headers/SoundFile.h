@@ -11,8 +11,6 @@
 #include <fstream>
 #include "SampleLine.h"
 #include "Sound.h"
-//TODO documentation
-
 using namespace std;
 /**
  * Main class for holding information about a cs229 file.
@@ -27,7 +25,7 @@ private:
 //    void readWAVFile(string fileName);
 public:
     SoundFile();
-    SoundFile(string fileName, int isWav);
+    SoundFile(string fileName);
     virtual ~SoundFile() {
 
     };
@@ -36,8 +34,6 @@ public:
      * will print out to stdout.
      */
     void writeCS229File(string outputFileName);
-//    void writeWAVFile(string outputFileName);
-
     /**
      * Finds the length of how many seconds this file is
      */

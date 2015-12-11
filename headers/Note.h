@@ -20,7 +20,7 @@ private:
     int frequency;
 public:
     /**
-     * Creates a note with a stated frequency and count
+     * Creates a note with a stated frequency and countge
      */
     Note(int frequency, float count):frequency(frequency),count(count){};
     Note(){};

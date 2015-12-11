@@ -7,7 +7,6 @@
 
 #include "EffectDecorator.h"
 
-//TODO
 /**
  * SamplesUpDecorator is a concrete decorator for the sndfx program.
  */

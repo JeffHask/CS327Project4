@@ -18,7 +18,7 @@ InfoService ::InfoService(int switches[], vector<string*> & soundFileNames, int 
     this->help = switches[0];
     this->numberOfSoundFiles = numberOfSoundFiles;
     if(numberOfSoundFiles == -1) {
-        SoundFile* soundFile = new SoundFile(string(" "),0);
+        SoundFile* soundFile = new SoundFile(string(" "));
         soundFiles.push_back(soundFile);
         this->numberOfSoundFiles = 1;
     } else if(help != 1) {
@@ -26,7 +26,7 @@ InfoService ::InfoService(int switches[], vector<string*> & soundFileNames, int 
         for(i = 0; i < numberOfSoundFiles; i++) {
 
             try {
-                soundFiles.push_back(new SoundFile((*soundFileNames[i]), 0));
+                soundFiles.push_back(new SoundFile((*soundFileNames[i])));
             } catch (invalid_argument &e) {
                 __throw_invalid_argument(e.what());
             }
@@ -40,7 +40,7 @@ void InfoService::helperMessage() {
             "Bit Depth" << endl << "Number of Channels" << endl << "Number of Samples" << "Length of Sound (In seconds)"
             << endl << endl << "Legal Switches:" << endl << endl;
     h_helperMessage();
-    cout << "In no files are passed as arguments, then the program will read from standard input";
+    cout << "If no files are passed as arguments, then the program will read from standard input";
 }
 
 void InfoService::printInfo() {

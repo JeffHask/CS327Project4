@@ -7,7 +7,6 @@
 
 #include "EffectDecorator.h"
 
-//TODO
 /**
  * Concrete Decorator for the sndfx program.
  */

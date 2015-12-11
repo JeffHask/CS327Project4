@@ -15,29 +15,20 @@ using namespace std;
 SoundFile::SoundFile() {
     numberOfSamples = 0;
 }
-SoundFile::SoundFile(string fileName, int wavFile) {
+SoundFile::SoundFile(string fileName) {
     numberOfChannels = -1;
     numberOfSamples = 0;
     bitDepth = -1;
     sampleRate = -1;
-        this->fileName = fileName;
-    if(!wavFile) {
-        fileType = ".cs229";
-        readCS299File(fileName);
-    } else {
-//        readWAVFile(fileName);
-//        fileType = ".WAV";
-    }
+    this->fileName = fileName;
+    fileType = ".cs229";
+    readCS299File(fileName);
 }
 
 void SoundFile::readCS299File(string fileName) {
     ifstream* fin = !fileName.compare(" ") ? NULL : new ifstream(fileName.c_str(),ifstream::in) ;
     cout << "Whoah:" << fileName<< endl;
     istream & input = !fileName.compare(" ") ? cin : *fin;
-//    ifstream *input = new ifstream(fileName);
-//    if(!fileName.compare(" ")) {
-//
-//    }
     string line;
 
     getline(input, line);
@@ -55,7 +46,6 @@ void SoundFile::readCS299File(string fileName) {
 
     int i;
     int startData = 0;
-    int lineScan;
     int numSamples = -1;
     while(getline( input, line ) ) {
         int keywordVal = -1;
@@ -64,7 +54,6 @@ void SoundFile::readCS299File(string fileName) {
             if (line[0] == '#') {
 
             } else {
-//                TODO
                 sscanf(line.c_str(), "%s%d", keyword, &keywordVal);
                 if(keyword[0] == ' ') {
                     continue;
@@ -111,7 +100,6 @@ void SoundFile::readCS299File(string fileName) {
             try {
                 samples.push_back(new SampleLine(line, numberOfChannels, bitDepth));
                 numberOfSamples++;
-//                addSample(new SampleLine(line, numberOfChannels, bitDepth));
             } catch (invalid_argument &e) {
                 string errorLine = " in sample " +to_string(numberOfSamples + 1) + " in file " + fileName;
                 __throw_invalid_argument((string(e.what()) + errorLine).c_str());
@@ -148,58 +136,7 @@ void SoundFile::writeCS229File(string fileName) {
     }
 }
 
-//void SoundFile::readWAVFile(string fileName) {
-//    TODO
-//}
-
-//void SoundFile::writeWAVFile(string fileName) {
-//    FIRST PART: RIFF
-//    THEN total size of file - 8 bytes
-//    int = 4 bytes, short = 2 btyes
-//    remaining chunk size for fmt: 8
-//    ofstream fout(fileName.c_str(), ofstream::out);
-//    ostream & out = !fileName.compare(" ") ? cout : fout;
-//    int twosCompNeeded = 1;
-//    short audioFormat = 1;
-//    short numChannels = (short)numberOfChannels;
-//    int sampleRate = this->sampleRate;
-//    int byteRate = sampleRate * numberOfChannels * bitDepth;
-//    short blockAlign;
-//    if(bitDepth == 8) {
-//        twosCompNeeded = 0;
-//        blockAlign = (short)numberOfChannels;
-//    } else if (bitDepth == 16) {
-//        blockAlign = (short)(numberOfChannels * 2);
-//    } else {
-//        blockAlign = (short)(4 * numberOfChannels);
-//    }
-//    short bitdepth = (short)this->bitDepth;
-//    int fmtSize = 16;
-//    int dataSize = twosCompNeeded ? 4 * numberOfChannels * numberOfSamples : numberOfChannels * numberOfSamples;
-//    int totalSize = dataSize + fmtSize + 16;
-//    out<< "RIFF" << littleEndianInt(totalSize) << "WAVE";
-//    out << "fmt " << littleEndianInt(fmtSize) << audioFormat << numChannels;
-//    out << sampleRate << byteRate << blockAlign << bitdepth;
-//    out << "data" << dataSize << endl;
-//    out << (unsigned int)(numChannels) << endl;
-//    int i;
-//    for(i = 0; i < numberOfSamples; i++) {
-//        int j;
-//        for (j = 0; j < numberOfChannels; ++j) {
-//            if(twosCompNeeded) {
-//                TODO, signed 2's complement
-//            } else {
-//                TODO, binary unsigned ints
-//            }
-//        }
-//    }
-//    out total size of file
-
-//    cout << littleEndianInt(76) << endl;
-//}
-
 void SoundFile::mutate() {
-//    TODO
 }
 
 void SoundFile::print(string outputFile) {
@@ -226,7 +163,6 @@ void SoundFile ::operator+=(SoundFile *soundFile) {
     for(i = 0; i < samplesToAdd; i++) {
         samples.push_back(new SampleLine(*soundFile->getSamples()[i]));
         numberOfSamples++;
-//        this->addSample(new SampleLine(*soundFile->getSamples()[i]));
     }
 }
 
@@ -236,7 +172,6 @@ SoundFile *SoundFile::operator+(SoundFile *soundFile) {
         if(i >= numberOfSamples) {
             samples.push_back(soundFile->getSamples()[i]);
             numberOfSamples++;
-//            addSample(soundFile->getSamples()[i]);
         } else {
             *samples[i] += soundFile->getSamples()[i];
         }
@@ -259,7 +194,6 @@ void SoundFile::operator|(SoundFile *soundFile) {
     cout<<"other sampples: " << soundFile->getNumberOfSamples() << endl;
     cout << "current Samples " << getNumberOfSamples() << endl;
     for (int i = 0; i < numberOfSamples && i < soundFile->getNumberOfSamples(); ++i) {
-//        cout << "SAMPLE : "<< i << endl;
         samples[i]->addNewChannel(soundFile->getSamples()[i]->getChannels()[0]);
     }
 }

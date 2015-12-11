@@ -5,8 +5,6 @@
 #ifndef CS327PROJECT4_SERVICE_H
 #define CS327PROJECT4_SERVICE_H
 
-//TODO documentation
-
 #include "SoundFile.h"
 
 /**

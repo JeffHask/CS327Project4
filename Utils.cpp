@@ -28,17 +28,15 @@ int handleSwitches(char* args[],int numArgs, int switches[], int executable, str
             if(!string("-h").compare(args[i])) {
                 switches[0] = 1;
             } else if (!string("-o").compare(args[i]) && executable != SNDINFO) {
-                if(i+1 < numArgs || (string(args[i + 1]).find(string(".cs229")) != string::npos || string(args[i + 1]).find(string(".wav")) != string::npos )) {
+                if(i+1 < numArgs || (string(args[i + 1]).find(string(".cs229")) != string::npos )) {
                     outputFile = args[i+1];
                     i++;
                 } else {
                     __throw_invalid_argument((std::string("ERROR: Invalid output file '") + std::string(args[i + 1]) + std::string("'")).c_str());
                 }
-            } else if(!string("-w").compare(args[i]) && executable == SNDCAT) {
-                switches[1] = 1;
             } else if ((string(args[i]).find(string(".cs229")) != string::npos || (SNDMIX == executable && sscanf(args[i],"%d", &mixCheck) == 1))) {
                 return i;
-            } else if((string(args[i]).find(string(".cs229")) != string::npos || string(args[i]).find(string(".wav")) != string::npos)) {
+            } else if((string(args[i]).find(string(".cs229")) != string::npos)) {
                 return i;
             }
             else {
@@ -81,16 +79,6 @@ string toUpperCase(string keyword) {
     return keyword;
 }
 
-//int littleEndianInt(int value) {
-//    uint x = (uint)value;
-//    int valueShifted =
-//            ( x << 24) |                // Move 4th byte to 1st
-//            ((x << 8) & 0x00ff0000) |  // Move 2nd byte to 3rd
-//            ((x >> 8) & 0x0000ff00) |  // Move 3rd byte to 2nd
-//            ( x >> 24);                 // Move 4th byte to 1st
-//    return valueShifted;
-//}
-
 void h_helperMessage() {
     cout << "-h\t: Show the help screen" << endl;
 }
@@ -105,19 +93,19 @@ void w_helperMessage() {
 void sndgen_helperMessage() {
     cout  << "--bits n\t : use a bit depth of n. Defaults is 8" << endl;
     cout  << "--sr n\t: use a sample rate of n. Defaults to 4" << endl;
-    cout  << "-f r\t: use a frequency of r Hz" << endl;
-    cout  << "-t r\t: total duration of r seconds" << endl;
+    cout  << "-f r\t: use a frequency of r Hz. Defaults to 5" << endl;
+    cout  << "-t r\t: total duration of r seconds, defaults to 10" << endl;
     cout  << "-v p\t: peak volume, between 0 and 1. Defaults to 1" << endl;
-    cout  << "-a r\t: release time of r seconds" << endl;
-    cout  << "-d r\t: decay time of r seconds" << endl;
-    cout  << "-s p\t: sustain volume, between 0 and 1." << endl;
-    cout  << "-r r\t: release time of r seconds" << endl;
+    cout  << "-a r\t: release time of r seconds, defaults to 0" << endl;
+    cout  << "-d r\t: decay time of r seconds, defaults to 0" << endl;
+    cout  << "-s p\t: sustain volume, between 0 and 1. defaults to 1" << endl;
+    cout  << "-r r\t: release time of r seconds, defaults to 0" << endl;
     cout << endl << "Wave types: If no wave type is specified, it defaults to sine wave. "
     << "Only one type of wave is allowed at a time." << endl;
     cout  << "--sine\t: generate a sine wave. This is default value if no type of wave is specified" << endl;
     cout  << "--triangle\t: generate a triangle wave" << endl;
     cout  << "--sawtooth\t: generate a sawtooth wave" << endl;
     cout  << "--pulse\t: generate a pulse wave" << endl;
-    cout  << "--pf p\t: percentage of time the pulse wave is 'up'" << endl;
+    cout  << "--pf p\t: percentage of time the pulse wave is 'up', defaults to .5" << endl;
 
 }

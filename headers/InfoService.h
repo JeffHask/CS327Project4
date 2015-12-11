@@ -14,7 +14,6 @@ using namespace std;
  * Info Service is a class used for printing out information about passed in .cs229 files.
  */
 class InfoService : public Service {
-//TODO documentation
 
 private:
     /**

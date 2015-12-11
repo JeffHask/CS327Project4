@@ -7,7 +7,6 @@
 
 #include "iostream"
 #include "SoundFile.h"
-//TODO documentation
 /**
  * SoundGenerator is a class used for sndgen. The idea for this class was to try some different design pattern, so I went with
  * the builder pattern. It actually worked nicely, as I could used it seamlessly with sndplay, atleast the handleEnvelop()
@@ -81,7 +80,7 @@ class SoundGenerator::SoundBuilder {
 private:
     int bitDepth = 8;
     int sampleRate = 20;
-    float frequency = 3;
+    float frequency = 5;
     float duration = 10;
     float volume = 1;
     float attack = 0;

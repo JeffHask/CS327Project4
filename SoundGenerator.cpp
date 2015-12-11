@@ -4,6 +4,7 @@
 
 #include <cmath>
 #include "headers/SoundGenerator.h"
+#include "headers/Utils.h"
 
 SoundFile *SoundGenerator::setupFile() {
     SoundFile * soundFile = new SoundFile();
@@ -58,7 +59,6 @@ void SoundGenerator::handleEnvelop(SoundFile *soundFile) {
         double peakSlope = attackSlope * i;
         int j;
         for (j = 1; j < (sampleRate * tempDecay) + 1; j++) {
-//        TODO: fix, volume needs to be changed to a different value if attack is cut off
             decaySlope = (peakSlope) - (j * sustain) / (1.0 * sampleRate * decay);
             SampleLine *sampleLine = soundFile->getSamples()[i];
             int newVal = (int) round(sampleLine->getChannels()[0] * (decaySlope));
@@ -91,7 +91,12 @@ void SoundGenerator::handleEnvelop(SoundFile *soundFile) {
 
 void SoundGenerator::run(int helpMessage) {
     if(helpMessage) {
-//        TODO: print help message
+        cout<<"Sndgen is a program that lets you create different types of waves with a lot of manipulation" <<
+              endl << "It uses 4 different types of waves and an adsr envelop to create sound" << endl
+        << endl << "Accepted Switches :" << endl;
+        h_helperMessage();
+        o_helperMessage();
+        sndgen_helperMessage();
     } else {
         SoundFile *soundFile = setupFile();
         handleEnvelop(soundFile);
@@ -100,7 +105,6 @@ void SoundGenerator::run(int helpMessage) {
 }
 
 void SoundGenerator::print() {
-//todo :NOT NEEDED
     cout << "Bit Rate: " << bitDepth << endl;
     cout << "Sample Rate: " << sampleRate << endl;
     cout <<"Frequency: " << frequency << endl;
@@ -137,7 +141,6 @@ void SoundGenerator::create_triangle_wave(SoundFile * soundFile) {
     }
 }
 
-//TODO: slope
 void SoundGenerator::create_sawtooth_wave(SoundFile* soundFile) {
     int numSamples = (int)round(duration * sampleRate);
     int maxVal = (int)pow(2,bitDepth) - 1;
