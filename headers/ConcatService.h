@@ -57,7 +57,7 @@ class ConcatService : public Service {
          *
          * If the help switch is present, the constructor does not read the input files
          */
-        ConcatService(int switches[], vector<string*> soundFiles,int numberOfSoundsFiles, string outputFileName);
+        ConcatService(int switches[], vector<string*> & soundFiles,int numberOfSoundsFiles, string outputFileName);
         /**
          * Prints out information about the sndcat service, and lists the acceptable switches
          */

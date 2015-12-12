@@ -59,8 +59,6 @@ public:
         numberOfChannels++;
     }
     void operator +=(SampleLine *sampleLine);
-
-//    void operator = (SampleLine * sampleLine);
 };
 
 

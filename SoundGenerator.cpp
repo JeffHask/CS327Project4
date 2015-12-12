@@ -52,7 +52,7 @@ void SoundGenerator::handleEnvelop(SoundFile *soundFile) {
         double decaySlope = -1;
         int i;
         for (i = 0; i < sampleRate * tempAttack; i++) {
-            SampleLine *sampleLine = soundFile->getSamples()[i];
+            SampleLine *sampleLine = soundFile->getSampleLine(i);
             int newVal = (int)round(sampleLine->getChannels()[0] * attackSlope * i);
             sampleLine->setChannel(0, newVal);
         }
@@ -60,7 +60,7 @@ void SoundGenerator::handleEnvelop(SoundFile *soundFile) {
         int j;
         for (j = 1; j < (sampleRate * tempDecay) + 1; j++) {
             decaySlope = (peakSlope) - (j * sustain) / (1.0 * sampleRate * decay);
-            SampleLine *sampleLine = soundFile->getSamples()[i];
+            SampleLine *sampleLine = soundFile->getSampleLine(i);
             int newVal = (int) round(sampleLine->getChannels()[0] * (decaySlope));
             sampleLine->setChannel(0, newVal);
             i++;
@@ -70,7 +70,7 @@ void SoundGenerator::handleEnvelop(SoundFile *soundFile) {
         }
         int k;
         for (k = 0; k < tempSustain * sampleRate; k++) {
-            SampleLine *sampleLine = soundFile->getSamples()[i];
+            SampleLine *sampleLine = soundFile->getSampleLine(i);
             int newVal = (int) (sampleLine->getChannels()[0] * (decaySlope));
             sampleLine->setChannel(0, newVal);
             i++;
@@ -78,7 +78,7 @@ void SoundGenerator::handleEnvelop(SoundFile *soundFile) {
         float l;
         double releaseSlope = decaySlope / (sampleRate * release);
         for (l = release * sampleRate; l > 0; l--) {
-            SampleLine *sampleLine = soundFile->getSamples()[i];
+            SampleLine *sampleLine = soundFile->getSampleLine(i);
             int newVal = (int) (sampleLine->getChannels()[0] * (releaseSlope * l));
             sampleLine->setChannel(0, newVal);
 
@@ -86,7 +86,6 @@ void SoundGenerator::handleEnvelop(SoundFile *soundFile) {
                 return;
             };
         }
-//    soundFile->writeCS229File(" ");
 }
 
 void SoundGenerator::run(int helpMessage) {
@@ -144,11 +143,8 @@ void SoundGenerator::create_triangle_wave(SoundFile * soundFile) {
 void SoundGenerator::create_sawtooth_wave(SoundFile* soundFile) {
     int numSamples = (int)round(duration * sampleRate);
     int maxVal = (int)pow(2,bitDepth) - 1;
-
-    double slope =  (maxVal * frequency) / sampleRate;
     float i;
     for(i = 0; i < numSamples; i++) {
-//        int sampleVal = (int)((slope + slope * (i % ((int)(round(sampleRate / frequency * 1.0))))));
         int sampleVal = (int)(maxVal*((i/sampleRate * frequency)-floor(.5+(i/sampleRate * frequency))));
         SampleLine * sampleLine = new SampleLine(sampleVal);
         soundFile->addSample(sampleLine);
@@ -173,6 +169,5 @@ void SoundGenerator::create_pulse_wave(SoundFile * soundFile) {
             soundFile->addSample(sampleLine);
             j++;
         }
-//        double val =  maxVal * (1.0/(sin(2*M_PI*i * frequency /sampleRate )))*abs(sin(2*M_PI * i * frequency / sampleRate));
     }
 }

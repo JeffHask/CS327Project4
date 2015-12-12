@@ -23,7 +23,7 @@ public:
      *
      * If the help switch is there, no files will be processed, and the when run is called, only the help message will appear
      */
-    MixService(int switches[], vector<string*> soundFiles,int numberOfSoundsFiles, string outputFileName, vector<float> multiplyers);
+    MixService(int switches[], vector<string*> & soundFiles,int numberOfSoundsFiles, string outputFileName, vector<float> & multiplyers);
     virtual ~MixService() {
         soundFiles.clear();
     }

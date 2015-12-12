@@ -19,7 +19,7 @@ int handleCommandArgs(vector<string*> &inputFiles, char*args[], int index, int n
 /**
  * This is a specialized command args handler, as sndmix also has float values that are passed in with a file name.
  */
-int handleSndmixCommandArgs(vector<string*> & inputFiles, char *args[], int index , int numArgs, vector<float> multiples);
+int handleSndmixCommandArgs(vector<string*> & inputFiles, char *args[], int index , int numArgs, vector<float>& multiples);
 /**
  * This handles switches for  sndinfo, sndmix, and sndcat.
  */

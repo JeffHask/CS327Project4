@@ -8,7 +8,7 @@
 
 using namespace std;
 
-ConcatService::ConcatService(int switches[], vector<string*> soundFileNames, int numberOfFiles, string outputFileName) {
+ConcatService::ConcatService(int switches[], vector<string*> & soundFileNames, int numberOfFiles, string outputFileName) {
     this->help = switches[0];
     this->outputFileName = outputFileName;
     this->numberOfSoundFiles = numberOfFiles;

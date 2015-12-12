@@ -23,7 +23,7 @@ int main(int argc, char* argv[]) {
     string outputFile = " ";
     int intVal = 0;
     int i;
-    for(i = argc - 2; i > 0 ; i--) {
+    for(i = 1; i < argc - 1 ; i++) {
         if(!string(argv[i]).compare("-h")) {
             cout << "sndfx is a fun little program that you can chain acceptable switches to see what will happen." <<
                     "Valid switches:" <<endl;
@@ -35,11 +35,11 @@ int main(int argc, char* argv[]) {
             << "-su: up samples all the samples if the bitdepth of the file is 8 or 16. Error if the file's bitdepth is 32"
             << endl << "-sd: down samples all the samples if the bitdeph of the file is 16 or 32. Error if the file's bitdepth is 8";
         } else if(!string(argv[i]).compare("-o")) {
-            if (!outputFile.compare(" ")) {
+            if (outputFile.compare(" ")) {
                 cout << "ERROR: Please only specify one output file" << endl;
                 return 0;
             }
-            if (i + 2 != argc && (string(argv[argc - 1]).find(".cs229") != string::npos)) {
+            if (i + 2 != argc && (string(argv[i + 1]).find(".cs229") != string::npos)) {
                 outputFile = string(argv[i + 1]);
                 i++;
             } else {

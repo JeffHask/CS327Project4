@@ -22,7 +22,6 @@ private:
      * As it says, it reads a given .cs229 and updates itself with the information
      */
     void readCS299File(string fileName);
-//    void readWAVFile(string fileName);
 public:
     SoundFile();
     SoundFile(string fileName);
@@ -114,6 +113,10 @@ public:
 
     virtual vector<SampleLine*> getSamples() const {
         return samples;
+    }
+
+    SampleLine* getSampleLine(int index) {
+        return samples[index];
     }
 
     virtual void setSamples(vector<SampleLine*> samples) {

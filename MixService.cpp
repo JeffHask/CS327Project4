@@ -5,8 +5,8 @@
 #include "headers/MixService.h"
 #include "headers/Utils.h"
 
-MixService::MixService(int switches[], vector<string*> soundFileNames, int numberOfFiles, string outputFileName,
-                       vector<float> multiplyers) {
+MixService::MixService(int switches[], vector<string*> & soundFileNames, int numberOfFiles, string outputFileName,
+                       vector<float> & multiplyers) {
     this->help = switches[0];
     this->outputFileName = outputFileName;
     this->numberOfSoundFiles = numberOfFiles;

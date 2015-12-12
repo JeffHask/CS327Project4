@@ -46,7 +46,7 @@ int handleSwitches(char* args[],int numArgs, int switches[], int executable, str
     return 0;
 }
 
-int handleSndmixCommandArgs(vector<string*> & inputFiles, char *args[], int index , int numArgs, vector<float> multiples) {
+int handleSndmixCommandArgs(vector<string*> & inputFiles, char *args[], int index , int numArgs, vector<float> & multiples) {
     int numFiles = 0;
     int i;
     if((numArgs - index) % 2 != 0) {

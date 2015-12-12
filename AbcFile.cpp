@@ -129,9 +129,7 @@ SoundFile* AbcFile::createSoundFile() {
     soundFile->setBitDepth(bitRate);
     soundFile->setSampleRate(sampleRate);
     soundFile->setNumberOfChannels((int)instruments.size());
-    cout << getMaxSamples(instruments) <<endl;
     int samplesPerCount = (int)ceil(60.0*sampleRate/tempo);
-    cout << instruments.size() << endl;
     for(int i = 0; i < instruments.size(); i++) {
         SoundFile * otherChannels = new SoundFile();
         otherChannels->setBitDepth(bitRate);

@@ -27,7 +27,6 @@ SoundFile::SoundFile(string fileName) {
 
 void SoundFile::readCS299File(string fileName) {
     ifstream* fin = !fileName.compare(" ") ? NULL : new ifstream(fileName.c_str(),ifstream::in) ;
-    cout << "Whoah:" << fileName<< endl;
     istream & input = !fileName.compare(" ") ? cin : *fin;
     string line;
 
@@ -39,7 +38,6 @@ void SoundFile::readCS299File(string fileName) {
             __throw_invalid_argument("Error: No 'CS229' in the first line, invalid cs229 file.");
         }
     } else {
-        cout << line << endl;
         __throw_invalid_argument("Error: the first line should just have 'CS229', and nothing else.");
     }
 
@@ -116,7 +114,6 @@ void SoundFile::writeCS229File(string fileName) {
     ofstream* fout = !fileName.compare(" ") ? NULL : new ofstream(fileName.c_str(),ofstream::out) ;
     ostream & out = !fileName.compare(" ") ? cout : *fout;
     out << "CS229" << endl;
-    out << "Samples\t\t" << numberOfSamples << endl;
     out <<"SampleRate\t" <<sampleRate << endl;
     out <<"Channels\t" << numberOfChannels << endl;
     out << "BitRes\t\t" << bitDepth << endl;
@@ -191,9 +188,7 @@ SoundFile *SoundFile::operator*(float multi) {
 }
 
 void SoundFile::operator|(SoundFile *soundFile) {
-    cout<<"other sampples: " << soundFile->getNumberOfSamples() << endl;
-    cout << "current Samples " << getNumberOfSamples() << endl;
     for (int i = 0; i < numberOfSamples && i < soundFile->getNumberOfSamples(); ++i) {
-        samples[i]->addNewChannel(soundFile->getSamples()[i]->getChannels()[0]);
+        samples[i]->addNewChannel(soundFile->getSampleLine(i)->getChannels()[0]);
     }
 }

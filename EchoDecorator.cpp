@@ -15,7 +15,7 @@ void EchoDecorator::mutate() {
     lowValSample->setNumberOfChannels(channels);
     int i;
     for(i = 0; i < channels; i++) {
-        lowValSample->setChannel(i,0);
+        lowValSample->addNewChannel(0);
     }
     for(i = 0; i < numSamples; i++) {
         echoSamples.push_back(soundFileSamples[i]);

@@ -2,19 +2,23 @@ ABC229
 %
 %
 %
-TEMPO 90
+TEMPO 200
 
 Instrument 0
 Waveform triangle
 Volume 1
 Attack 15
-Decay 7
+Decay 0
 Sustain 0.7
-Release 10
+Release 0
 
 Score
 [
-abc#d#bbccadgefgabcd#efgabcdef#g
+e,e,e,e,g,G,c,g,e,a,b,a,agege'e'e''e'g'G'c'g'e'a'b'a#'a'g'e'g'
+e'e'e''e'g'G'c'g'e'a'b'a#'a'g'e'g'
+e'e'e''e'g'G'c'g'e'a'b'a#'a'g'e'g'
+e'e'e''e'g'G'c'g'e'a'b'a#'a'g'e'g'
+
 ]
 
 Instrument 1
@@ -23,11 +27,14 @@ Volume 1
 Attack 1
 Decay .5
 Sustain .8
-Release 3
+Release 0
 
 Score
 [
-gggfagaabcdefgfafafaaabcd
+ez,ez,ez,eZ,gZ,GZ,cZ,gZ,eZ'aZ'bZ'aZ#'aZ'g'eZ'g'e'ZZeZ'e''e'g'GZ'Zc'ZZg'e'a'b'aZZ#'a'g'e'g'
+e'Ze'e'Z'e'g'G'c'g'eZ'a'b'Za#'a'gZ'e'g'
+e'e'e'Z'e'g'G'cZ'g'eZ'a'b'a#'Za'g'e'g'
+e'e'e'Z'e'g'G'c'g'e'a'ZZb'a#'a'g'e'g'
 ]
 
 %Instrument 2
