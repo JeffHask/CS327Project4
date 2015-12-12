@@ -19,18 +19,18 @@ InfoService ::InfoService(int switches[], vector<string*> & soundFileNames, int 
     this->numberOfSoundFiles = numberOfSoundFiles;
     if(numberOfSoundFiles == -1) {
         SoundFile* soundFile = new SoundFile(string(" "));
+        soundFile->setFileName("From Standard Input");
         soundFiles.push_back(soundFile);
         this->numberOfSoundFiles = 1;
     } else if(help != 1) {
         int i;
         for(i = 0; i < numberOfSoundFiles; i++) {
-
             try {
                 soundFiles.push_back(new SoundFile((*soundFileNames[i])));
             } catch (invalid_argument &e) {
                 __throw_invalid_argument(e.what());
             }
-            }
+        }
     }
 }
 

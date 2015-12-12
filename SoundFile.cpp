@@ -124,7 +124,7 @@ void SoundFile::writeCS229File(string fileName) {
         for(j = 0; j<numberOfChannels; j++) {
             out << samples[i]->getChannels()[j];
             if(j != numberOfChannels -1) {
-                out << "\t";
+                out << " ";
             }
         }
         if(i != numberOfSamples -1) {
