@@ -40,7 +40,7 @@ void MixService::helperMessage() {
 void MixService::mixSound() {
     int i;
     if(!numberOfSoundFiles) {
-        __throw_invalid_argument("Please specify atleast one .cs229 file");
+        __throw_invalid_argument("Please specify at least one .cs229 file");
     }
     SoundFile *soundFile = soundFiles[0];
     for (i = 1; i < numberOfSoundFiles; ++i) {

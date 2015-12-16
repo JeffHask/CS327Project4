@@ -19,7 +19,7 @@ InfoService ::InfoService(int switches[], vector<string*> & soundFileNames, int 
     this->numberOfSoundFiles = numberOfSoundFiles;
     if(numberOfSoundFiles == -1) {
         SoundFile* soundFile = new SoundFile(string(" "));
-        soundFile->setFileName("From Standard Input");
+        soundFile->setFileName(string("From Standard Input").c_str());
         soundFiles.push_back(soundFile);
         this->numberOfSoundFiles = 1;
     } else if(help != 1) {

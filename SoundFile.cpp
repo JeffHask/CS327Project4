@@ -164,6 +164,11 @@ void SoundFile ::operator+=(SoundFile *soundFile) {
 }
 
 SoundFile *SoundFile::operator+(SoundFile *soundFile) {
+    if(soundFile->getSampleRate() != this->getSampleRate() ||
+       soundFile->getNumberOfChannels() != this->getNumberOfChannels() ||
+       soundFile->getBitDepth() != this->getBitDepth()) {
+        __throw_invalid_argument("ERROR: To mix cs229 files together, the sample rate, number of channels, and bit depth all need to be the same.");
+    }
     int i;
     for (i = 0; i < soundFile->getNumberOfSamples(); ++i) {
         if(i >= numberOfSamples) {
